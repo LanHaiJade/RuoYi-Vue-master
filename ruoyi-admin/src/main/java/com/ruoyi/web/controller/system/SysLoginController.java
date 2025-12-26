@@ -3,6 +3,9 @@ package com.ruoyi.web.controller.system;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import com.ruoyi.system.domain.BaseUser;
+import com.ruoyi.system.service.IBaseUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +50,9 @@ public class SysLoginController
     @Autowired
     private ISysConfigService configService;
 
+    @Autowired
+    private IBaseUserService baseUserService;
+
     /**
      * 登录方法
      * 
@@ -74,6 +80,7 @@ public class SysLoginController
     {
         LoginUser loginUser = SecurityUtils.getLoginUser();
         SysUser user = loginUser.getUser();
+        BaseUser baseUser = baseUserService.selectBaseUserByPhone(loginUser.getUsername());
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);
         // 权限集合
@@ -85,6 +92,7 @@ public class SysLoginController
         }
         AjaxResult ajax = AjaxResult.success();
         ajax.put("user", user);
+        ajax.put("usersm", baseUser);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);
         ajax.put("isDefaultModifyPwd", initPasswordIsModify(user.getPwdUpdateDate()));

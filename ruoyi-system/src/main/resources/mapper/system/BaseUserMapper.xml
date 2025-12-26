@@ -166,7 +166,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBaseUserByPhone" parameterType="String" resultMap="BaseUserResult">
         <include refid="selectBaseUserVo"/>
-        where phone = #{Phone}
+        where phone = #{Phone} and status = 0
     </select>
 
     <insert id="insertBaseUser" parameterType="BaseUser" useGeneratedKeys="true" keyProperty="id">

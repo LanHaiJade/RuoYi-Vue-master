@@ -3,6 +3,8 @@ package com.ruoyi.common.utils;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -112,6 +114,16 @@ public class SecurityUtils
     {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
+
+    /**
+     * 售货机系统用户验证密码
+     * @param rawPassword
+     * @param encodedPassword
+     * @return
+     */
+    public static boolean smMatchesPassword(String rawPassword, String encodedPassword){
+        return new Sha256Hash(rawPassword).toHex().equals(encodedPassword);
     }
 
     /**

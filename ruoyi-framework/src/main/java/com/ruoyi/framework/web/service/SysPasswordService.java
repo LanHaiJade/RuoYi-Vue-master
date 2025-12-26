@@ -41,7 +41,7 @@ public class SysPasswordService
         return CacheConstants.PWD_ERR_CNT_KEY + username;
     }
 
-    public void validate(SysUser user)
+    public void validate(SysUser user,int type)
     {
         Authentication usernamePasswordAuthenticationToken = AuthenticationContextHolder.getContext();
         String username = usernamePasswordAuthenticationToken.getName();
@@ -59,7 +59,11 @@ public class SysPasswordService
             throw new UserPasswordRetryLimitExceedException(maxRetryCount, lockTime);
         }
 
-        if (!matches(user, password))
+        boolean flag = false;
+        if(type == 1) flag = SecurityUtils.smMatchesPassword(password, user.getPassword());
+        if(type == 2) flag = SecurityUtils.matchesPassword(password, user.getPassword());
+
+        if (!flag)
         {
             retryCount = retryCount + 1;
             redisCache.setCacheObject(getCacheKey(username), retryCount, lockTime, TimeUnit.MINUTES);

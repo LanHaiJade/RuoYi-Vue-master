@@ -1,5 +1,10 @@
 package com.ruoyi.framework.web.service;
 
+import com.ruoyi.common.enums.sm.RoleType;
+import com.ruoyi.system.domain.BaseUser;
+import com.ruoyi.system.domain.BaseUserRole;
+import com.ruoyi.system.service.IBaseUserRoleService;
+import com.ruoyi.system.service.IBaseUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,27 +39,43 @@ public class UserDetailsServiceImpl implements UserDetailsService
     @Autowired
     private SysPermissionService permissionService;
 
+    @Autowired
+    private IBaseUserService baseUserService;
+
+    @Autowired
+    private IBaseUserRoleService baseUserRoleService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         SysUser user = userService.selectUserByUserName(username);
-        if (StringUtils.isNull(user))
-        {
-            log.info("登录用户：{} 不存在.", username);
-            throw new ServiceException(MessageUtils.message("user.not.exists"));
+        BaseUser baseUser = baseUserService.selectBaseUserByPhone(username);
+        if(baseUser != null){
+            BaseUserRole baseUserRole = baseUserRoleService.selectBaseUserRoleByUserId(baseUser.getId());
+            if(baseUserRole.getRoleId() == RoleType.Operator.getType()){
+                user = userService.selectUserByUserName("operator");
+                user.setUserName(baseUser.getPhone());
+                user.setPassword(baseUser.getPassword());
+                passwordService.validate(user,1);
+            }
+        }else{
+            if (StringUtils.isNull(user))
+            {
+                log.info("登录用户：{} 不存在.", username);
+                throw new ServiceException(MessageUtils.message("user.not.exists"));
+            }
+            else if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
+            {
+                log.info("登录用户：{} 已被删除.", username);
+                throw new ServiceException(MessageUtils.message("user.password.delete"));
+            }
+            else if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
+            {
+                log.info("登录用户：{} 已被停用.", username);
+                throw new ServiceException(MessageUtils.message("user.blocked"));
+            }
+            passwordService.validate(user,2);
         }
-        else if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
-        {
-            log.info("登录用户：{} 已被删除.", username);
-            throw new ServiceException(MessageUtils.message("user.password.delete"));
-        }
-        else if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
-        {
-            log.info("登录用户：{} 已被停用.", username);
-            throw new ServiceException(MessageUtils.message("user.blocked"));
-        }
-
-        passwordService.validate(user);
 
         return createLoginUser(user);
     }
