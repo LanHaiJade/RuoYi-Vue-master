@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineSimMapper">
+    
+    <resultMap type="BaseMachineSim" id="BaseMachineSimResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="simNo"    column="sim_no"    />
+        <result property="price"    column="price"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineSimVo">
+        select id, machine_id, user_id, sb_id, sim_no, price, status, create_time from base_machine_sim
+    </sql>
+
+    <select id="selectBaseMachineSimList" parameterType="BaseMachineSim" resultMap="BaseMachineSimResult">
+        <include refid="selectBaseMachineSimVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="simNo != null  and simNo != ''"> and sim_no = #{simNo}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineSimById" parameterType="Long" resultMap="BaseMachineSimResult">
+        <include refid="selectBaseMachineSimVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineSim" parameterType="BaseMachineSim" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_sim
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="simNo != null">sim_no,</if>
+            <if test="price != null">price,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="simNo != null">#{simNo},</if>
+            <if test="price != null">#{price},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineSim" parameterType="BaseMachineSim">
+        update base_machine_sim
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="simNo != null">sim_no = #{simNo},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineSimById" parameterType="Long">
+        delete from base_machine_sim where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineSimByIds" parameterType="String">
+        delete from base_machine_sim where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

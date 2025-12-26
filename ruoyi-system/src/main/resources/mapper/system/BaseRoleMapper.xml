@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseRoleMapper">
+    
+    <resultMap type="BaseRole" id="BaseRoleResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="description"    column="description"    />
+    </resultMap>
+
+    <sql id="selectBaseRoleVo">
+        select id, name, description from base_role
+    </sql>
+
+    <select id="selectBaseRoleList" parameterType="BaseRole" resultMap="BaseRoleResult">
+        <include refid="selectBaseRoleVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseRoleById" parameterType="Long" resultMap="BaseRoleResult">
+        <include refid="selectBaseRoleVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseRole" parameterType="BaseRole" useGeneratedKeys="true" keyProperty="id">
+        insert into base_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="description != null">description,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="description != null">#{description},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseRole" parameterType="BaseRole">
+        update base_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseRoleById" parameterType="Long">
+        delete from base_role where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseRoleByIds" parameterType="String">
+        delete from base_role where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

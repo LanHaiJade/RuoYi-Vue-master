@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseCouponMapper">
+    
+    <resultMap type="BaseCoupon" id="BaseCouponResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="price"    column="price"    />
+        <result property="code"    column="code"    />
+        <result property="status"    column="status"    />
+        <result property="type"    column="type"    />
+        <result property="amount"    column="amount"    />
+        <result property="avNum"    column="av_num"    />
+        <result property="remark"    column="remark"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseCouponVo">
+        select id, user_id, price, code, status, type, amount, av_num, remark, start_time, end_time, update_time, create_time from base_coupon
+    </sql>
+
+    <select id="selectBaseCouponList" parameterType="BaseCoupon" resultMap="BaseCouponResult">
+        <include refid="selectBaseCouponVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="avNum != null "> and av_num = #{avNum}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseCouponById" parameterType="Long" resultMap="BaseCouponResult">
+        <include refid="selectBaseCouponVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseCoupon" parameterType="BaseCoupon" useGeneratedKeys="true" keyProperty="id">
+        insert into base_coupon
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="price != null">price,</if>
+            <if test="code != null">code,</if>
+            <if test="status != null">status,</if>
+            <if test="type != null">type,</if>
+            <if test="amount != null">amount,</if>
+            <if test="avNum != null">av_num,</if>
+            <if test="remark != null">remark,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="price != null">#{price},</if>
+            <if test="code != null">#{code},</if>
+            <if test="status != null">#{status},</if>
+            <if test="type != null">#{type},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="avNum != null">#{avNum},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseCoupon" parameterType="BaseCoupon">
+        update base_coupon
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="avNum != null">av_num = #{avNum},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseCouponById" parameterType="Long">
+        delete from base_coupon where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseCouponByIds" parameterType="String">
+        delete from base_coupon where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

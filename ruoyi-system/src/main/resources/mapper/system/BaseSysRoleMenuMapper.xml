@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSysRoleMenuMapper">
+    
+    <resultMap type="BaseSysRoleMenu" id="BaseSysRoleMenuResult">
+        <result property="roleId"    column="role_id"    />
+        <result property="menuId"    column="menu_id"    />
+    </resultMap>
+
+    <sql id="selectBaseSysRoleMenuVo">
+        select role_id, menu_id from base_sys_role_menu
+    </sql>
+
+    <select id="selectBaseSysRoleMenuList" parameterType="BaseSysRoleMenu" resultMap="BaseSysRoleMenuResult">
+        <include refid="selectBaseSysRoleMenuVo"/>
+        <where>  
+            <if test="roleId != null "> and role_id = #{roleId}</if>
+            <if test="menuId != null "> and menu_id = #{menuId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSysRoleMenuByRoleId" parameterType="Long" resultMap="BaseSysRoleMenuResult">
+        <include refid="selectBaseSysRoleMenuVo"/>
+        where role_id = #{roleId}
+    </select>
+
+    <insert id="insertBaseSysRoleMenu" parameterType="BaseSysRoleMenu">
+        insert into base_sys_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">role_id,</if>
+            <if test="menuId != null">menu_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">#{roleId},</if>
+            <if test="menuId != null">#{menuId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSysRoleMenu" parameterType="BaseSysRoleMenu">
+        update base_sys_role_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuId != null">menu_id = #{menuId},</if>
+        </trim>
+        where role_id = #{roleId}
+    </update>
+
+    <delete id="deleteBaseSysRoleMenuByRoleId" parameterType="Long">
+        delete from base_sys_role_menu where role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteBaseSysRoleMenuByRoleIds" parameterType="String">
+        delete from base_sys_role_menu where role_id in 
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSimFlowLimitMapper">
+    
+    <resultMap type="BaseSimFlowLimit" id="BaseSimFlowLimitResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="flowLimit"    column="flow_limit"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBaseSimFlowLimitVo">
+        select id, name, flow_limit, create_time, update_time from base_sim_flow_limit
+    </sql>
+
+    <select id="selectBaseSimFlowLimitList" parameterType="BaseSimFlowLimit" resultMap="BaseSimFlowLimitResult">
+        <include refid="selectBaseSimFlowLimitVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="flowLimit != null "> and flow_limit = #{flowLimit}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSimFlowLimitById" parameterType="Long" resultMap="BaseSimFlowLimitResult">
+        <include refid="selectBaseSimFlowLimitVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseSimFlowLimit" parameterType="BaseSimFlowLimit" useGeneratedKeys="true" keyProperty="id">
+        insert into base_sim_flow_limit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="flowLimit != null">flow_limit,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="flowLimit != null">#{flowLimit},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSimFlowLimit" parameterType="BaseSimFlowLimit">
+        update base_sim_flow_limit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="flowLimit != null">flow_limit = #{flowLimit},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseSimFlowLimitById" parameterType="Long">
+        delete from base_sim_flow_limit where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseSimFlowLimitByIds" parameterType="String">
+        delete from base_sim_flow_limit where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

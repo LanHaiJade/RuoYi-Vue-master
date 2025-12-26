@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineRegisterRackMapper">
+    
+    <resultMap type="BaseMachineRegisterRack" id="BaseMachineRegisterRackResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="containerid"    column="containerid"    />
+        <result property="machinename"    column="machinename"    />
+        <result property="spctrsz"    column="spctrsz"    />
+        <result property="spctrspclz"    column="spctrspclz"    />
+        <result property="brf"    column="brf"    />
+        <result property="oprgtm"    column="oprgtm"    />
+        <result property="ctcpsnnm"    column="ctcpsnnm"    />
+        <result property="ctcpsnmblph"    column="ctcpsnmblph"    />
+        <result property="eqmtmodl"    column="eqmtmodl"    />
+        <result property="sceneid"    column="sceneid"    />
+        <result property="eqmtst"    column="eqmtst"    />
+        <result property="isrun"    column="isrun"    />
+        <result property="runtimespan"    column="runtimespan"    />
+        <result property="scale"    column="scale"    />
+        <result property="selllingpoint"    column="selllingpoint"    />
+        <result property="runby"    column="runby"    />
+        <result property="desription"    column="desription"    />
+        <result property="dailaddress"    column="dailaddress"    />
+        <result property="location"    column="location"    />
+        <result property="lon"    column="lon"    />
+        <result property="lat"    column="lat"    />
+        <result property="pic"    column="pic"    />
+        <result property="recomode"    column="recomode"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="regionid"    column="regionid"    />
+        <result property="provinceid"    column="provinceid"    />
+        <result property="province"    column="province"    />
+        <result property="cityid"    column="cityid"    />
+        <result property="cityname"    column="cityname"    />
+        <result property="countyid"    column="countyid"    />
+        <result property="county"    column="county"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineRegisterRackVo">
+        select id, sb_id, containerid, machinename, spctrsz, spctrspclz, brf, oprgtm, ctcpsnnm, ctcpsnmblph, eqmtmodl, sceneid, eqmtst, isrun, runtimespan, scale, selllingpoint, runby, desription, dailaddress, location, lon, lat, pic, recomode, mobile, regionid, provinceid, province, cityid, cityname, countyid, county from base_machine_register_rack
+    </sql>
+
+    <select id="selectBaseMachineRegisterRackList" parameterType="BaseMachineRegisterRack" resultMap="BaseMachineRegisterRackResult">
+        <include refid="selectBaseMachineRegisterRackVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="containerid != null  and containerid != ''"> and containerid = #{containerid}</if>
+            <if test="machinename != null  and machinename != ''"> and machinename like concat('%', #{machinename}, '%')</if>
+            <if test="spctrsz != null  and spctrsz != ''"> and spctrsz = #{spctrsz}</if>
+            <if test="spctrspclz != null  and spctrspclz != ''"> and spctrspclz = #{spctrspclz}</if>
+            <if test="brf != null  and brf != ''"> and brf = #{brf}</if>
+            <if test="oprgtm != null  and oprgtm != ''"> and oprgtm = #{oprgtm}</if>
+            <if test="ctcpsnnm != null  and ctcpsnnm != ''"> and ctcpsnnm = #{ctcpsnnm}</if>
+            <if test="ctcpsnmblph != null  and ctcpsnmblph != ''"> and ctcpsnmblph = #{ctcpsnmblph}</if>
+            <if test="eqmtmodl != null  and eqmtmodl != ''"> and eqmtmodl = #{eqmtmodl}</if>
+            <if test="sceneid != null  and sceneid != ''"> and sceneid = #{sceneid}</if>
+            <if test="eqmtst != null  and eqmtst != ''"> and eqmtst = #{eqmtst}</if>
+            <if test="isrun != null  and isrun != ''"> and isrun = #{isrun}</if>
+            <if test="runtimespan != null  and runtimespan != ''"> and runtimespan = #{runtimespan}</if>
+            <if test="scale != null  and scale != ''"> and scale = #{scale}</if>
+            <if test="selllingpoint != null  and selllingpoint != ''"> and selllingpoint = #{selllingpoint}</if>
+            <if test="runby != null  and runby != ''"> and runby = #{runby}</if>
+            <if test="desription != null  and desription != ''"> and desription = #{desription}</if>
+            <if test="dailaddress != null  and dailaddress != ''"> and dailaddress = #{dailaddress}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="lon != null  and lon != ''"> and lon = #{lon}</if>
+            <if test="lat != null  and lat != ''"> and lat = #{lat}</if>
+            <if test="pic != null  and pic != ''"> and pic = #{pic}</if>
+            <if test="recomode != null "> and recomode = #{recomode}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="regionid != null  and regionid != ''"> and regionid = #{regionid}</if>
+            <if test="provinceid != null  and provinceid != ''"> and provinceid = #{provinceid}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="cityid != null  and cityid != ''"> and cityid = #{cityid}</if>
+            <if test="cityname != null  and cityname != ''"> and cityname like concat('%', #{cityname}, '%')</if>
+            <if test="countyid != null  and countyid != ''"> and countyid = #{countyid}</if>
+            <if test="county != null  and county != ''"> and county = #{county}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineRegisterRackById" parameterType="Integer" resultMap="BaseMachineRegisterRackResult">
+        <include refid="selectBaseMachineRegisterRackVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineRegisterRack" parameterType="BaseMachineRegisterRack" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_register_rack
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="containerid != null">containerid,</if>
+            <if test="machinename != null">machinename,</if>
+            <if test="spctrsz != null">spctrsz,</if>
+            <if test="spctrspclz != null">spctrspclz,</if>
+            <if test="brf != null">brf,</if>
+            <if test="oprgtm != null">oprgtm,</if>
+            <if test="ctcpsnnm != null">ctcpsnnm,</if>
+            <if test="ctcpsnmblph != null">ctcpsnmblph,</if>
+            <if test="eqmtmodl != null">eqmtmodl,</if>
+            <if test="sceneid != null">sceneid,</if>
+            <if test="eqmtst != null">eqmtst,</if>
+            <if test="isrun != null">isrun,</if>
+            <if test="runtimespan != null">runtimespan,</if>
+            <if test="scale != null">scale,</if>
+            <if test="selllingpoint != null">selllingpoint,</if>
+            <if test="runby != null">runby,</if>
+            <if test="desription != null">desription,</if>
+            <if test="dailaddress != null">dailaddress,</if>
+            <if test="location != null">location,</if>
+            <if test="lon != null">lon,</if>
+            <if test="lat != null">lat,</if>
+            <if test="pic != null">pic,</if>
+            <if test="recomode != null">recomode,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="regionid != null">regionid,</if>
+            <if test="provinceid != null">provinceid,</if>
+            <if test="province != null">province,</if>
+            <if test="cityid != null">cityid,</if>
+            <if test="cityname != null">cityname,</if>
+            <if test="countyid != null">countyid,</if>
+            <if test="county != null">county,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="containerid != null">#{containerid},</if>
+            <if test="machinename != null">#{machinename},</if>
+            <if test="spctrsz != null">#{spctrsz},</if>
+            <if test="spctrspclz != null">#{spctrspclz},</if>
+            <if test="brf != null">#{brf},</if>
+            <if test="oprgtm != null">#{oprgtm},</if>
+            <if test="ctcpsnnm != null">#{ctcpsnnm},</if>
+            <if test="ctcpsnmblph != null">#{ctcpsnmblph},</if>
+            <if test="eqmtmodl != null">#{eqmtmodl},</if>
+            <if test="sceneid != null">#{sceneid},</if>
+            <if test="eqmtst != null">#{eqmtst},</if>
+            <if test="isrun != null">#{isrun},</if>
+            <if test="runtimespan != null">#{runtimespan},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="selllingpoint != null">#{selllingpoint},</if>
+            <if test="runby != null">#{runby},</if>
+            <if test="desription != null">#{desription},</if>
+            <if test="dailaddress != null">#{dailaddress},</if>
+            <if test="location != null">#{location},</if>
+            <if test="lon != null">#{lon},</if>
+            <if test="lat != null">#{lat},</if>
+            <if test="pic != null">#{pic},</if>
+            <if test="recomode != null">#{recomode},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="regionid != null">#{regionid},</if>
+            <if test="provinceid != null">#{provinceid},</if>
+            <if test="province != null">#{province},</if>
+            <if test="cityid != null">#{cityid},</if>
+            <if test="cityname != null">#{cityname},</if>
+            <if test="countyid != null">#{countyid},</if>
+            <if test="county != null">#{county},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineRegisterRack" parameterType="BaseMachineRegisterRack">
+        update base_machine_register_rack
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="containerid != null">containerid = #{containerid},</if>
+            <if test="machinename != null">machinename = #{machinename},</if>
+            <if test="spctrsz != null">spctrsz = #{spctrsz},</if>
+            <if test="spctrspclz != null">spctrspclz = #{spctrspclz},</if>
+            <if test="brf != null">brf = #{brf},</if>
+            <if test="oprgtm != null">oprgtm = #{oprgtm},</if>
+            <if test="ctcpsnnm != null">ctcpsnnm = #{ctcpsnnm},</if>
+            <if test="ctcpsnmblph != null">ctcpsnmblph = #{ctcpsnmblph},</if>
+            <if test="eqmtmodl != null">eqmtmodl = #{eqmtmodl},</if>
+            <if test="sceneid != null">sceneid = #{sceneid},</if>
+            <if test="eqmtst != null">eqmtst = #{eqmtst},</if>
+            <if test="isrun != null">isrun = #{isrun},</if>
+            <if test="runtimespan != null">runtimespan = #{runtimespan},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="selllingpoint != null">selllingpoint = #{selllingpoint},</if>
+            <if test="runby != null">runby = #{runby},</if>
+            <if test="desription != null">desription = #{desription},</if>
+            <if test="dailaddress != null">dailaddress = #{dailaddress},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="lon != null">lon = #{lon},</if>
+            <if test="lat != null">lat = #{lat},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="recomode != null">recomode = #{recomode},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="regionid != null">regionid = #{regionid},</if>
+            <if test="provinceid != null">provinceid = #{provinceid},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="cityid != null">cityid = #{cityid},</if>
+            <if test="cityname != null">cityname = #{cityname},</if>
+            <if test="countyid != null">countyid = #{countyid},</if>
+            <if test="county != null">county = #{county},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineRegisterRackById" parameterType="Integer">
+        delete from base_machine_register_rack where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineRegisterRackByIds" parameterType="String">
+        delete from base_machine_register_rack where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

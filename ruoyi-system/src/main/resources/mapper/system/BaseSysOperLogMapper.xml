@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSysOperLogMapper">
+    
+    <resultMap type="BaseSysOperLog" id="BaseSysOperLogResult">
+        <result property="id"    column="id"    />
+        <result property="function"    column="function"    />
+        <result property="beforeChangeInfo"    column="before_change_info"    />
+        <result property="afterChangeInfo"    column="after_change_info"    />
+        <result property="userName"    column="user_name"    />
+        <result property="roleName"    column="role_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="phone"    column="phone"    />
+        <result property="sign"    column="sign"    />
+    </resultMap>
+
+    <sql id="selectBaseSysOperLogVo">
+        select id, function, before_change_info, after_change_info, user_name, role_name, create_time, phone, sign from base_sys_oper_log
+    </sql>
+
+    <select id="selectBaseSysOperLogList" parameterType="BaseSysOperLog" resultMap="BaseSysOperLogResult">
+        <include refid="selectBaseSysOperLogVo"/>
+        <where>  
+            <if test="function != null  and function != ''"> and function = #{function}</if>
+            <if test="beforeChangeInfo != null  and beforeChangeInfo != ''"> and before_change_info = #{beforeChangeInfo}</if>
+            <if test="afterChangeInfo != null  and afterChangeInfo != ''"> and after_change_info = #{afterChangeInfo}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="roleName != null  and roleName != ''"> and role_name like concat('%', #{roleName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSysOperLogById" parameterType="Long" resultMap="BaseSysOperLogResult">
+        <include refid="selectBaseSysOperLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseSysOperLog" parameterType="BaseSysOperLog" useGeneratedKeys="true" keyProperty="id">
+        insert into base_sys_oper_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="function != null">function,</if>
+            <if test="beforeChangeInfo != null">before_change_info,</if>
+            <if test="afterChangeInfo != null">after_change_info,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="roleName != null">role_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="phone != null">phone,</if>
+            <if test="sign != null">sign,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="function != null">#{function},</if>
+            <if test="beforeChangeInfo != null">#{beforeChangeInfo},</if>
+            <if test="afterChangeInfo != null">#{afterChangeInfo},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="roleName != null">#{roleName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="sign != null">#{sign},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSysOperLog" parameterType="BaseSysOperLog">
+        update base_sys_oper_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="function != null">function = #{function},</if>
+            <if test="beforeChangeInfo != null">before_change_info = #{beforeChangeInfo},</if>
+            <if test="afterChangeInfo != null">after_change_info = #{afterChangeInfo},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="roleName != null">role_name = #{roleName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="sign != null">sign = #{sign},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseSysOperLogById" parameterType="Long">
+        delete from base_sys_oper_log where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseSysOperLogByIds" parameterType="String">
+        delete from base_sys_oper_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseRefundAlertMapper">
+    
+    <resultMap type="BaseRefundAlert" id="BaseRefundAlertResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sbId"    />
+        <result property="count"    column="count"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBaseRefundAlertVo">
+        select id, sbId, count, update_time from base_refund_alert
+    </sql>
+
+    <select id="selectBaseRefundAlertList" parameterType="BaseRefundAlert" resultMap="BaseRefundAlertResult">
+        <include refid="selectBaseRefundAlertVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sbId = #{sbId}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseRefundAlertById" parameterType="Integer" resultMap="BaseRefundAlertResult">
+        <include refid="selectBaseRefundAlertVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseRefundAlert" parameterType="BaseRefundAlert" useGeneratedKeys="true" keyProperty="id">
+        insert into base_refund_alert
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sbId,</if>
+            <if test="count != null">count,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="count != null">#{count},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseRefundAlert" parameterType="BaseRefundAlert">
+        update base_refund_alert
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sbId = #{sbId},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseRefundAlertById" parameterType="Integer">
+        delete from base_refund_alert where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseRefundAlertByIds" parameterType="String">
+        delete from base_refund_alert where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

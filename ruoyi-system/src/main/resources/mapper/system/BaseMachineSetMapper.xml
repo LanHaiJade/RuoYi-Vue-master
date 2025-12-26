@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineSetMapper">
+    
+    <resultMap type="BaseMachineSet" id="BaseMachineSetResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="terG1Time"    column="ter_g1_time"    />
+        <result property="terG1Z1Mode"    column="ter_g1_z1_mode"    />
+        <result property="terG1Z1Ter"    column="ter_g1_z1_ter"    />
+        <result property="terG1Z2Mode"    column="ter_g1_z2_mode"    />
+        <result property="terG1Z2Ter"    column="ter_g1_z2_ter"    />
+        <result property="terG1Z3Mode"    column="ter_g1_z3_mode"    />
+        <result property="terG1Z3Ter"    column="ter_g1_z3_ter"    />
+        <result property="terG1Z4Mode"    column="ter_g1_z4_mode"    />
+        <result property="terG1Z4Ter"    column="ter_g1_z4_ter"    />
+        <result property="terG2Time"    column="ter_g2_time"    />
+        <result property="terG2Z1Mode"    column="ter_g2_z1_mode"    />
+        <result property="terG2Z1Ter"    column="ter_g2_z1_ter"    />
+        <result property="terG2Z2Mode"    column="ter_g2_z2_mode"    />
+        <result property="terG2Z2Ter"    column="ter_g2_z2_ter"    />
+        <result property="terG2Z3Mode"    column="ter_g2_z3_mode"    />
+        <result property="terG2Z3Ter"    column="ter_g2_z3_ter"    />
+        <result property="terG2Z4Mode"    column="ter_g2_z4_mode"    />
+        <result property="terG2Z4Ter"    column="ter_g2_z4_ter"    />
+        <result property="terG3Time"    column="ter_g3_time"    />
+        <result property="terG3Z1Mode"    column="ter_g3_z1_mode"    />
+        <result property="terG3Z1Ter"    column="ter_g3_z1_ter"    />
+        <result property="terG3Z2Mode"    column="ter_g3_z2_mode"    />
+        <result property="terG3Z2Ter"    column="ter_g3_z2_ter"    />
+        <result property="terG3Z3Mode"    column="ter_g3_z3_mode"    />
+        <result property="terG3Z3Ter"    column="ter_g3_z3_ter"    />
+        <result property="terG3Z4Mode"    column="ter_g3_z4_mode"    />
+        <result property="terG3Z4Ter"    column="ter_g3_z4_ter"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="cartType"    column="cart_type"    />
+        <result property="light"    column="light"    />
+        <result property="startTime1"    column="startTime1"    />
+        <result property="endTime1"    column="endTime1"    />
+        <result property="startTime2"    column="startTime2"    />
+        <result property="endTime2"    column="endTime2"    />
+        <result property="startTime3"    column="startTime3"    />
+        <result property="endTime3"    column="endTime3"    />
+        <result property="hdMode"    column="hd_mode"    />
+        <result property="terG1TimeEnd"    column="ter_g1_time_end"    />
+        <result property="terG2TimeEnd"    column="ter_g2_time_end"    />
+        <result property="terG3TimeEnd"    column="ter_g3_time_end"    />
+        <result property="humidity"    column="humidity"    />
+        <result property="sxhdmd"    column="sxhdmd"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineSetVo">
+        select id, sb_id, ter_g1_time, ter_g1_z1_mode, ter_g1_z1_ter, ter_g1_z2_mode, ter_g1_z2_ter, ter_g1_z3_mode, ter_g1_z3_ter, ter_g1_z4_mode, ter_g1_z4_ter, ter_g2_time, ter_g2_z1_mode, ter_g2_z1_ter, ter_g2_z2_mode, ter_g2_z2_ter, ter_g2_z3_mode, ter_g2_z3_ter, ter_g2_z4_mode, ter_g2_z4_ter, ter_g3_time, ter_g3_z1_mode, ter_g3_z1_ter, ter_g3_z2_mode, ter_g3_z2_ter, ter_g3_z3_mode, ter_g3_z3_ter, ter_g3_z4_mode, ter_g3_z4_ter, update_time, create_time, cart_type, light, startTime1, endTime1, startTime2, endTime2, startTime3, endTime3, hd_mode, ter_g1_time_end, ter_g2_time_end, ter_g3_time_end, humidity, sxhdmd from base_machine_set
+    </sql>
+
+    <select id="selectBaseMachineSetList" parameterType="BaseMachineSet" resultMap="BaseMachineSetResult">
+        <include refid="selectBaseMachineSetVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="terG1Time != null  and terG1Time != ''"> and ter_g1_time = #{terG1Time}</if>
+            <if test="terG1Z1Mode != null "> and ter_g1_z1_mode = #{terG1Z1Mode}</if>
+            <if test="terG1Z1Ter != null "> and ter_g1_z1_ter = #{terG1Z1Ter}</if>
+            <if test="terG1Z2Mode != null "> and ter_g1_z2_mode = #{terG1Z2Mode}</if>
+            <if test="terG1Z2Ter != null "> and ter_g1_z2_ter = #{terG1Z2Ter}</if>
+            <if test="terG1Z3Mode != null "> and ter_g1_z3_mode = #{terG1Z3Mode}</if>
+            <if test="terG1Z3Ter != null "> and ter_g1_z3_ter = #{terG1Z3Ter}</if>
+            <if test="terG1Z4Mode != null "> and ter_g1_z4_mode = #{terG1Z4Mode}</if>
+            <if test="terG1Z4Ter != null "> and ter_g1_z4_ter = #{terG1Z4Ter}</if>
+            <if test="terG2Time != null  and terG2Time != ''"> and ter_g2_time = #{terG2Time}</if>
+            <if test="terG2Z1Mode != null "> and ter_g2_z1_mode = #{terG2Z1Mode}</if>
+            <if test="terG2Z1Ter != null "> and ter_g2_z1_ter = #{terG2Z1Ter}</if>
+            <if test="terG2Z2Mode != null "> and ter_g2_z2_mode = #{terG2Z2Mode}</if>
+            <if test="terG2Z2Ter != null "> and ter_g2_z2_ter = #{terG2Z2Ter}</if>
+            <if test="terG2Z3Mode != null "> and ter_g2_z3_mode = #{terG2Z3Mode}</if>
+            <if test="terG2Z3Ter != null "> and ter_g2_z3_ter = #{terG2Z3Ter}</if>
+            <if test="terG2Z4Mode != null "> and ter_g2_z4_mode = #{terG2Z4Mode}</if>
+            <if test="terG2Z4Ter != null "> and ter_g2_z4_ter = #{terG2Z4Ter}</if>
+            <if test="terG3Time != null  and terG3Time != ''"> and ter_g3_time = #{terG3Time}</if>
+            <if test="terG3Z1Mode != null "> and ter_g3_z1_mode = #{terG3Z1Mode}</if>
+            <if test="terG3Z1Ter != null "> and ter_g3_z1_ter = #{terG3Z1Ter}</if>
+            <if test="terG3Z2Mode != null "> and ter_g3_z2_mode = #{terG3Z2Mode}</if>
+            <if test="terG3Z2Ter != null "> and ter_g3_z2_ter = #{terG3Z2Ter}</if>
+            <if test="terG3Z3Mode != null "> and ter_g3_z3_mode = #{terG3Z3Mode}</if>
+            <if test="terG3Z3Ter != null "> and ter_g3_z3_ter = #{terG3Z3Ter}</if>
+            <if test="terG3Z4Mode != null "> and ter_g3_z4_mode = #{terG3Z4Mode}</if>
+            <if test="terG3Z4Ter != null "> and ter_g3_z4_ter = #{terG3Z4Ter}</if>
+            <if test="cartType != null "> and cart_type = #{cartType}</if>
+            <if test="light != null "> and light = #{light}</if>
+            <if test="startTime1 != null  and startTime1 != ''"> and startTime1 = #{startTime1}</if>
+            <if test="endTime1 != null  and endTime1 != ''"> and endTime1 = #{endTime1}</if>
+            <if test="startTime2 != null  and startTime2 != ''"> and startTime2 = #{startTime2}</if>
+            <if test="endTime2 != null  and endTime2 != ''"> and endTime2 = #{endTime2}</if>
+            <if test="startTime3 != null  and startTime3 != ''"> and startTime3 = #{startTime3}</if>
+            <if test="endTime3 != null  and endTime3 != ''"> and endTime3 = #{endTime3}</if>
+            <if test="hdMode != null "> and hd_mode = #{hdMode}</if>
+            <if test="terG1TimeEnd != null  and terG1TimeEnd != ''"> and ter_g1_time_end = #{terG1TimeEnd}</if>
+            <if test="terG2TimeEnd != null  and terG2TimeEnd != ''"> and ter_g2_time_end = #{terG2TimeEnd}</if>
+            <if test="terG3TimeEnd != null  and terG3TimeEnd != ''"> and ter_g3_time_end = #{terG3TimeEnd}</if>
+            <if test="humidity != null "> and humidity = #{humidity}</if>
+            <if test="sxhdmd != null  and sxhdmd != ''"> and sxhdmd = #{sxhdmd}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineSetById" parameterType="Integer" resultMap="BaseMachineSetResult">
+        <include refid="selectBaseMachineSetVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineSet" parameterType="BaseMachineSet" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_set
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="terG1Time != null">ter_g1_time,</if>
+            <if test="terG1Z1Mode != null">ter_g1_z1_mode,</if>
+            <if test="terG1Z1Ter != null">ter_g1_z1_ter,</if>
+            <if test="terG1Z2Mode != null">ter_g1_z2_mode,</if>
+            <if test="terG1Z2Ter != null">ter_g1_z2_ter,</if>
+            <if test="terG1Z3Mode != null">ter_g1_z3_mode,</if>
+            <if test="terG1Z3Ter != null">ter_g1_z3_ter,</if>
+            <if test="terG1Z4Mode != null">ter_g1_z4_mode,</if>
+            <if test="terG1Z4Ter != null">ter_g1_z4_ter,</if>
+            <if test="terG2Time != null">ter_g2_time,</if>
+            <if test="terG2Z1Mode != null">ter_g2_z1_mode,</if>
+            <if test="terG2Z1Ter != null">ter_g2_z1_ter,</if>
+            <if test="terG2Z2Mode != null">ter_g2_z2_mode,</if>
+            <if test="terG2Z2Ter != null">ter_g2_z2_ter,</if>
+            <if test="terG2Z3Mode != null">ter_g2_z3_mode,</if>
+            <if test="terG2Z3Ter != null">ter_g2_z3_ter,</if>
+            <if test="terG2Z4Mode != null">ter_g2_z4_mode,</if>
+            <if test="terG2Z4Ter != null">ter_g2_z4_ter,</if>
+            <if test="terG3Time != null">ter_g3_time,</if>
+            <if test="terG3Z1Mode != null">ter_g3_z1_mode,</if>
+            <if test="terG3Z1Ter != null">ter_g3_z1_ter,</if>
+            <if test="terG3Z2Mode != null">ter_g3_z2_mode,</if>
+            <if test="terG3Z2Ter != null">ter_g3_z2_ter,</if>
+            <if test="terG3Z3Mode != null">ter_g3_z3_mode,</if>
+            <if test="terG3Z3Ter != null">ter_g3_z3_ter,</if>
+            <if test="terG3Z4Mode != null">ter_g3_z4_mode,</if>
+            <if test="terG3Z4Ter != null">ter_g3_z4_ter,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="cartType != null">cart_type,</if>
+            <if test="light != null">light,</if>
+            <if test="startTime1 != null">startTime1,</if>
+            <if test="endTime1 != null">endTime1,</if>
+            <if test="startTime2 != null">startTime2,</if>
+            <if test="endTime2 != null">endTime2,</if>
+            <if test="startTime3 != null">startTime3,</if>
+            <if test="endTime3 != null">endTime3,</if>
+            <if test="hdMode != null">hd_mode,</if>
+            <if test="terG1TimeEnd != null">ter_g1_time_end,</if>
+            <if test="terG2TimeEnd != null">ter_g2_time_end,</if>
+            <if test="terG3TimeEnd != null">ter_g3_time_end,</if>
+            <if test="humidity != null">humidity,</if>
+            <if test="sxhdmd != null">sxhdmd,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="terG1Time != null">#{terG1Time},</if>
+            <if test="terG1Z1Mode != null">#{terG1Z1Mode},</if>
+            <if test="terG1Z1Ter != null">#{terG1Z1Ter},</if>
+            <if test="terG1Z2Mode != null">#{terG1Z2Mode},</if>
+            <if test="terG1Z2Ter != null">#{terG1Z2Ter},</if>
+            <if test="terG1Z3Mode != null">#{terG1Z3Mode},</if>
+            <if test="terG1Z3Ter != null">#{terG1Z3Ter},</if>
+            <if test="terG1Z4Mode != null">#{terG1Z4Mode},</if>
+            <if test="terG1Z4Ter != null">#{terG1Z4Ter},</if>
+            <if test="terG2Time != null">#{terG2Time},</if>
+            <if test="terG2Z1Mode != null">#{terG2Z1Mode},</if>
+            <if test="terG2Z1Ter != null">#{terG2Z1Ter},</if>
+            <if test="terG2Z2Mode != null">#{terG2Z2Mode},</if>
+            <if test="terG2Z2Ter != null">#{terG2Z2Ter},</if>
+            <if test="terG2Z3Mode != null">#{terG2Z3Mode},</if>
+            <if test="terG2Z3Ter != null">#{terG2Z3Ter},</if>
+            <if test="terG2Z4Mode != null">#{terG2Z4Mode},</if>
+            <if test="terG2Z4Ter != null">#{terG2Z4Ter},</if>
+            <if test="terG3Time != null">#{terG3Time},</if>
+            <if test="terG3Z1Mode != null">#{terG3Z1Mode},</if>
+            <if test="terG3Z1Ter != null">#{terG3Z1Ter},</if>
+            <if test="terG3Z2Mode != null">#{terG3Z2Mode},</if>
+            <if test="terG3Z2Ter != null">#{terG3Z2Ter},</if>
+            <if test="terG3Z3Mode != null">#{terG3Z3Mode},</if>
+            <if test="terG3Z3Ter != null">#{terG3Z3Ter},</if>
+            <if test="terG3Z4Mode != null">#{terG3Z4Mode},</if>
+            <if test="terG3Z4Ter != null">#{terG3Z4Ter},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="cartType != null">#{cartType},</if>
+            <if test="light != null">#{light},</if>
+            <if test="startTime1 != null">#{startTime1},</if>
+            <if test="endTime1 != null">#{endTime1},</if>
+            <if test="startTime2 != null">#{startTime2},</if>
+            <if test="endTime2 != null">#{endTime2},</if>
+            <if test="startTime3 != null">#{startTime3},</if>
+            <if test="endTime3 != null">#{endTime3},</if>
+            <if test="hdMode != null">#{hdMode},</if>
+            <if test="terG1TimeEnd != null">#{terG1TimeEnd},</if>
+            <if test="terG2TimeEnd != null">#{terG2TimeEnd},</if>
+            <if test="terG3TimeEnd != null">#{terG3TimeEnd},</if>
+            <if test="humidity != null">#{humidity},</if>
+            <if test="sxhdmd != null">#{sxhdmd},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineSet" parameterType="BaseMachineSet">
+        update base_machine_set
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="terG1Time != null">ter_g1_time = #{terG1Time},</if>
+            <if test="terG1Z1Mode != null">ter_g1_z1_mode = #{terG1Z1Mode},</if>
+            <if test="terG1Z1Ter != null">ter_g1_z1_ter = #{terG1Z1Ter},</if>
+            <if test="terG1Z2Mode != null">ter_g1_z2_mode = #{terG1Z2Mode},</if>
+            <if test="terG1Z2Ter != null">ter_g1_z2_ter = #{terG1Z2Ter},</if>
+            <if test="terG1Z3Mode != null">ter_g1_z3_mode = #{terG1Z3Mode},</if>
+            <if test="terG1Z3Ter != null">ter_g1_z3_ter = #{terG1Z3Ter},</if>
+            <if test="terG1Z4Mode != null">ter_g1_z4_mode = #{terG1Z4Mode},</if>
+            <if test="terG1Z4Ter != null">ter_g1_z4_ter = #{terG1Z4Ter},</if>
+            <if test="terG2Time != null">ter_g2_time = #{terG2Time},</if>
+            <if test="terG2Z1Mode != null">ter_g2_z1_mode = #{terG2Z1Mode},</if>
+            <if test="terG2Z1Ter != null">ter_g2_z1_ter = #{terG2Z1Ter},</if>
+            <if test="terG2Z2Mode != null">ter_g2_z2_mode = #{terG2Z2Mode},</if>
+            <if test="terG2Z2Ter != null">ter_g2_z2_ter = #{terG2Z2Ter},</if>
+            <if test="terG2Z3Mode != null">ter_g2_z3_mode = #{terG2Z3Mode},</if>
+            <if test="terG2Z3Ter != null">ter_g2_z3_ter = #{terG2Z3Ter},</if>
+            <if test="terG2Z4Mode != null">ter_g2_z4_mode = #{terG2Z4Mode},</if>
+            <if test="terG2Z4Ter != null">ter_g2_z4_ter = #{terG2Z4Ter},</if>
+            <if test="terG3Time != null">ter_g3_time = #{terG3Time},</if>
+            <if test="terG3Z1Mode != null">ter_g3_z1_mode = #{terG3Z1Mode},</if>
+            <if test="terG3Z1Ter != null">ter_g3_z1_ter = #{terG3Z1Ter},</if>
+            <if test="terG3Z2Mode != null">ter_g3_z2_mode = #{terG3Z2Mode},</if>
+            <if test="terG3Z2Ter != null">ter_g3_z2_ter = #{terG3Z2Ter},</if>
+            <if test="terG3Z3Mode != null">ter_g3_z3_mode = #{terG3Z3Mode},</if>
+            <if test="terG3Z3Ter != null">ter_g3_z3_ter = #{terG3Z3Ter},</if>
+            <if test="terG3Z4Mode != null">ter_g3_z4_mode = #{terG3Z4Mode},</if>
+            <if test="terG3Z4Ter != null">ter_g3_z4_ter = #{terG3Z4Ter},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="cartType != null">cart_type = #{cartType},</if>
+            <if test="light != null">light = #{light},</if>
+            <if test="startTime1 != null">startTime1 = #{startTime1},</if>
+            <if test="endTime1 != null">endTime1 = #{endTime1},</if>
+            <if test="startTime2 != null">startTime2 = #{startTime2},</if>
+            <if test="endTime2 != null">endTime2 = #{endTime2},</if>
+            <if test="startTime3 != null">startTime3 = #{startTime3},</if>
+            <if test="endTime3 != null">endTime3 = #{endTime3},</if>
+            <if test="hdMode != null">hd_mode = #{hdMode},</if>
+            <if test="terG1TimeEnd != null">ter_g1_time_end = #{terG1TimeEnd},</if>
+            <if test="terG2TimeEnd != null">ter_g2_time_end = #{terG2TimeEnd},</if>
+            <if test="terG3TimeEnd != null">ter_g3_time_end = #{terG3TimeEnd},</if>
+            <if test="humidity != null">humidity = #{humidity},</if>
+            <if test="sxhdmd != null">sxhdmd = #{sxhdmd},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineSetById" parameterType="Integer">
+        delete from base_machine_set where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineSetByIds" parameterType="String">
+        delete from base_machine_set where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

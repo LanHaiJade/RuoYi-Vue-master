@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseAreaAlipayMapper">
+    
+    <resultMap type="BaseAreaAlipay" id="BaseAreaAlipayResult">
+        <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
+        <result property="parentCode"    column="parent_code"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectBaseAreaAlipayVo">
+        select code, name, parent_code, type from base_area_alipay
+    </sql>
+
+    <select id="selectBaseAreaAlipayList" parameterType="BaseAreaAlipay" resultMap="BaseAreaAlipayResult">
+        <include refid="selectBaseAreaAlipayVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="parentCode != null  and parentCode != ''"> and parent_code = #{parentCode}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseAreaAlipayByCode" parameterType="String" resultMap="BaseAreaAlipayResult">
+        <include refid="selectBaseAreaAlipayVo"/>
+        where code = #{code}
+    </select>
+
+    <insert id="insertBaseAreaAlipay" parameterType="BaseAreaAlipay">
+        insert into base_area_alipay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">code,</if>
+            <if test="name != null">name,</if>
+            <if test="parentCode != null">parent_code,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">#{code},</if>
+            <if test="name != null">#{name},</if>
+            <if test="parentCode != null">#{parentCode},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseAreaAlipay" parameterType="BaseAreaAlipay">
+        update base_area_alipay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="parentCode != null">parent_code = #{parentCode},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where code = #{code}
+    </update>
+
+    <delete id="deleteBaseAreaAlipayByCode" parameterType="String">
+        delete from base_area_alipay where code = #{code}
+    </delete>
+
+    <delete id="deleteBaseAreaAlipayByCodes" parameterType="String">
+        delete from base_area_alipay where code in 
+        <foreach item="code" collection="array" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </delete>
+</mapper>

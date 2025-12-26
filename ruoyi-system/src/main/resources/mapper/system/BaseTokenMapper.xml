@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseTokenMapper">
+    
+    <resultMap type="BaseToken" id="BaseTokenResult">
+        <result property="id"    column="id"    />
+        <result property="mpAppid"    column="mp_appid"    />
+        <result property="token"    column="token"    />
+        <result property="expiresIn"    column="expires_in"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseTokenVo">
+        select id, mp_appid, token, expires_in, create_time from base_token
+    </sql>
+
+    <select id="selectBaseTokenList" parameterType="BaseToken" resultMap="BaseTokenResult">
+        <include refid="selectBaseTokenVo"/>
+        <where>  
+            <if test="mpAppid != null  and mpAppid != ''"> and mp_appid = #{mpAppid}</if>
+            <if test="token != null  and token != ''"> and token = #{token}</if>
+            <if test="expiresIn != null "> and expires_in = #{expiresIn}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseTokenById" parameterType="Long" resultMap="BaseTokenResult">
+        <include refid="selectBaseTokenVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseToken" parameterType="BaseToken" useGeneratedKeys="true" keyProperty="id">
+        insert into base_token
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mpAppid != null">mp_appid,</if>
+            <if test="token != null">token,</if>
+            <if test="expiresIn != null">expires_in,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mpAppid != null">#{mpAppid},</if>
+            <if test="token != null">#{token},</if>
+            <if test="expiresIn != null">#{expiresIn},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseToken" parameterType="BaseToken">
+        update base_token
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mpAppid != null">mp_appid = #{mpAppid},</if>
+            <if test="token != null">token = #{token},</if>
+            <if test="expiresIn != null">expires_in = #{expiresIn},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseTokenById" parameterType="Long">
+        delete from base_token where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseTokenByIds" parameterType="String">
+        delete from base_token where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

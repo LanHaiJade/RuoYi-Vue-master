@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseRechargeMapper">
+    
+    <resultMap type="BaseRecharge" id="BaseRechargeResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="machineIds"    column="machine_ids"    />
+        <result property="userId"    column="user_id"    />
+        <result property="day"    column="day"    />
+        <result property="amount"    column="amount"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="pm"    column="pm"    />
+        <result property="amountL"    column="amount_l"    />
+        <result property="amountF"    column="amount_f"    />
+        <result property="transactionId"    column="transaction_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="amountAll"    column="amount_all"    />
+        <result property="invoiceStatus"    column="invoice_status"    />
+        <result property="invoiceUrl"    column="invoice_url"    />
+        <result property="invoiceType"    column="invoice_type"    />
+        <result property="invoiceName"    column="invoice_name"    />
+    </resultMap>
+
+    <sql id="selectBaseRechargeVo">
+        select id, order_no, machine_ids, user_id, day, amount, status, update_time, create_time, pm, amount_l, amount_f, transaction_id, remark, amount_all, invoice_status, invoice_url, invoice_type, invoice_name from base_recharge
+    </sql>
+
+    <select id="selectBaseRechargeList" parameterType="BaseRecharge" resultMap="BaseRechargeResult">
+        <include refid="selectBaseRechargeVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="machineIds != null  and machineIds != ''"> and machine_ids = #{machineIds}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="day != null "> and day = #{day}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="pm != null "> and pm = #{pm}</if>
+            <if test="amountL != null "> and amount_l = #{amountL}</if>
+            <if test="amountF != null "> and amount_f = #{amountF}</if>
+            <if test="transactionId != null  and transactionId != ''"> and transaction_id = #{transactionId}</if>
+            <if test="amountAll != null "> and amount_all = #{amountAll}</if>
+            <if test="invoiceStatus != null "> and invoice_status = #{invoiceStatus}</if>
+            <if test="invoiceUrl != null  and invoiceUrl != ''"> and invoice_url = #{invoiceUrl}</if>
+            <if test="invoiceType != null  and invoiceType != ''"> and invoice_type = #{invoiceType}</if>
+            <if test="invoiceName != null  and invoiceName != ''"> and invoice_name like concat('%', #{invoiceName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseRechargeById" parameterType="Long" resultMap="BaseRechargeResult">
+        <include refid="selectBaseRechargeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseRecharge" parameterType="BaseRecharge" useGeneratedKeys="true" keyProperty="id">
+        insert into base_recharge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="machineIds != null">machine_ids,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="day != null">day,</if>
+            <if test="amount != null">amount,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="pm != null">pm,</if>
+            <if test="amountL != null">amount_l,</if>
+            <if test="amountF != null">amount_f,</if>
+            <if test="transactionId != null">transaction_id,</if>
+            <if test="remark != null">remark,</if>
+            <if test="amountAll != null">amount_all,</if>
+            <if test="invoiceStatus != null">invoice_status,</if>
+            <if test="invoiceUrl != null">invoice_url,</if>
+            <if test="invoiceType != null">invoice_type,</if>
+            <if test="invoiceName != null">invoice_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="machineIds != null">#{machineIds},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="day != null">#{day},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="pm != null">#{pm},</if>
+            <if test="amountL != null">#{amountL},</if>
+            <if test="amountF != null">#{amountF},</if>
+            <if test="transactionId != null">#{transactionId},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="amountAll != null">#{amountAll},</if>
+            <if test="invoiceStatus != null">#{invoiceStatus},</if>
+            <if test="invoiceUrl != null">#{invoiceUrl},</if>
+            <if test="invoiceType != null">#{invoiceType},</if>
+            <if test="invoiceName != null">#{invoiceName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseRecharge" parameterType="BaseRecharge">
+        update base_recharge
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="machineIds != null">machine_ids = #{machineIds},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="day != null">day = #{day},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="pm != null">pm = #{pm},</if>
+            <if test="amountL != null">amount_l = #{amountL},</if>
+            <if test="amountF != null">amount_f = #{amountF},</if>
+            <if test="transactionId != null">transaction_id = #{transactionId},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="amountAll != null">amount_all = #{amountAll},</if>
+            <if test="invoiceStatus != null">invoice_status = #{invoiceStatus},</if>
+            <if test="invoiceUrl != null">invoice_url = #{invoiceUrl},</if>
+            <if test="invoiceType != null">invoice_type = #{invoiceType},</if>
+            <if test="invoiceName != null">invoice_name = #{invoiceName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseRechargeById" parameterType="Long">
+        delete from base_recharge where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseRechargeByIds" parameterType="String">
+        delete from base_recharge where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

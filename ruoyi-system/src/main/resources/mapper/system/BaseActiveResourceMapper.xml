@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseActiveResourceMapper">
+    
+    <resultMap type="BaseActiveResource" id="BaseActiveResourceResult">
+        <result property="id"    column="id"    />
+        <result property="resourceId"    column="resource_id"    />
+        <result property="vftId"    column="vft_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="fileData"    column="file_data"    />
+        <result property="fileType"    column="file_type"    />
+        <result property="total"    column="total"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseActiveResourceVo">
+        select id, resource_id, vft_id, sb_id, file_data, file_type, total, sort, status, update_time, create_time from base_active_resource
+    </sql>
+
+    <select id="selectBaseActiveResourceList" parameterType="BaseActiveResource" resultMap="BaseActiveResourceResult">
+        <include refid="selectBaseActiveResourceVo"/>
+        <where>  
+            <if test="resourceId != null "> and resource_id = #{resourceId}</if>
+            <if test="vftId != null "> and vft_id = #{vftId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="fileData != null  and fileData != ''"> and file_data = #{fileData}</if>
+            <if test="fileType != null "> and file_type = #{fileType}</if>
+            <if test="total != null "> and total = #{total}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseActiveResourceById" parameterType="Long" resultMap="BaseActiveResourceResult">
+        <include refid="selectBaseActiveResourceVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseActiveResource" parameterType="BaseActiveResource" useGeneratedKeys="true" keyProperty="id">
+        insert into base_active_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceId != null">resource_id,</if>
+            <if test="vftId != null">vft_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="fileData != null">file_data,</if>
+            <if test="fileType != null">file_type,</if>
+            <if test="total != null">total,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resourceId != null">#{resourceId},</if>
+            <if test="vftId != null">#{vftId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="fileData != null">#{fileData},</if>
+            <if test="fileType != null">#{fileType},</if>
+            <if test="total != null">#{total},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseActiveResource" parameterType="BaseActiveResource">
+        update base_active_resource
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="resourceId != null">resource_id = #{resourceId},</if>
+            <if test="vftId != null">vft_id = #{vftId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="fileData != null">file_data = #{fileData},</if>
+            <if test="fileType != null">file_type = #{fileType},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseActiveResourceById" parameterType="Long">
+        delete from base_active_resource where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseActiveResourceByIds" parameterType="String">
+        delete from base_active_resource where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

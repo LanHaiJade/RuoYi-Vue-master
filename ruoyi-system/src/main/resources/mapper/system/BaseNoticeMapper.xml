@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseNoticeMapper">
+    
+    <resultMap type="BaseNotice" id="BaseNoticeResult">
+        <result property="baseNoticeId"    column="base_notice_id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="beginDate"    column="begin_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="deleteTime"    column="delete_time"    />
+        <result property="thumb"    column="thumb"    />
+    </resultMap>
+
+    <sql id="selectBaseNoticeVo">
+        select base_notice_id, title, content, begin_date, end_date, is_delete, delete_time, thumb from base_notice
+    </sql>
+
+    <select id="selectBaseNoticeList" parameterType="BaseNotice" resultMap="BaseNoticeResult">
+        <include refid="selectBaseNoticeVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="beginDate != null "> and begin_date = #{beginDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="deleteTime != null "> and delete_time = #{deleteTime}</if>
+            <if test="thumb != null  and thumb != ''"> and thumb = #{thumb}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseNoticeByBaseNoticeId" parameterType="String" resultMap="BaseNoticeResult">
+        <include refid="selectBaseNoticeVo"/>
+        where base_notice_id = #{baseNoticeId}
+    </select>
+
+    <insert id="insertBaseNotice" parameterType="BaseNotice">
+        insert into base_notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="baseNoticeId != null">base_notice_id,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="beginDate != null">begin_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="deleteTime != null">delete_time,</if>
+            <if test="thumb != null">thumb,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="baseNoticeId != null">#{baseNoticeId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="beginDate != null">#{beginDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="deleteTime != null">#{deleteTime},</if>
+            <if test="thumb != null">#{thumb},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseNotice" parameterType="BaseNotice">
+        update base_notice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="beginDate != null">begin_date = #{beginDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="deleteTime != null">delete_time = #{deleteTime},</if>
+            <if test="thumb != null">thumb = #{thumb},</if>
+        </trim>
+        where base_notice_id = #{baseNoticeId}
+    </update>
+
+    <delete id="deleteBaseNoticeByBaseNoticeId" parameterType="String">
+        delete from base_notice where base_notice_id = #{baseNoticeId}
+    </delete>
+
+    <delete id="deleteBaseNoticeByBaseNoticeIds" parameterType="String">
+        delete from base_notice where base_notice_id in 
+        <foreach item="baseNoticeId" collection="array" open="(" separator="," close=")">
+            #{baseNoticeId}
+        </foreach>
+    </delete>
+</mapper>

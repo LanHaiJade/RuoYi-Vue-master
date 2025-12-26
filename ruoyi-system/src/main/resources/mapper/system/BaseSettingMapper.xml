@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSettingMapper">
+    
+    <resultMap type="BaseSetting" id="BaseSettingResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="skey"    column="skey"    />
+        <result property="svalue"    column="svalue"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBaseSettingVo">
+        select id, user_id, skey, svalue, update_time from base_setting
+    </sql>
+
+    <select id="selectBaseSettingList" parameterType="BaseSetting" resultMap="BaseSettingResult">
+        <include refid="selectBaseSettingVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="skey != null  and skey != ''"> and skey = #{skey}</if>
+            <if test="svalue != null  and svalue != ''"> and svalue = #{svalue}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSettingById" parameterType="Long" resultMap="BaseSettingResult">
+        <include refid="selectBaseSettingVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseSetting" parameterType="BaseSetting" useGeneratedKeys="true" keyProperty="id">
+        insert into base_setting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="skey != null">skey,</if>
+            <if test="svalue != null">svalue,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="skey != null">#{skey},</if>
+            <if test="svalue != null">#{svalue},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSetting" parameterType="BaseSetting">
+        update base_setting
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="skey != null">skey = #{skey},</if>
+            <if test="svalue != null">svalue = #{svalue},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseSettingById" parameterType="Long">
+        delete from base_setting where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseSettingByIds" parameterType="String">
+        delete from base_setting where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

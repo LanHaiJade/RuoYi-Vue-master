@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseActiveSettingMapper">
+    
+    <resultMap type="BaseActiveSetting" id="BaseActiveSettingResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="huodaoArray"    column="huodao_array"    />
+        <result property="huodaoHex"    column="huodao_hex"    />
+        <result property="huodaoCount"    column="huodao_count"    />
+        <result property="machineType"    column="machine_type"    />
+        <result property="activeType"    column="active_type"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectBaseActiveSettingVo">
+        select id, machine_id, sb_id, huodao_array, huodao_hex, huodao_count, machine_type, active_type, status, update_time, create_time, type from base_active_setting
+    </sql>
+
+    <select id="selectBaseActiveSettingList" parameterType="BaseActiveSetting" resultMap="BaseActiveSettingResult">
+        <include refid="selectBaseActiveSettingVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="huodaoArray != null  and huodaoArray != ''"> and huodao_array = #{huodaoArray}</if>
+            <if test="huodaoHex != null  and huodaoHex != ''"> and huodao_hex = #{huodaoHex}</if>
+            <if test="huodaoCount != null "> and huodao_count = #{huodaoCount}</if>
+            <if test="machineType != null "> and machine_type = #{machineType}</if>
+            <if test="activeType != null "> and active_type = #{activeType}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="type != null "> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseActiveSettingById" parameterType="Long" resultMap="BaseActiveSettingResult">
+        <include refid="selectBaseActiveSettingVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseActiveSetting" parameterType="BaseActiveSetting" useGeneratedKeys="true" keyProperty="id">
+        insert into base_active_setting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="huodaoArray != null">huodao_array,</if>
+            <if test="huodaoHex != null">huodao_hex,</if>
+            <if test="huodaoCount != null">huodao_count,</if>
+            <if test="machineType != null">machine_type,</if>
+            <if test="activeType != null">active_type,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="huodaoArray != null">#{huodaoArray},</if>
+            <if test="huodaoHex != null">#{huodaoHex},</if>
+            <if test="huodaoCount != null">#{huodaoCount},</if>
+            <if test="machineType != null">#{machineType},</if>
+            <if test="activeType != null">#{activeType},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseActiveSetting" parameterType="BaseActiveSetting">
+        update base_active_setting
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="huodaoArray != null">huodao_array = #{huodaoArray},</if>
+            <if test="huodaoHex != null">huodao_hex = #{huodaoHex},</if>
+            <if test="huodaoCount != null">huodao_count = #{huodaoCount},</if>
+            <if test="machineType != null">machine_type = #{machineType},</if>
+            <if test="activeType != null">active_type = #{activeType},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseActiveSettingById" parameterType="Long">
+        delete from base_active_setting where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseActiveSettingByIds" parameterType="String">
+        delete from base_active_setting where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseIpMapper">
+    
+    <resultMap type="BaseIp" id="BaseIpResult">
+        <result property="id"    column="id"    />
+        <result property="ip"    column="ip"    />
+        <result property="num"    column="num"    />
+        <result property="sbId"    column="sbId"    />
+    </resultMap>
+
+    <sql id="selectBaseIpVo">
+        select id, ip, num, sbId from base_ip
+    </sql>
+
+    <select id="selectBaseIpList" parameterType="BaseIp" resultMap="BaseIpResult">
+        <include refid="selectBaseIpVo"/>
+        <where>  
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="sbId != null  and sbId != ''"> and sbId = #{sbId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseIpById" parameterType="Long" resultMap="BaseIpResult">
+        <include refid="selectBaseIpVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseIp" parameterType="BaseIp" useGeneratedKeys="true" keyProperty="id">
+        insert into base_ip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ip != null">ip,</if>
+            <if test="num != null">num,</if>
+            <if test="sbId != null">sbId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ip != null">#{ip},</if>
+            <if test="num != null">#{num},</if>
+            <if test="sbId != null">#{sbId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseIp" parameterType="BaseIp">
+        update base_ip
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="sbId != null">sbId = #{sbId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseIpById" parameterType="Long">
+        delete from base_ip where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseIpByIds" parameterType="String">
+        delete from base_ip where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseIccardRechargeMapper">
+    
+    <resultMap type="BaseIccardRecharge" id="BaseIccardRechargeResult">
+        <result property="id"    column="id"    />
+        <result property="afterRechargeAmount"    column="After_recharge_amount"    />
+        <result property="beforeRechargeAmount"    column="Before_recharge_amount"    />
+        <result property="rechargeAmount"    column="recharge_amount"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="cardNumber"    column="card_number"    />
+        <result property="userId"    column="user_id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="payStatus"    column="pay_status"    />
+        <result property="ctrlUserId"    column="ctrl_user_id"    />
+        <result property="ctrlUserName"    column="ctrl_user_name"    />
+        <result property="cpuNo"    column="cpu_no"    />
+        <result property="remark"    column="remark"    />
+        <result property="giftAmount"    column="giftAmount"    />
+    </resultMap>
+
+    <sql id="selectBaseIccardRechargeVo">
+        select id, After_recharge_amount, Before_recharge_amount, recharge_amount, update_time, create_time, card_number, user_id, order_no, pay_type, pay_status, ctrl_user_id, ctrl_user_name, cpu_no, remark, giftAmount from base_iccard_recharge
+    </sql>
+
+    <select id="selectBaseIccardRechargeList" parameterType="BaseIccardRecharge" resultMap="BaseIccardRechargeResult">
+        <include refid="selectBaseIccardRechargeVo"/>
+        <where>  
+            <if test="afterRechargeAmount != null "> and After_recharge_amount = #{afterRechargeAmount}</if>
+            <if test="beforeRechargeAmount != null "> and Before_recharge_amount = #{beforeRechargeAmount}</if>
+            <if test="rechargeAmount != null "> and recharge_amount = #{rechargeAmount}</if>
+            <if test="cardNumber != null  and cardNumber != ''"> and card_number = #{cardNumber}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="payStatus != null "> and pay_status = #{payStatus}</if>
+            <if test="ctrlUserId != null "> and ctrl_user_id = #{ctrlUserId}</if>
+            <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
+            <if test="cpuNo != null  and cpuNo != ''"> and cpu_no = #{cpuNo}</if>
+            <if test="giftAmount != null "> and giftAmount = #{giftAmount}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseIccardRechargeById" parameterType="Long" resultMap="BaseIccardRechargeResult">
+        <include refid="selectBaseIccardRechargeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseIccardRecharge" parameterType="BaseIccardRecharge" useGeneratedKeys="true" keyProperty="id">
+        insert into base_iccard_recharge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="afterRechargeAmount != null">After_recharge_amount,</if>
+            <if test="beforeRechargeAmount != null">Before_recharge_amount,</if>
+            <if test="rechargeAmount != null">recharge_amount,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="cardNumber != null">card_number,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="orderNo != null">order_no,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="payStatus != null">pay_status,</if>
+            <if test="ctrlUserId != null">ctrl_user_id,</if>
+            <if test="ctrlUserName != null">ctrl_user_name,</if>
+            <if test="cpuNo != null">cpu_no,</if>
+            <if test="remark != null">remark,</if>
+            <if test="giftAmount != null">giftAmount,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="afterRechargeAmount != null">#{afterRechargeAmount},</if>
+            <if test="beforeRechargeAmount != null">#{beforeRechargeAmount},</if>
+            <if test="rechargeAmount != null">#{rechargeAmount},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="cardNumber != null">#{cardNumber},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="payStatus != null">#{payStatus},</if>
+            <if test="ctrlUserId != null">#{ctrlUserId},</if>
+            <if test="ctrlUserName != null">#{ctrlUserName},</if>
+            <if test="cpuNo != null">#{cpuNo},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="giftAmount != null">#{giftAmount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseIccardRecharge" parameterType="BaseIccardRecharge">
+        update base_iccard_recharge
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="afterRechargeAmount != null">After_recharge_amount = #{afterRechargeAmount},</if>
+            <if test="beforeRechargeAmount != null">Before_recharge_amount = #{beforeRechargeAmount},</if>
+            <if test="rechargeAmount != null">recharge_amount = #{rechargeAmount},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="cardNumber != null">card_number = #{cardNumber},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="payStatus != null">pay_status = #{payStatus},</if>
+            <if test="ctrlUserId != null">ctrl_user_id = #{ctrlUserId},</if>
+            <if test="ctrlUserName != null">ctrl_user_name = #{ctrlUserName},</if>
+            <if test="cpuNo != null">cpu_no = #{cpuNo},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="giftAmount != null">giftAmount = #{giftAmount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseIccardRechargeById" parameterType="Long">
+        delete from base_iccard_recharge where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseIccardRechargeByIds" parameterType="String">
+        delete from base_iccard_recharge where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

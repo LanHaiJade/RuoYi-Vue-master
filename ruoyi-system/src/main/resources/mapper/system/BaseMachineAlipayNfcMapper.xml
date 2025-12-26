@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineAlipayNfcMapper">
+    
+    <resultMap type="BaseMachineAlipayNfc" id="BaseMachineAlipayNfcResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="nfcId"    column="nfc_id"    />
+        <result property="transactionId"    column="transaction_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineAlipayNfcVo">
+        select id, machine_id, sb_id, nfc_id, transaction_id, update_time, create_time from base_machine_alipay_nfc
+    </sql>
+
+    <select id="selectBaseMachineAlipayNfcList" parameterType="BaseMachineAlipayNfc" resultMap="BaseMachineAlipayNfcResult">
+        <include refid="selectBaseMachineAlipayNfcVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="nfcId != null  and nfcId != ''"> and nfc_id = #{nfcId}</if>
+            <if test="transactionId != null  and transactionId != ''"> and transaction_id = #{transactionId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineAlipayNfcById" parameterType="Integer" resultMap="BaseMachineAlipayNfcResult">
+        <include refid="selectBaseMachineAlipayNfcVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineAlipayNfc" parameterType="BaseMachineAlipayNfc" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_alipay_nfc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="nfcId != null">nfc_id,</if>
+            <if test="transactionId != null">transaction_id,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="nfcId != null">#{nfcId},</if>
+            <if test="transactionId != null">#{transactionId},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineAlipayNfc" parameterType="BaseMachineAlipayNfc">
+        update base_machine_alipay_nfc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="nfcId != null">nfc_id = #{nfcId},</if>
+            <if test="transactionId != null">transaction_id = #{transactionId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineAlipayNfcById" parameterType="Integer">
+        delete from base_machine_alipay_nfc where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineAlipayNfcByIds" parameterType="String">
+        delete from base_machine_alipay_nfc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

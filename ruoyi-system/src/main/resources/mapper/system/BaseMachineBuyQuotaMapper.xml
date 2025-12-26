@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineBuyQuotaMapper">
+    
+    <resultMap type="BaseMachineBuyQuota" id="BaseMachineBuyQuotaResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sbId"    />
+        <result property="openId"    column="open_id"    />
+        <result property="count"    column="count"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineBuyQuotaVo">
+        select id, sbId, open_id, count, update_time from base_machine_buy_quota
+    </sql>
+
+    <select id="selectBaseMachineBuyQuotaList" parameterType="BaseMachineBuyQuota" resultMap="BaseMachineBuyQuotaResult">
+        <include refid="selectBaseMachineBuyQuotaVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sbId = #{sbId}</if>
+            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineBuyQuotaById" parameterType="Integer" resultMap="BaseMachineBuyQuotaResult">
+        <include refid="selectBaseMachineBuyQuotaVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineBuyQuota" parameterType="BaseMachineBuyQuota" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_buy_quota
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sbId,</if>
+            <if test="openId != null">open_id,</if>
+            <if test="count != null">count,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="openId != null">#{openId},</if>
+            <if test="count != null">#{count},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineBuyQuota" parameterType="BaseMachineBuyQuota">
+        update base_machine_buy_quota
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sbId = #{sbId},</if>
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineBuyQuotaById" parameterType="Integer">
+        delete from base_machine_buy_quota where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineBuyQuotaByIds" parameterType="String">
+        delete from base_machine_buy_quota where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

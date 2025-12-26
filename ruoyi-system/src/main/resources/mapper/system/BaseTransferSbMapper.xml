@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseTransferSbMapper">
+    
+    <resultMap type="BaseTransferSb" id="BaseTransferSbResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="phone"    column="phone"    />
+        <result property="recUserId"    column="rec_user_id"    />
+        <result property="recUserName"    column="rec_user_name"    />
+        <result property="recPhone"    column="rec_phone"    />
+        <result property="status"    column="status"    />
+        <result property="amount"    column="amount"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseTransferSbVo">
+        select id, order_no, machine_id, sb_id, sb_name, user_id, user_name, phone, rec_user_id, rec_user_name, rec_phone, status, amount, update_time, create_time from base_transfer_sb
+    </sql>
+
+    <select id="selectBaseTransferSbList" parameterType="BaseTransferSb" resultMap="BaseTransferSbResult">
+        <include refid="selectBaseTransferSbVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="recUserId != null "> and rec_user_id = #{recUserId}</if>
+            <if test="recUserName != null  and recUserName != ''"> and rec_user_name like concat('%', #{recUserName}, '%')</if>
+            <if test="recPhone != null  and recPhone != ''"> and rec_phone = #{recPhone}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseTransferSbById" parameterType="Integer" resultMap="BaseTransferSbResult">
+        <include refid="selectBaseTransferSbVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseTransferSb" parameterType="BaseTransferSb" useGeneratedKeys="true" keyProperty="id">
+        insert into base_transfer_sb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="recUserId != null">rec_user_id,</if>
+            <if test="recUserName != null">rec_user_name,</if>
+            <if test="recPhone != null">rec_phone,</if>
+            <if test="status != null">status,</if>
+            <if test="amount != null">amount,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="recUserId != null">#{recUserId},</if>
+            <if test="recUserName != null">#{recUserName},</if>
+            <if test="recPhone != null">#{recPhone},</if>
+            <if test="status != null">#{status},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseTransferSb" parameterType="BaseTransferSb">
+        update base_transfer_sb
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="recUserId != null">rec_user_id = #{recUserId},</if>
+            <if test="recUserName != null">rec_user_name = #{recUserName},</if>
+            <if test="recPhone != null">rec_phone = #{recPhone},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseTransferSbById" parameterType="Integer">
+        delete from base_transfer_sb where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseTransferSbByIds" parameterType="String">
+        delete from base_transfer_sb where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

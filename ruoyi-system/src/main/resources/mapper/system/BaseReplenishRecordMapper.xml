@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseReplenishRecordMapper">
+    
+    <resultMap type="BaseReplenishRecord" id="BaseReplenishRecordResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="json"    column="json"    />
+        <result property="lastReplenishTime"    column="last_replenish_time"    />
+        <result property="replenishTime"    column="replenish_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectBaseReplenishRecordVo">
+        select id, machine_id, sb_id, sb_name, user_id, json, last_replenish_time, replenish_time, update_time, create_time, count from base_replenish_record
+    </sql>
+
+    <select id="selectBaseReplenishRecordList" parameterType="BaseReplenishRecord" resultMap="BaseReplenishRecordResult">
+        <include refid="selectBaseReplenishRecordVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="json != null  and json != ''"> and json = #{json}</if>
+            <if test="lastReplenishTime != null "> and last_replenish_time = #{lastReplenishTime}</if>
+            <if test="replenishTime != null "> and replenish_time = #{replenishTime}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseReplenishRecordById" parameterType="Long" resultMap="BaseReplenishRecordResult">
+        <include refid="selectBaseReplenishRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseReplenishRecord" parameterType="BaseReplenishRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into base_replenish_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="json != null">json,</if>
+            <if test="lastReplenishTime != null">last_replenish_time,</if>
+            <if test="replenishTime != null">replenish_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="count != null">count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="json != null">#{json},</if>
+            <if test="lastReplenishTime != null">#{lastReplenishTime},</if>
+            <if test="replenishTime != null">#{replenishTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseReplenishRecord" parameterType="BaseReplenishRecord">
+        update base_replenish_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="json != null">json = #{json},</if>
+            <if test="lastReplenishTime != null">last_replenish_time = #{lastReplenishTime},</if>
+            <if test="replenishTime != null">replenish_time = #{replenishTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseReplenishRecordById" parameterType="Long">
+        delete from base_replenish_record where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseReplenishRecordByIds" parameterType="String">
+        delete from base_replenish_record where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseTransferAccountMapper">
+    
+    <resultMap type="BaseTransferAccount" id="BaseTransferAccountResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="monthDate"    column="month_date"    />
+        <result property="userId"    column="user_id"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="amount"    column="amount"    />
+        <result property="plamount"    column="plamount"    />
+        <result property="jtamount"    column="jtamount"    />
+        <result property="openId"    column="open_id"    />
+        <result property="payeeRealname"    column="payee_realname"    />
+        <result property="payeeAccount"    column="payee_account"    />
+        <result property="payerRealname"    column="payer_realname"    />
+        <result property="transactionId"    column="transaction_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="reason"    column="reason"    />
+        <result property="hasNotice"    column="has_notice"    />
+        <result property="payChannelType"    column="payChannelType"    />
+        <result property="subMch"    column="sub_mch"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="amountWkf"    column="amount_wkf"    />
+        <result property="ratedis"    column="ratedis"    />
+        <result property="amountRatedis"    column="amount_ratedis"    />
+    </resultMap>
+
+    <sql id="selectBaseTransferAccountVo">
+        select id, order_no, month_date, user_id, pay_type, amount, plamount, jtamount, open_id, payee_realname, payee_account, payer_realname, transaction_id, remark, reason, has_notice, payChannelType, sub_mch, status, update_time, create_time, amount_wkf, ratedis, amount_ratedis from base_transfer_account
+    </sql>
+
+    <select id="selectBaseTransferAccountList" parameterType="BaseTransferAccount" resultMap="BaseTransferAccountResult">
+        <include refid="selectBaseTransferAccountVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="monthDate != null  and monthDate != ''"> and month_date = #{monthDate}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="plamount != null "> and plamount = #{plamount}</if>
+            <if test="jtamount != null "> and jtamount = #{jtamount}</if>
+            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
+            <if test="payeeRealname != null  and payeeRealname != ''"> and payee_realname like concat('%', #{payeeRealname}, '%')</if>
+            <if test="payeeAccount != null  and payeeAccount != ''"> and payee_account = #{payeeAccount}</if>
+            <if test="payerRealname != null  and payerRealname != ''"> and payer_realname like concat('%', #{payerRealname}, '%')</if>
+            <if test="transactionId != null  and transactionId != ''"> and transaction_id = #{transactionId}</if>
+            <if test="reason != null  and reason != ''"> and reason = #{reason}</if>
+            <if test="hasNotice != null "> and has_notice = #{hasNotice}</if>
+            <if test="payChannelType != null "> and payChannelType = #{payChannelType}</if>
+            <if test="subMch != null "> and sub_mch = #{subMch}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="amountWkf != null "> and amount_wkf = #{amountWkf}</if>
+            <if test="ratedis != null "> and ratedis = #{ratedis}</if>
+            <if test="amountRatedis != null "> and amount_ratedis = #{amountRatedis}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseTransferAccountById" parameterType="Long" resultMap="BaseTransferAccountResult">
+        <include refid="selectBaseTransferAccountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseTransferAccount" parameterType="BaseTransferAccount" useGeneratedKeys="true" keyProperty="id">
+        insert into base_transfer_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="monthDate != null">month_date,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="amount != null">amount,</if>
+            <if test="plamount != null">plamount,</if>
+            <if test="jtamount != null">jtamount,</if>
+            <if test="openId != null">open_id,</if>
+            <if test="payeeRealname != null">payee_realname,</if>
+            <if test="payeeAccount != null">payee_account,</if>
+            <if test="payerRealname != null">payer_realname,</if>
+            <if test="transactionId != null">transaction_id,</if>
+            <if test="remark != null">remark,</if>
+            <if test="reason != null">reason,</if>
+            <if test="hasNotice != null">has_notice,</if>
+            <if test="payChannelType != null">payChannelType,</if>
+            <if test="subMch != null">sub_mch,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="amountWkf != null">amount_wkf,</if>
+            <if test="ratedis != null">ratedis,</if>
+            <if test="amountRatedis != null">amount_ratedis,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="monthDate != null">#{monthDate},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="plamount != null">#{plamount},</if>
+            <if test="jtamount != null">#{jtamount},</if>
+            <if test="openId != null">#{openId},</if>
+            <if test="payeeRealname != null">#{payeeRealname},</if>
+            <if test="payeeAccount != null">#{payeeAccount},</if>
+            <if test="payerRealname != null">#{payerRealname},</if>
+            <if test="transactionId != null">#{transactionId},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="reason != null">#{reason},</if>
+            <if test="hasNotice != null">#{hasNotice},</if>
+            <if test="payChannelType != null">#{payChannelType},</if>
+            <if test="subMch != null">#{subMch},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="amountWkf != null">#{amountWkf},</if>
+            <if test="ratedis != null">#{ratedis},</if>
+            <if test="amountRatedis != null">#{amountRatedis},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseTransferAccount" parameterType="BaseTransferAccount">
+        update base_transfer_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="monthDate != null">month_date = #{monthDate},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="plamount != null">plamount = #{plamount},</if>
+            <if test="jtamount != null">jtamount = #{jtamount},</if>
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="payeeRealname != null">payee_realname = #{payeeRealname},</if>
+            <if test="payeeAccount != null">payee_account = #{payeeAccount},</if>
+            <if test="payerRealname != null">payer_realname = #{payerRealname},</if>
+            <if test="transactionId != null">transaction_id = #{transactionId},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="reason != null">reason = #{reason},</if>
+            <if test="hasNotice != null">has_notice = #{hasNotice},</if>
+            <if test="payChannelType != null">payChannelType = #{payChannelType},</if>
+            <if test="subMch != null">sub_mch = #{subMch},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="amountWkf != null">amount_wkf = #{amountWkf},</if>
+            <if test="ratedis != null">ratedis = #{ratedis},</if>
+            <if test="amountRatedis != null">amount_ratedis = #{amountRatedis},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseTransferAccountById" parameterType="Long">
+        delete from base_transfer_account where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseTransferAccountByIds" parameterType="String">
+        delete from base_transfer_account where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

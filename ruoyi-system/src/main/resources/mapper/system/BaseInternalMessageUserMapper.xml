@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseInternalMessageUserMapper">
+    
+    <resultMap type="BaseInternalMessageUser" id="BaseInternalMessageUserResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="interMsgId"    column="inter_msg_id"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectBaseInternalMessageUserVo">
+        select id, user_id, inter_msg_id, status from base_internal_message_user
+    </sql>
+
+    <select id="selectBaseInternalMessageUserList" parameterType="BaseInternalMessageUser" resultMap="BaseInternalMessageUserResult">
+        <include refid="selectBaseInternalMessageUserVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="interMsgId != null "> and inter_msg_id = #{interMsgId}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseInternalMessageUserById" parameterType="Long" resultMap="BaseInternalMessageUserResult">
+        <include refid="selectBaseInternalMessageUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseInternalMessageUser" parameterType="BaseInternalMessageUser" useGeneratedKeys="true" keyProperty="id">
+        insert into base_internal_message_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="interMsgId != null">inter_msg_id,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="interMsgId != null">#{interMsgId},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseInternalMessageUser" parameterType="BaseInternalMessageUser">
+        update base_internal_message_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="interMsgId != null">inter_msg_id = #{interMsgId},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseInternalMessageUserById" parameterType="Long">
+        delete from base_internal_message_user where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseInternalMessageUserByIds" parameterType="String">
+        delete from base_internal_message_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

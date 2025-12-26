@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseGoodsMapper">
+    
+    <resultMap type="BaseGoods" id="BaseGoodsResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="sku"    column="sku"    />
+        <result property="slogon"    column="slogon"    />
+        <result property="status"    column="status"    />
+        <result property="isPublic"    column="is_public"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="brandId"    column="brand_id"    />
+        <result property="brandName"    column="brand_name"    />
+        <result property="price"    column="price"    />
+        <result property="num"    column="num"    />
+        <result property="content"    column="content"    />
+        <result property="stock"    column="stock"    />
+        <result property="goodsAttr"    column="goods_attr"    />
+        <result property="hasPublish"    column="has_publish"    />
+        <result property="number"    column="number"    />
+        <result property="manufacturer"    column="manufacturer"    />
+        <result property="registrationNumber"    column="registrationNumber"    />
+        <result property="specification"    column="specification"    />
+        <result property="indication"    column="indication"    />
+        <result property="fpType"    column="fp_type"    />
+        <result property="discount"    column="discount"    />
+        <result property="amount"    column="amount"    />
+        <result property="imgPath"    column="img_path"    />
+    </resultMap>
+
+    <sql id="selectBaseGoodsVo">
+        select id, name, user_id, sku, slogon, status, is_public, update_time, create_time, category_id, brand_id, brand_name, price, num, content, stock, goods_attr, has_publish, number, manufacturer, registrationNumber, specification, indication, fp_type, discount, amount, img_path from base_goods
+    </sql>
+
+    <select id="selectBaseGoodsList" parameterType="BaseGoods" resultMap="BaseGoodsResult">
+        <include refid="selectBaseGoodsVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="sku != null  and sku != ''"> and sku = #{sku}</if>
+            <if test="slogon != null  and slogon != ''"> and slogon = #{slogon}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="brandId != null "> and brand_id = #{brandId}</if>
+            <if test="brandName != null  and brandName != ''"> and brand_name like concat('%', #{brandName}, '%')</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="stock != null "> and stock = #{stock}</if>
+            <if test="goodsAttr != null  and goodsAttr != ''"> and goods_attr = #{goodsAttr}</if>
+            <if test="hasPublish != null "> and has_publish = #{hasPublish}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="manufacturer != null  and manufacturer != ''"> and manufacturer = #{manufacturer}</if>
+            <if test="registrationNumber != null  and registrationNumber != ''"> and registrationNumber = #{registrationNumber}</if>
+            <if test="specification != null  and specification != ''"> and specification = #{specification}</if>
+            <if test="indication != null  and indication != ''"> and indication = #{indication}</if>
+            <if test="fpType != null "> and fp_type = #{fpType}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="imgPath != null  and imgPath != ''"> and img_path = #{imgPath}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseGoodsById" parameterType="Long" resultMap="BaseGoodsResult">
+        <include refid="selectBaseGoodsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseGoods" parameterType="BaseGoods" useGeneratedKeys="true" keyProperty="id">
+        insert into base_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="sku != null">sku,</if>
+            <if test="slogon != null">slogon,</if>
+            <if test="status != null">status,</if>
+            <if test="isPublic != null">is_public,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="brandId != null">brand_id,</if>
+            <if test="brandName != null">brand_name,</if>
+            <if test="price != null">price,</if>
+            <if test="num != null">num,</if>
+            <if test="content != null">content,</if>
+            <if test="stock != null">stock,</if>
+            <if test="goodsAttr != null">goods_attr,</if>
+            <if test="hasPublish != null">has_publish,</if>
+            <if test="number != null">number,</if>
+            <if test="manufacturer != null">manufacturer,</if>
+            <if test="registrationNumber != null">registrationNumber,</if>
+            <if test="specification != null">specification,</if>
+            <if test="indication != null">indication,</if>
+            <if test="fpType != null">fp_type,</if>
+            <if test="discount != null">discount,</if>
+            <if test="amount != null">amount,</if>
+            <if test="imgPath != null">img_path,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="sku != null">#{sku},</if>
+            <if test="slogon != null">#{slogon},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isPublic != null">#{isPublic},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="brandId != null">#{brandId},</if>
+            <if test="brandName != null">#{brandName},</if>
+            <if test="price != null">#{price},</if>
+            <if test="num != null">#{num},</if>
+            <if test="content != null">#{content},</if>
+            <if test="stock != null">#{stock},</if>
+            <if test="goodsAttr != null">#{goodsAttr},</if>
+            <if test="hasPublish != null">#{hasPublish},</if>
+            <if test="number != null">#{number},</if>
+            <if test="manufacturer != null">#{manufacturer},</if>
+            <if test="registrationNumber != null">#{registrationNumber},</if>
+            <if test="specification != null">#{specification},</if>
+            <if test="indication != null">#{indication},</if>
+            <if test="fpType != null">#{fpType},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="imgPath != null">#{imgPath},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseGoods" parameterType="BaseGoods">
+        update base_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="sku != null">sku = #{sku},</if>
+            <if test="slogon != null">slogon = #{slogon},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isPublic != null">is_public = #{isPublic},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="brandId != null">brand_id = #{brandId},</if>
+            <if test="brandName != null">brand_name = #{brandName},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="stock != null">stock = #{stock},</if>
+            <if test="goodsAttr != null">goods_attr = #{goodsAttr},</if>
+            <if test="hasPublish != null">has_publish = #{hasPublish},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="manufacturer != null">manufacturer = #{manufacturer},</if>
+            <if test="registrationNumber != null">registrationNumber = #{registrationNumber},</if>
+            <if test="specification != null">specification = #{specification},</if>
+            <if test="indication != null">indication = #{indication},</if>
+            <if test="fpType != null">fp_type = #{fpType},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="imgPath != null">img_path = #{imgPath},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseGoodsById" parameterType="Long">
+        delete from base_goods where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseGoodsByIds" parameterType="String">
+        delete from base_goods where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

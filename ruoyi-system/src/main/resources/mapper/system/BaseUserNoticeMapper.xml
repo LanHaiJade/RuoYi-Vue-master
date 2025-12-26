@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserNoticeMapper">
+    
+    <resultMap type="BaseUserNotice" id="BaseUserNoticeResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="templateId"    column="template_id"    />
+    </resultMap>
+
+    <sql id="selectBaseUserNoticeVo">
+        select id, user_id, template_id from base_user_notice
+    </sql>
+
+    <select id="selectBaseUserNoticeList" parameterType="BaseUserNotice" resultMap="BaseUserNoticeResult">
+        <include refid="selectBaseUserNoticeVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="templateId != null "> and template_id = #{templateId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseUserNoticeById" parameterType="Long" resultMap="BaseUserNoticeResult">
+        <include refid="selectBaseUserNoticeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseUserNotice" parameterType="BaseUserNotice" useGeneratedKeys="true" keyProperty="id">
+        insert into base_user_notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="templateId != null">template_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="templateId != null">#{templateId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUserNotice" parameterType="BaseUserNotice">
+        update base_user_notice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="templateId != null">template_id = #{templateId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseUserNoticeById" parameterType="Long">
+        delete from base_user_notice where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseUserNoticeByIds" parameterType="String">
+        delete from base_user_notice where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

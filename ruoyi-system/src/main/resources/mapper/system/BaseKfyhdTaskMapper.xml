@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseKfyhdTaskMapper">
+    
+    <resultMap type="BaseKfyhdTask" id="BaseKfyhdTaskResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="huodao"    column="huodao"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseKfyhdTaskVo">
+        select id, sb_id, huodao, update_time, create_time from base_kfyhd_task
+    </sql>
+
+    <select id="selectBaseKfyhdTaskList" parameterType="BaseKfyhdTask" resultMap="BaseKfyhdTaskResult">
+        <include refid="selectBaseKfyhdTaskVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="huodao != null "> and huodao = #{huodao}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseKfyhdTaskById" parameterType="Integer" resultMap="BaseKfyhdTaskResult">
+        <include refid="selectBaseKfyhdTaskVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseKfyhdTask" parameterType="BaseKfyhdTask" useGeneratedKeys="true" keyProperty="id">
+        insert into base_kfyhd_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="huodao != null">huodao,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="huodao != null">#{huodao},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseKfyhdTask" parameterType="BaseKfyhdTask">
+        update base_kfyhd_task
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="huodao != null">huodao = #{huodao},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseKfyhdTaskById" parameterType="Integer">
+        delete from base_kfyhd_task where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseKfyhdTaskByIds" parameterType="String">
+        delete from base_kfyhd_task where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

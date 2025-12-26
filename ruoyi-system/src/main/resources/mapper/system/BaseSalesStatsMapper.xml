@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSalesStatsMapper">
+    
+    <resultMap type="BaseSalesStats" id="BaseSalesStatsResult">
+        <result property="id"    column="id"    />
+        <result property="allOnline"    column="all_online"    />
+        <result property="allAmount"    column="all_amount"    />
+        <result property="allCount"    column="all_count"    />
+        <result property="allPjb"    column="all_pjb"    />
+        <result property="allPjj"    column="all_pjj"    />
+        <result property="alifaceOnline"    column="aliface_online"    />
+        <result property="alifaceAmount"    column="aliface_amount"    />
+        <result property="alifaceCount"    column="aliface_count"    />
+        <result property="alifacePjb"    column="aliface_pjb"    />
+        <result property="alifacePjj"    column="aliface_pjj"    />
+        <result property="aliAmount"    column="ali_amount"    />
+        <result property="aliCount"    column="ali_count"    />
+        <result property="wxAmount"    column="wx_amount"    />
+        <result property="wxCount"    column="wx_count"    />
+        <result property="wxfaceAmount"    column="wxface_amount"    />
+        <result property="wxfaceCount"    column="wxface_count"    />
+        <result property="wxhandAmount"    column="wxhand_amount"    />
+        <result property="wxhandCount"    column="wxhand_count"    />
+        <result property="icAmount"    column="ic_amount"    />
+        <result property="icCount"    column="ic_count"    />
+        <result property="ghlAmount"    column="ghl_amount"    />
+        <result property="ghlCount"    column="ghl_count"    />
+        <result property="type"    column="type"    />
+        <result property="statsTime"    column="stats_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseSalesStatsVo">
+        select id, all_online, all_amount, all_count, all_pjb, all_pjj, aliface_online, aliface_amount, aliface_count, aliface_pjb, aliface_pjj, ali_amount, ali_count, wx_amount, wx_count, wxface_amount, wxface_count, wxhand_amount, wxhand_count, ic_amount, ic_count, ghl_amount, ghl_count, type, stats_time, update_time, create_time from base_sales_stats
+    </sql>
+
+    <select id="selectBaseSalesStatsList" parameterType="BaseSalesStats" resultMap="BaseSalesStatsResult">
+        <include refid="selectBaseSalesStatsVo"/>
+        <where>  
+            <if test="allOnline != null "> and all_online = #{allOnline}</if>
+            <if test="allAmount != null "> and all_amount = #{allAmount}</if>
+            <if test="allCount != null "> and all_count = #{allCount}</if>
+            <if test="allPjb != null "> and all_pjb = #{allPjb}</if>
+            <if test="allPjj != null "> and all_pjj = #{allPjj}</if>
+            <if test="alifaceOnline != null "> and aliface_online = #{alifaceOnline}</if>
+            <if test="alifaceAmount != null "> and aliface_amount = #{alifaceAmount}</if>
+            <if test="alifaceCount != null "> and aliface_count = #{alifaceCount}</if>
+            <if test="alifacePjb != null "> and aliface_pjb = #{alifacePjb}</if>
+            <if test="alifacePjj != null "> and aliface_pjj = #{alifacePjj}</if>
+            <if test="aliAmount != null "> and ali_amount = #{aliAmount}</if>
+            <if test="aliCount != null "> and ali_count = #{aliCount}</if>
+            <if test="wxAmount != null "> and wx_amount = #{wxAmount}</if>
+            <if test="wxCount != null "> and wx_count = #{wxCount}</if>
+            <if test="wxfaceAmount != null "> and wxface_amount = #{wxfaceAmount}</if>
+            <if test="wxfaceCount != null "> and wxface_count = #{wxfaceCount}</if>
+            <if test="wxhandAmount != null "> and wxhand_amount = #{wxhandAmount}</if>
+            <if test="wxhandCount != null "> and wxhand_count = #{wxhandCount}</if>
+            <if test="icAmount != null "> and ic_amount = #{icAmount}</if>
+            <if test="icCount != null "> and ic_count = #{icCount}</if>
+            <if test="ghlAmount != null "> and ghl_amount = #{ghlAmount}</if>
+            <if test="ghlCount != null "> and ghl_count = #{ghlCount}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="statsTime != null "> and stats_time = #{statsTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSalesStatsById" parameterType="Long" resultMap="BaseSalesStatsResult">
+        <include refid="selectBaseSalesStatsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseSalesStats" parameterType="BaseSalesStats" useGeneratedKeys="true" keyProperty="id">
+        insert into base_sales_stats
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="allOnline != null">all_online,</if>
+            <if test="allAmount != null">all_amount,</if>
+            <if test="allCount != null">all_count,</if>
+            <if test="allPjb != null">all_pjb,</if>
+            <if test="allPjj != null">all_pjj,</if>
+            <if test="alifaceOnline != null">aliface_online,</if>
+            <if test="alifaceAmount != null">aliface_amount,</if>
+            <if test="alifaceCount != null">aliface_count,</if>
+            <if test="alifacePjb != null">aliface_pjb,</if>
+            <if test="alifacePjj != null">aliface_pjj,</if>
+            <if test="aliAmount != null">ali_amount,</if>
+            <if test="aliCount != null">ali_count,</if>
+            <if test="wxAmount != null">wx_amount,</if>
+            <if test="wxCount != null">wx_count,</if>
+            <if test="wxfaceAmount != null">wxface_amount,</if>
+            <if test="wxfaceCount != null">wxface_count,</if>
+            <if test="wxhandAmount != null">wxhand_amount,</if>
+            <if test="wxhandCount != null">wxhand_count,</if>
+            <if test="icAmount != null">ic_amount,</if>
+            <if test="icCount != null">ic_count,</if>
+            <if test="ghlAmount != null">ghl_amount,</if>
+            <if test="ghlCount != null">ghl_count,</if>
+            <if test="type != null">type,</if>
+            <if test="statsTime != null">stats_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="allOnline != null">#{allOnline},</if>
+            <if test="allAmount != null">#{allAmount},</if>
+            <if test="allCount != null">#{allCount},</if>
+            <if test="allPjb != null">#{allPjb},</if>
+            <if test="allPjj != null">#{allPjj},</if>
+            <if test="alifaceOnline != null">#{alifaceOnline},</if>
+            <if test="alifaceAmount != null">#{alifaceAmount},</if>
+            <if test="alifaceCount != null">#{alifaceCount},</if>
+            <if test="alifacePjb != null">#{alifacePjb},</if>
+            <if test="alifacePjj != null">#{alifacePjj},</if>
+            <if test="aliAmount != null">#{aliAmount},</if>
+            <if test="aliCount != null">#{aliCount},</if>
+            <if test="wxAmount != null">#{wxAmount},</if>
+            <if test="wxCount != null">#{wxCount},</if>
+            <if test="wxfaceAmount != null">#{wxfaceAmount},</if>
+            <if test="wxfaceCount != null">#{wxfaceCount},</if>
+            <if test="wxhandAmount != null">#{wxhandAmount},</if>
+            <if test="wxhandCount != null">#{wxhandCount},</if>
+            <if test="icAmount != null">#{icAmount},</if>
+            <if test="icCount != null">#{icCount},</if>
+            <if test="ghlAmount != null">#{ghlAmount},</if>
+            <if test="ghlCount != null">#{ghlCount},</if>
+            <if test="type != null">#{type},</if>
+            <if test="statsTime != null">#{statsTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSalesStats" parameterType="BaseSalesStats">
+        update base_sales_stats
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="allOnline != null">all_online = #{allOnline},</if>
+            <if test="allAmount != null">all_amount = #{allAmount},</if>
+            <if test="allCount != null">all_count = #{allCount},</if>
+            <if test="allPjb != null">all_pjb = #{allPjb},</if>
+            <if test="allPjj != null">all_pjj = #{allPjj},</if>
+            <if test="alifaceOnline != null">aliface_online = #{alifaceOnline},</if>
+            <if test="alifaceAmount != null">aliface_amount = #{alifaceAmount},</if>
+            <if test="alifaceCount != null">aliface_count = #{alifaceCount},</if>
+            <if test="alifacePjb != null">aliface_pjb = #{alifacePjb},</if>
+            <if test="alifacePjj != null">aliface_pjj = #{alifacePjj},</if>
+            <if test="aliAmount != null">ali_amount = #{aliAmount},</if>
+            <if test="aliCount != null">ali_count = #{aliCount},</if>
+            <if test="wxAmount != null">wx_amount = #{wxAmount},</if>
+            <if test="wxCount != null">wx_count = #{wxCount},</if>
+            <if test="wxfaceAmount != null">wxface_amount = #{wxfaceAmount},</if>
+            <if test="wxfaceCount != null">wxface_count = #{wxfaceCount},</if>
+            <if test="wxhandAmount != null">wxhand_amount = #{wxhandAmount},</if>
+            <if test="wxhandCount != null">wxhand_count = #{wxhandCount},</if>
+            <if test="icAmount != null">ic_amount = #{icAmount},</if>
+            <if test="icCount != null">ic_count = #{icCount},</if>
+            <if test="ghlAmount != null">ghl_amount = #{ghlAmount},</if>
+            <if test="ghlCount != null">ghl_count = #{ghlCount},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="statsTime != null">stats_time = #{statsTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseSalesStatsById" parameterType="Long">
+        delete from base_sales_stats where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseSalesStatsByIds" parameterType="String">
+        delete from base_sales_stats where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

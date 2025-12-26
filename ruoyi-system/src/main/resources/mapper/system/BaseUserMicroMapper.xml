@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserMicroMapper">
+    
+    <resultMap type="BaseUserMicro" id="BaseUserMicroResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="businessCode"    column="business_code"    />
+        <result property="idCardName"    column="id_card_name"    />
+        <result property="idCardNumber"    column="id_card_number"    />
+        <result property="idCardAddress"    column="id_card_address"    />
+        <result property="idCardValidTime"    column="id_card_valid_time"    />
+        <result property="idCardFrontMediaId"    column="id_card_front_media_id"    />
+        <result property="idCardFrontUrl"    column="id_card_front_url"    />
+        <result property="idCardBackMediaId"    column="id_card_back_media_id"    />
+        <result property="idCardBackUrl"    column="id_card_back_url"    />
+        <result property="accountBank"    column="account_bank"    />
+        <result property="bankAddressCode"    column="bank_address_code"    />
+        <result property="accountNumber"    column="account_number"    />
+        <result property="storeName"    column="store_name"    />
+        <result property="storeAddressCode"    column="store_address_code"    />
+        <result property="storeEntrancePicMediaId"    column="store_entrance_pic_media_id"    />
+        <result property="storeEntrancePicUrl"    column="store_entrance_pic_url"    />
+        <result property="indoorPicMediaId"    column="indoor_pic_media_id"    />
+        <result property="indoorPicUrl"    column="indoor_pic_url"    />
+        <result property="merchantShortname"    column="merchant_shortname"    />
+        <result property="servicePhone"    column="service_phone"    />
+        <result property="productDesc"    column="product_desc"    />
+        <result property="rate"    column="rate"    />
+        <result property="contactPhone"    column="contact_phone"    />
+        <result property="status"    column="status"    />
+        <result property="message"    column="message"    />
+        <result property="applymentId"    column="applyment_id"    />
+        <result property="subMchId"    column="sub_mch_id"    />
+        <result property="signUrl"    column="sign_url"    />
+        <result property="payConfigStatus"    column="pay_config_status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="storeAddress"    column="store_address"    />
+        <result property="newIf"    column="new_if"    />
+        <result property="contactEmail"    column="contact_email"    />
+        <result property="goldplan"    column="goldplan"    />
+        <result property="subjectType"    column="subject_type"    />
+        <result property="merchantName"    column="merchant_name"    />
+        <result property="licenseNumber"    column="license_number"    />
+        <result property="licensePicUrl"    column="license_pic_url"    />
+        <result property="licensePicMediaId"    column="license_pic_media_id"    />
+        <result property="certType"    column="cert_type"    />
+        <result property="certNumber"    column="cert_number"    />
+        <result property="companyAddress"    column="company_address"    />
+        <result property="certPicUrl"    column="cert_pic_url"    />
+        <result property="certPicMediaId"    column="cert_pic_media_id"    />
+        <result property="periodBegin"    column="period_begin"    />
+        <result property="periodEnd"    column="period_end"    />
+        <result property="organizationCode"    column="organization_code"    />
+        <result property="orgPeriodBegin"    column="org_period_begin"    />
+        <result property="orgPeriodEnd"    column="org_period_end"    />
+        <result property="organizationPicUrl"    column="organization_pic_url"    />
+        <result property="organizationPicMediaId"    column="organization_pic_media_id"    />
+        <result property="idDocType"    column="id_doc_type"    />
+        <result property="contactName"    column="contact_name"    />
+        <result property="contactIdNumber"    column="contact_id_number"    />
+        <result property="idPeriodBegin"    column="id_period_begin"    />
+        <result property="idPeriodEnd"    column="id_period_end"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="settlement"    column="settlement"    />
+        <result property="qualification1Url"    column="qualification1_url"    />
+        <result property="qualification1MediaId"    column="qualification1_media_id"    />
+        <result property="qualification2Url"    column="qualification2_url"    />
+        <result property="qualification2MediaId"    column="qualification2_media_id"    />
+        <result property="qualification3Url"    column="qualification3_url"    />
+        <result property="qualification3MediaId"    column="qualification3_media_id"    />
+        <result property="qualification4Url"    column="qualification4_url"    />
+        <result property="qualification4MediaId"    column="qualification4_media_id"    />
+        <result property="qualification5Url"    column="qualification5_url"    />
+        <result property="qualification5MediaId"    column="qualification5_media_id"    />
+        <result property="bankAccountType"    column="bank_account_type"    />
+        <result property="contactType"    column="contact_type"    />
+        <result property="contactIdDocType"    column="contact_id_doc_type"    />
+        <result property="contactIdDocCopyUrl"    column="contact_id_doc_copy_url"    />
+        <result property="contactIdDocCopyMediaId"    column="contact_id_doc_copy_media_id"    />
+        <result property="contactIdDocCopyBackUrl"    column="contact_id_doc_copy_back_url"    />
+        <result property="contactIdDocCopyBackMediaId"    column="contact_id_doc_copy_back_media_id"    />
+        <result property="contactPeriodBegin"    column="contact_period_begin"    />
+        <result property="contactPeriodEnd"    column="contact_period_end"    />
+        <result property="businessAuthorizationLetterUrl"    column="business_authorization_letter_url"    />
+        <result property="businessAuthorizationLetterMediaId"    column="business_authorization_letter_media_id"    />
+        <result property="licenseAddress"    column="license_address"    />
+        <result property="licensePeriodBegin"    column="license_period_begin"    />
+        <result property="licensePeriodEnd"    column="license_period_end"    />
+        <result property="storeAddressProvinceCode"    column="store_address_province_code"    />
+        <result property="bankAddressProvinceCode"    column="bank_address_province_code"    />
+    </resultMap>
+
+    <sql id="selectBaseUserMicroVo">
+        select id, user_id, business_code, id_card_name, id_card_number, id_card_address, id_card_valid_time, id_card_front_media_id, id_card_front_url, id_card_back_media_id, id_card_back_url, account_bank, bank_address_code, account_number, store_name, store_address_code, store_entrance_pic_media_id, store_entrance_pic_url, indoor_pic_media_id, indoor_pic_url, merchant_shortname, service_phone, product_desc, rate, contact_phone, status, message, applyment_id, sub_mch_id, sign_url, pay_config_status, update_time, create_time, store_address, new_if, contact_email, goldplan, subject_type, merchant_name, license_number, license_pic_url, license_pic_media_id, cert_type, cert_number, company_address, cert_pic_url, cert_pic_media_id, period_begin, period_end, organization_code, org_period_begin, org_period_end, organization_pic_url, organization_pic_media_id, id_doc_type, contact_name, contact_id_number, id_period_begin, id_period_end, bank_name, settlement, qualification1_url, qualification1_media_id, qualification2_url, qualification2_media_id, qualification3_url, qualification3_media_id, qualification4_url, qualification4_media_id, qualification5_url, qualification5_media_id, bank_account_type, contact_type, contact_id_doc_type, contact_id_doc_copy_url, contact_id_doc_copy_media_id, contact_id_doc_copy_back_url, contact_id_doc_copy_back_media_id, contact_period_begin, contact_period_end, business_authorization_letter_url, business_authorization_letter_media_id, license_address, license_period_begin, license_period_end, store_address_province_code, bank_address_province_code from base_user_micro
+    </sql>
+
+    <select id="selectBaseUserMicroList" parameterType="BaseUserMicro" resultMap="BaseUserMicroResult">
+        <include refid="selectBaseUserMicroVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="businessCode != null  and businessCode != ''"> and business_code = #{businessCode}</if>
+            <if test="idCardName != null  and idCardName != ''"> and id_card_name like concat('%', #{idCardName}, '%')</if>
+            <if test="idCardNumber != null  and idCardNumber != ''"> and id_card_number = #{idCardNumber}</if>
+            <if test="idCardAddress != null  and idCardAddress != ''"> and id_card_address = #{idCardAddress}</if>
+            <if test="idCardValidTime != null  and idCardValidTime != ''"> and id_card_valid_time = #{idCardValidTime}</if>
+            <if test="idCardFrontMediaId != null  and idCardFrontMediaId != ''"> and id_card_front_media_id = #{idCardFrontMediaId}</if>
+            <if test="idCardFrontUrl != null  and idCardFrontUrl != ''"> and id_card_front_url = #{idCardFrontUrl}</if>
+            <if test="idCardBackMediaId != null  and idCardBackMediaId != ''"> and id_card_back_media_id = #{idCardBackMediaId}</if>
+            <if test="idCardBackUrl != null  and idCardBackUrl != ''"> and id_card_back_url = #{idCardBackUrl}</if>
+            <if test="accountBank != null  and accountBank != ''"> and account_bank = #{accountBank}</if>
+            <if test="bankAddressCode != null  and bankAddressCode != ''"> and bank_address_code = #{bankAddressCode}</if>
+            <if test="accountNumber != null  and accountNumber != ''"> and account_number = #{accountNumber}</if>
+            <if test="storeName != null  and storeName != ''"> and store_name like concat('%', #{storeName}, '%')</if>
+            <if test="storeAddressCode != null  and storeAddressCode != ''"> and store_address_code = #{storeAddressCode}</if>
+            <if test="storeEntrancePicMediaId != null  and storeEntrancePicMediaId != ''"> and store_entrance_pic_media_id = #{storeEntrancePicMediaId}</if>
+            <if test="storeEntrancePicUrl != null  and storeEntrancePicUrl != ''"> and store_entrance_pic_url = #{storeEntrancePicUrl}</if>
+            <if test="indoorPicMediaId != null  and indoorPicMediaId != ''"> and indoor_pic_media_id = #{indoorPicMediaId}</if>
+            <if test="indoorPicUrl != null  and indoorPicUrl != ''"> and indoor_pic_url = #{indoorPicUrl}</if>
+            <if test="merchantShortname != null  and merchantShortname != ''"> and merchant_shortname like concat('%', #{merchantShortname}, '%')</if>
+            <if test="servicePhone != null  and servicePhone != ''"> and service_phone = #{servicePhone}</if>
+            <if test="productDesc != null  and productDesc != ''"> and product_desc = #{productDesc}</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="contactPhone != null  and contactPhone != ''"> and contact_phone = #{contactPhone}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="message != null  and message != ''"> and message = #{message}</if>
+            <if test="applymentId != null  and applymentId != ''"> and applyment_id = #{applymentId}</if>
+            <if test="subMchId != null  and subMchId != ''"> and sub_mch_id = #{subMchId}</if>
+            <if test="signUrl != null  and signUrl != ''"> and sign_url = #{signUrl}</if>
+            <if test="payConfigStatus != null "> and pay_config_status = #{payConfigStatus}</if>
+            <if test="storeAddress != null  and storeAddress != ''"> and store_address = #{storeAddress}</if>
+            <if test="newIf != null "> and new_if = #{newIf}</if>
+            <if test="contactEmail != null  and contactEmail != ''"> and contact_email = #{contactEmail}</if>
+            <if test="goldplan != null "> and goldplan = #{goldplan}</if>
+            <if test="subjectType != null "> and subject_type = #{subjectType}</if>
+            <if test="merchantName != null  and merchantName != ''"> and merchant_name like concat('%', #{merchantName}, '%')</if>
+            <if test="licenseNumber != null  and licenseNumber != ''"> and license_number = #{licenseNumber}</if>
+            <if test="licensePicUrl != null  and licensePicUrl != ''"> and license_pic_url = #{licensePicUrl}</if>
+            <if test="licensePicMediaId != null  and licensePicMediaId != ''"> and license_pic_media_id = #{licensePicMediaId}</if>
+            <if test="certType != null  and certType != ''"> and cert_type = #{certType}</if>
+            <if test="certNumber != null  and certNumber != ''"> and cert_number = #{certNumber}</if>
+            <if test="companyAddress != null  and companyAddress != ''"> and company_address = #{companyAddress}</if>
+            <if test="certPicUrl != null  and certPicUrl != ''"> and cert_pic_url = #{certPicUrl}</if>
+            <if test="certPicMediaId != null  and certPicMediaId != ''"> and cert_pic_media_id = #{certPicMediaId}</if>
+            <if test="periodBegin != null  and periodBegin != ''"> and period_begin = #{periodBegin}</if>
+            <if test="periodEnd != null  and periodEnd != ''"> and period_end = #{periodEnd}</if>
+            <if test="organizationCode != null  and organizationCode != ''"> and organization_code = #{organizationCode}</if>
+            <if test="orgPeriodBegin != null  and orgPeriodBegin != ''"> and org_period_begin = #{orgPeriodBegin}</if>
+            <if test="orgPeriodEnd != null  and orgPeriodEnd != ''"> and org_period_end = #{orgPeriodEnd}</if>
+            <if test="organizationPicUrl != null  and organizationPicUrl != ''"> and organization_pic_url = #{organizationPicUrl}</if>
+            <if test="organizationPicMediaId != null  and organizationPicMediaId != ''"> and organization_pic_media_id = #{organizationPicMediaId}</if>
+            <if test="idDocType != null  and idDocType != ''"> and id_doc_type = #{idDocType}</if>
+            <if test="contactName != null  and contactName != ''"> and contact_name like concat('%', #{contactName}, '%')</if>
+            <if test="contactIdNumber != null  and contactIdNumber != ''"> and contact_id_number = #{contactIdNumber}</if>
+            <if test="idPeriodBegin != null  and idPeriodBegin != ''"> and id_period_begin = #{idPeriodBegin}</if>
+            <if test="idPeriodEnd != null  and idPeriodEnd != ''"> and id_period_end = #{idPeriodEnd}</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="settlement != null  and settlement != ''"> and settlement = #{settlement}</if>
+            <if test="qualification1Url != null  and qualification1Url != ''"> and qualification1_url = #{qualification1Url}</if>
+            <if test="qualification1MediaId != null  and qualification1MediaId != ''"> and qualification1_media_id = #{qualification1MediaId}</if>
+            <if test="qualification2Url != null  and qualification2Url != ''"> and qualification2_url = #{qualification2Url}</if>
+            <if test="qualification2MediaId != null  and qualification2MediaId != ''"> and qualification2_media_id = #{qualification2MediaId}</if>
+            <if test="qualification3Url != null  and qualification3Url != ''"> and qualification3_url = #{qualification3Url}</if>
+            <if test="qualification3MediaId != null  and qualification3MediaId != ''"> and qualification3_media_id = #{qualification3MediaId}</if>
+            <if test="qualification4Url != null  and qualification4Url != ''"> and qualification4_url = #{qualification4Url}</if>
+            <if test="qualification4MediaId != null  and qualification4MediaId != ''"> and qualification4_media_id = #{qualification4MediaId}</if>
+            <if test="qualification5Url != null  and qualification5Url != ''"> and qualification5_url = #{qualification5Url}</if>
+            <if test="qualification5MediaId != null  and qualification5MediaId != ''"> and qualification5_media_id = #{qualification5MediaId}</if>
+            <if test="bankAccountType != null "> and bank_account_type = #{bankAccountType}</if>
+            <if test="contactType != null  and contactType != ''"> and contact_type = #{contactType}</if>
+            <if test="contactIdDocType != null  and contactIdDocType != ''"> and contact_id_doc_type = #{contactIdDocType}</if>
+            <if test="contactIdDocCopyUrl != null  and contactIdDocCopyUrl != ''"> and contact_id_doc_copy_url = #{contactIdDocCopyUrl}</if>
+            <if test="contactIdDocCopyMediaId != null  and contactIdDocCopyMediaId != ''"> and contact_id_doc_copy_media_id = #{contactIdDocCopyMediaId}</if>
+            <if test="contactIdDocCopyBackUrl != null  and contactIdDocCopyBackUrl != ''"> and contact_id_doc_copy_back_url = #{contactIdDocCopyBackUrl}</if>
+            <if test="contactIdDocCopyBackMediaId != null  and contactIdDocCopyBackMediaId != ''"> and contact_id_doc_copy_back_media_id = #{contactIdDocCopyBackMediaId}</if>
+            <if test="contactPeriodBegin != null  and contactPeriodBegin != ''"> and contact_period_begin = #{contactPeriodBegin}</if>
+            <if test="contactPeriodEnd != null  and contactPeriodEnd != ''"> and contact_period_end = #{contactPeriodEnd}</if>
+            <if test="businessAuthorizationLetterUrl != null  and businessAuthorizationLetterUrl != ''"> and business_authorization_letter_url = #{businessAuthorizationLetterUrl}</if>
+            <if test="businessAuthorizationLetterMediaId != null  and businessAuthorizationLetterMediaId != ''"> and business_authorization_letter_media_id = #{businessAuthorizationLetterMediaId}</if>
+            <if test="licenseAddress != null  and licenseAddress != ''"> and license_address = #{licenseAddress}</if>
+            <if test="licensePeriodBegin != null  and licensePeriodBegin != ''"> and license_period_begin = #{licensePeriodBegin}</if>
+            <if test="licensePeriodEnd != null  and licensePeriodEnd != ''"> and license_period_end = #{licensePeriodEnd}</if>
+            <if test="storeAddressProvinceCode != null  and storeAddressProvinceCode != ''"> and store_address_province_code = #{storeAddressProvinceCode}</if>
+            <if test="bankAddressProvinceCode != null  and bankAddressProvinceCode != ''"> and bank_address_province_code = #{bankAddressProvinceCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseUserMicroById" parameterType="Long" resultMap="BaseUserMicroResult">
+        <include refid="selectBaseUserMicroVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseUserMicro" parameterType="BaseUserMicro" useGeneratedKeys="true" keyProperty="id">
+        insert into base_user_micro
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="businessCode != null">business_code,</if>
+            <if test="idCardName != null">id_card_name,</if>
+            <if test="idCardNumber != null">id_card_number,</if>
+            <if test="idCardAddress != null">id_card_address,</if>
+            <if test="idCardValidTime != null">id_card_valid_time,</if>
+            <if test="idCardFrontMediaId != null">id_card_front_media_id,</if>
+            <if test="idCardFrontUrl != null">id_card_front_url,</if>
+            <if test="idCardBackMediaId != null">id_card_back_media_id,</if>
+            <if test="idCardBackUrl != null">id_card_back_url,</if>
+            <if test="accountBank != null">account_bank,</if>
+            <if test="bankAddressCode != null">bank_address_code,</if>
+            <if test="accountNumber != null">account_number,</if>
+            <if test="storeName != null">store_name,</if>
+            <if test="storeAddressCode != null">store_address_code,</if>
+            <if test="storeEntrancePicMediaId != null">store_entrance_pic_media_id,</if>
+            <if test="storeEntrancePicUrl != null">store_entrance_pic_url,</if>
+            <if test="indoorPicMediaId != null">indoor_pic_media_id,</if>
+            <if test="indoorPicUrl != null">indoor_pic_url,</if>
+            <if test="merchantShortname != null">merchant_shortname,</if>
+            <if test="servicePhone != null">service_phone,</if>
+            <if test="productDesc != null">product_desc,</if>
+            <if test="rate != null">rate,</if>
+            <if test="contactPhone != null">contact_phone,</if>
+            <if test="status != null">status,</if>
+            <if test="message != null">message,</if>
+            <if test="applymentId != null">applyment_id,</if>
+            <if test="subMchId != null">sub_mch_id,</if>
+            <if test="signUrl != null">sign_url,</if>
+            <if test="payConfigStatus != null">pay_config_status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="storeAddress != null">store_address,</if>
+            <if test="newIf != null">new_if,</if>
+            <if test="contactEmail != null">contact_email,</if>
+            <if test="goldplan != null">goldplan,</if>
+            <if test="subjectType != null">subject_type,</if>
+            <if test="merchantName != null">merchant_name,</if>
+            <if test="licenseNumber != null">license_number,</if>
+            <if test="licensePicUrl != null">license_pic_url,</if>
+            <if test="licensePicMediaId != null">license_pic_media_id,</if>
+            <if test="certType != null">cert_type,</if>
+            <if test="certNumber != null">cert_number,</if>
+            <if test="companyAddress != null">company_address,</if>
+            <if test="certPicUrl != null">cert_pic_url,</if>
+            <if test="certPicMediaId != null">cert_pic_media_id,</if>
+            <if test="periodBegin != null">period_begin,</if>
+            <if test="periodEnd != null">period_end,</if>
+            <if test="organizationCode != null">organization_code,</if>
+            <if test="orgPeriodBegin != null">org_period_begin,</if>
+            <if test="orgPeriodEnd != null">org_period_end,</if>
+            <if test="organizationPicUrl != null">organization_pic_url,</if>
+            <if test="organizationPicMediaId != null">organization_pic_media_id,</if>
+            <if test="idDocType != null">id_doc_type,</if>
+            <if test="contactName != null">contact_name,</if>
+            <if test="contactIdNumber != null">contact_id_number,</if>
+            <if test="idPeriodBegin != null">id_period_begin,</if>
+            <if test="idPeriodEnd != null">id_period_end,</if>
+            <if test="bankName != null">bank_name,</if>
+            <if test="settlement != null">settlement,</if>
+            <if test="qualification1Url != null">qualification1_url,</if>
+            <if test="qualification1MediaId != null">qualification1_media_id,</if>
+            <if test="qualification2Url != null">qualification2_url,</if>
+            <if test="qualification2MediaId != null">qualification2_media_id,</if>
+            <if test="qualification3Url != null">qualification3_url,</if>
+            <if test="qualification3MediaId != null">qualification3_media_id,</if>
+            <if test="qualification4Url != null">qualification4_url,</if>
+            <if test="qualification4MediaId != null">qualification4_media_id,</if>
+            <if test="qualification5Url != null">qualification5_url,</if>
+            <if test="qualification5MediaId != null">qualification5_media_id,</if>
+            <if test="bankAccountType != null">bank_account_type,</if>
+            <if test="contactType != null">contact_type,</if>
+            <if test="contactIdDocType != null">contact_id_doc_type,</if>
+            <if test="contactIdDocCopyUrl != null">contact_id_doc_copy_url,</if>
+            <if test="contactIdDocCopyMediaId != null">contact_id_doc_copy_media_id,</if>
+            <if test="contactIdDocCopyBackUrl != null">contact_id_doc_copy_back_url,</if>
+            <if test="contactIdDocCopyBackMediaId != null">contact_id_doc_copy_back_media_id,</if>
+            <if test="contactPeriodBegin != null">contact_period_begin,</if>
+            <if test="contactPeriodEnd != null">contact_period_end,</if>
+            <if test="businessAuthorizationLetterUrl != null">business_authorization_letter_url,</if>
+            <if test="businessAuthorizationLetterMediaId != null">business_authorization_letter_media_id,</if>
+            <if test="licenseAddress != null">license_address,</if>
+            <if test="licensePeriodBegin != null">license_period_begin,</if>
+            <if test="licensePeriodEnd != null">license_period_end,</if>
+            <if test="storeAddressProvinceCode != null">store_address_province_code,</if>
+            <if test="bankAddressProvinceCode != null">bank_address_province_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="businessCode != null">#{businessCode},</if>
+            <if test="idCardName != null">#{idCardName},</if>
+            <if test="idCardNumber != null">#{idCardNumber},</if>
+            <if test="idCardAddress != null">#{idCardAddress},</if>
+            <if test="idCardValidTime != null">#{idCardValidTime},</if>
+            <if test="idCardFrontMediaId != null">#{idCardFrontMediaId},</if>
+            <if test="idCardFrontUrl != null">#{idCardFrontUrl},</if>
+            <if test="idCardBackMediaId != null">#{idCardBackMediaId},</if>
+            <if test="idCardBackUrl != null">#{idCardBackUrl},</if>
+            <if test="accountBank != null">#{accountBank},</if>
+            <if test="bankAddressCode != null">#{bankAddressCode},</if>
+            <if test="accountNumber != null">#{accountNumber},</if>
+            <if test="storeName != null">#{storeName},</if>
+            <if test="storeAddressCode != null">#{storeAddressCode},</if>
+            <if test="storeEntrancePicMediaId != null">#{storeEntrancePicMediaId},</if>
+            <if test="storeEntrancePicUrl != null">#{storeEntrancePicUrl},</if>
+            <if test="indoorPicMediaId != null">#{indoorPicMediaId},</if>
+            <if test="indoorPicUrl != null">#{indoorPicUrl},</if>
+            <if test="merchantShortname != null">#{merchantShortname},</if>
+            <if test="servicePhone != null">#{servicePhone},</if>
+            <if test="productDesc != null">#{productDesc},</if>
+            <if test="rate != null">#{rate},</if>
+            <if test="contactPhone != null">#{contactPhone},</if>
+            <if test="status != null">#{status},</if>
+            <if test="message != null">#{message},</if>
+            <if test="applymentId != null">#{applymentId},</if>
+            <if test="subMchId != null">#{subMchId},</if>
+            <if test="signUrl != null">#{signUrl},</if>
+            <if test="payConfigStatus != null">#{payConfigStatus},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="storeAddress != null">#{storeAddress},</if>
+            <if test="newIf != null">#{newIf},</if>
+            <if test="contactEmail != null">#{contactEmail},</if>
+            <if test="goldplan != null">#{goldplan},</if>
+            <if test="subjectType != null">#{subjectType},</if>
+            <if test="merchantName != null">#{merchantName},</if>
+            <if test="licenseNumber != null">#{licenseNumber},</if>
+            <if test="licensePicUrl != null">#{licensePicUrl},</if>
+            <if test="licensePicMediaId != null">#{licensePicMediaId},</if>
+            <if test="certType != null">#{certType},</if>
+            <if test="certNumber != null">#{certNumber},</if>
+            <if test="companyAddress != null">#{companyAddress},</if>
+            <if test="certPicUrl != null">#{certPicUrl},</if>
+            <if test="certPicMediaId != null">#{certPicMediaId},</if>
+            <if test="periodBegin != null">#{periodBegin},</if>
+            <if test="periodEnd != null">#{periodEnd},</if>
+            <if test="organizationCode != null">#{organizationCode},</if>
+            <if test="orgPeriodBegin != null">#{orgPeriodBegin},</if>
+            <if test="orgPeriodEnd != null">#{orgPeriodEnd},</if>
+            <if test="organizationPicUrl != null">#{organizationPicUrl},</if>
+            <if test="organizationPicMediaId != null">#{organizationPicMediaId},</if>
+            <if test="idDocType != null">#{idDocType},</if>
+            <if test="contactName != null">#{contactName},</if>
+            <if test="contactIdNumber != null">#{contactIdNumber},</if>
+            <if test="idPeriodBegin != null">#{idPeriodBegin},</if>
+            <if test="idPeriodEnd != null">#{idPeriodEnd},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="settlement != null">#{settlement},</if>
+            <if test="qualification1Url != null">#{qualification1Url},</if>
+            <if test="qualification1MediaId != null">#{qualification1MediaId},</if>
+            <if test="qualification2Url != null">#{qualification2Url},</if>
+            <if test="qualification2MediaId != null">#{qualification2MediaId},</if>
+            <if test="qualification3Url != null">#{qualification3Url},</if>
+            <if test="qualification3MediaId != null">#{qualification3MediaId},</if>
+            <if test="qualification4Url != null">#{qualification4Url},</if>
+            <if test="qualification4MediaId != null">#{qualification4MediaId},</if>
+            <if test="qualification5Url != null">#{qualification5Url},</if>
+            <if test="qualification5MediaId != null">#{qualification5MediaId},</if>
+            <if test="bankAccountType != null">#{bankAccountType},</if>
+            <if test="contactType != null">#{contactType},</if>
+            <if test="contactIdDocType != null">#{contactIdDocType},</if>
+            <if test="contactIdDocCopyUrl != null">#{contactIdDocCopyUrl},</if>
+            <if test="contactIdDocCopyMediaId != null">#{contactIdDocCopyMediaId},</if>
+            <if test="contactIdDocCopyBackUrl != null">#{contactIdDocCopyBackUrl},</if>
+            <if test="contactIdDocCopyBackMediaId != null">#{contactIdDocCopyBackMediaId},</if>
+            <if test="contactPeriodBegin != null">#{contactPeriodBegin},</if>
+            <if test="contactPeriodEnd != null">#{contactPeriodEnd},</if>
+            <if test="businessAuthorizationLetterUrl != null">#{businessAuthorizationLetterUrl},</if>
+            <if test="businessAuthorizationLetterMediaId != null">#{businessAuthorizationLetterMediaId},</if>
+            <if test="licenseAddress != null">#{licenseAddress},</if>
+            <if test="licensePeriodBegin != null">#{licensePeriodBegin},</if>
+            <if test="licensePeriodEnd != null">#{licensePeriodEnd},</if>
+            <if test="storeAddressProvinceCode != null">#{storeAddressProvinceCode},</if>
+            <if test="bankAddressProvinceCode != null">#{bankAddressProvinceCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUserMicro" parameterType="BaseUserMicro">
+        update base_user_micro
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="businessCode != null">business_code = #{businessCode},</if>
+            <if test="idCardName != null">id_card_name = #{idCardName},</if>
+            <if test="idCardNumber != null">id_card_number = #{idCardNumber},</if>
+            <if test="idCardAddress != null">id_card_address = #{idCardAddress},</if>
+            <if test="idCardValidTime != null">id_card_valid_time = #{idCardValidTime},</if>
+            <if test="idCardFrontMediaId != null">id_card_front_media_id = #{idCardFrontMediaId},</if>
+            <if test="idCardFrontUrl != null">id_card_front_url = #{idCardFrontUrl},</if>
+            <if test="idCardBackMediaId != null">id_card_back_media_id = #{idCardBackMediaId},</if>
+            <if test="idCardBackUrl != null">id_card_back_url = #{idCardBackUrl},</if>
+            <if test="accountBank != null">account_bank = #{accountBank},</if>
+            <if test="bankAddressCode != null">bank_address_code = #{bankAddressCode},</if>
+            <if test="accountNumber != null">account_number = #{accountNumber},</if>
+            <if test="storeName != null">store_name = #{storeName},</if>
+            <if test="storeAddressCode != null">store_address_code = #{storeAddressCode},</if>
+            <if test="storeEntrancePicMediaId != null">store_entrance_pic_media_id = #{storeEntrancePicMediaId},</if>
+            <if test="storeEntrancePicUrl != null">store_entrance_pic_url = #{storeEntrancePicUrl},</if>
+            <if test="indoorPicMediaId != null">indoor_pic_media_id = #{indoorPicMediaId},</if>
+            <if test="indoorPicUrl != null">indoor_pic_url = #{indoorPicUrl},</if>
+            <if test="merchantShortname != null">merchant_shortname = #{merchantShortname},</if>
+            <if test="servicePhone != null">service_phone = #{servicePhone},</if>
+            <if test="productDesc != null">product_desc = #{productDesc},</if>
+            <if test="rate != null">rate = #{rate},</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="applymentId != null">applyment_id = #{applymentId},</if>
+            <if test="subMchId != null">sub_mch_id = #{subMchId},</if>
+            <if test="signUrl != null">sign_url = #{signUrl},</if>
+            <if test="payConfigStatus != null">pay_config_status = #{payConfigStatus},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="storeAddress != null">store_address = #{storeAddress},</if>
+            <if test="newIf != null">new_if = #{newIf},</if>
+            <if test="contactEmail != null">contact_email = #{contactEmail},</if>
+            <if test="goldplan != null">goldplan = #{goldplan},</if>
+            <if test="subjectType != null">subject_type = #{subjectType},</if>
+            <if test="merchantName != null">merchant_name = #{merchantName},</if>
+            <if test="licenseNumber != null">license_number = #{licenseNumber},</if>
+            <if test="licensePicUrl != null">license_pic_url = #{licensePicUrl},</if>
+            <if test="licensePicMediaId != null">license_pic_media_id = #{licensePicMediaId},</if>
+            <if test="certType != null">cert_type = #{certType},</if>
+            <if test="certNumber != null">cert_number = #{certNumber},</if>
+            <if test="companyAddress != null">company_address = #{companyAddress},</if>
+            <if test="certPicUrl != null">cert_pic_url = #{certPicUrl},</if>
+            <if test="certPicMediaId != null">cert_pic_media_id = #{certPicMediaId},</if>
+            <if test="periodBegin != null">period_begin = #{periodBegin},</if>
+            <if test="periodEnd != null">period_end = #{periodEnd},</if>
+            <if test="organizationCode != null">organization_code = #{organizationCode},</if>
+            <if test="orgPeriodBegin != null">org_period_begin = #{orgPeriodBegin},</if>
+            <if test="orgPeriodEnd != null">org_period_end = #{orgPeriodEnd},</if>
+            <if test="organizationPicUrl != null">organization_pic_url = #{organizationPicUrl},</if>
+            <if test="organizationPicMediaId != null">organization_pic_media_id = #{organizationPicMediaId},</if>
+            <if test="idDocType != null">id_doc_type = #{idDocType},</if>
+            <if test="contactName != null">contact_name = #{contactName},</if>
+            <if test="contactIdNumber != null">contact_id_number = #{contactIdNumber},</if>
+            <if test="idPeriodBegin != null">id_period_begin = #{idPeriodBegin},</if>
+            <if test="idPeriodEnd != null">id_period_end = #{idPeriodEnd},</if>
+            <if test="bankName != null">bank_name = #{bankName},</if>
+            <if test="settlement != null">settlement = #{settlement},</if>
+            <if test="qualification1Url != null">qualification1_url = #{qualification1Url},</if>
+            <if test="qualification1MediaId != null">qualification1_media_id = #{qualification1MediaId},</if>
+            <if test="qualification2Url != null">qualification2_url = #{qualification2Url},</if>
+            <if test="qualification2MediaId != null">qualification2_media_id = #{qualification2MediaId},</if>
+            <if test="qualification3Url != null">qualification3_url = #{qualification3Url},</if>
+            <if test="qualification3MediaId != null">qualification3_media_id = #{qualification3MediaId},</if>
+            <if test="qualification4Url != null">qualification4_url = #{qualification4Url},</if>
+            <if test="qualification4MediaId != null">qualification4_media_id = #{qualification4MediaId},</if>
+            <if test="qualification5Url != null">qualification5_url = #{qualification5Url},</if>
+            <if test="qualification5MediaId != null">qualification5_media_id = #{qualification5MediaId},</if>
+            <if test="bankAccountType != null">bank_account_type = #{bankAccountType},</if>
+            <if test="contactType != null">contact_type = #{contactType},</if>
+            <if test="contactIdDocType != null">contact_id_doc_type = #{contactIdDocType},</if>
+            <if test="contactIdDocCopyUrl != null">contact_id_doc_copy_url = #{contactIdDocCopyUrl},</if>
+            <if test="contactIdDocCopyMediaId != null">contact_id_doc_copy_media_id = #{contactIdDocCopyMediaId},</if>
+            <if test="contactIdDocCopyBackUrl != null">contact_id_doc_copy_back_url = #{contactIdDocCopyBackUrl},</if>
+            <if test="contactIdDocCopyBackMediaId != null">contact_id_doc_copy_back_media_id = #{contactIdDocCopyBackMediaId},</if>
+            <if test="contactPeriodBegin != null">contact_period_begin = #{contactPeriodBegin},</if>
+            <if test="contactPeriodEnd != null">contact_period_end = #{contactPeriodEnd},</if>
+            <if test="businessAuthorizationLetterUrl != null">business_authorization_letter_url = #{businessAuthorizationLetterUrl},</if>
+            <if test="businessAuthorizationLetterMediaId != null">business_authorization_letter_media_id = #{businessAuthorizationLetterMediaId},</if>
+            <if test="licenseAddress != null">license_address = #{licenseAddress},</if>
+            <if test="licensePeriodBegin != null">license_period_begin = #{licensePeriodBegin},</if>
+            <if test="licensePeriodEnd != null">license_period_end = #{licensePeriodEnd},</if>
+            <if test="storeAddressProvinceCode != null">store_address_province_code = #{storeAddressProvinceCode},</if>
+            <if test="bankAddressProvinceCode != null">bank_address_province_code = #{bankAddressProvinceCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseUserMicroById" parameterType="Long">
+        delete from base_user_micro where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseUserMicroByIds" parameterType="String">
+        delete from base_user_micro where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

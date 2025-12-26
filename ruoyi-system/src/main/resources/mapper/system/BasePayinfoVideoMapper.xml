@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BasePayinfoVideoMapper">
+    
+    <resultMap type="BasePayinfoVideo" id="BasePayinfoVideoResult">
+        <result property="id"    column="id"    />
+        <result property="payinfoId"    column="payinfo_id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="videoUrl"    column="video_url"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBasePayinfoVideoVo">
+        select id, payinfo_id, order_no, video_url, status, create_time from base_payinfo_video
+    </sql>
+
+    <select id="selectBasePayinfoVideoList" parameterType="BasePayinfoVideo" resultMap="BasePayinfoVideoResult">
+        <include refid="selectBasePayinfoVideoVo"/>
+        <where>  
+            <if test="payinfoId != null "> and payinfo_id = #{payinfoId}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="videoUrl != null  and videoUrl != ''"> and video_url = #{videoUrl}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBasePayinfoVideoById" parameterType="Long" resultMap="BasePayinfoVideoResult">
+        <include refid="selectBasePayinfoVideoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBasePayinfoVideo" parameterType="BasePayinfoVideo" useGeneratedKeys="true" keyProperty="id">
+        insert into base_payinfo_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payinfoId != null">payinfo_id,</if>
+            <if test="orderNo != null">order_no,</if>
+            <if test="videoUrl != null">video_url,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payinfoId != null">#{payinfoId},</if>
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="videoUrl != null">#{videoUrl},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBasePayinfoVideo" parameterType="BasePayinfoVideo">
+        update base_payinfo_video
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="payinfoId != null">payinfo_id = #{payinfoId},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="videoUrl != null">video_url = #{videoUrl},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBasePayinfoVideoById" parameterType="Long">
+        delete from base_payinfo_video where id = #{id}
+    </delete>
+
+    <delete id="deleteBasePayinfoVideoByIds" parameterType="String">
+        delete from base_payinfo_video where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

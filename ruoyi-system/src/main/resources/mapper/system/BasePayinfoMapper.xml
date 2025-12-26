@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BasePayinfoMapper">
+    
+    <resultMap type="BasePayinfo" id="BasePayinfoResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="deliveryId"    column="delivery_id"    />
+        <result property="huodao"    column="huodao"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="number"    column="number"    />
+        <result property="price"    column="price"    />
+        <result property="amount"    column="amount"    />
+        <result property="poundage"    column="poundage"    />
+        <result property="openId"    column="open_id"    />
+        <result property="transactionId"    column="transaction_id"    />
+        <result property="returnNo"    column="return_no"    />
+        <result property="hasDelivery"    column="has_delivery"    />
+        <result property="hasRefund"    column="has_refund"    />
+        <result property="hasNotice"    column="has_notice"    />
+        <result property="hasPay"    column="has_pay"    />
+        <result property="transferId"    column="transfer_id"    />
+        <result property="payChannelType"    column="payChannelType"    />
+        <result property="scanWeb"    column="scan_web"    />
+        <result property="pickUp"    column="pick_up"    />
+        <result property="subMch"    column="sub_mch"    />
+        <result property="deliveryCode"    column="delivery_code"    />
+        <result property="deliveryInfo"    column="delivery_info"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="couponCode"    column="coupon_code"    />
+        <result property="discount"    column="discount"    />
+        <result property="oldamount"    column="oldamount"    />
+        <result property="disamount"    column="disamount"    />
+        <result property="discountInfo"    column="discount_info"    />
+        <result property="huodaos"    column="huodaos"    />
+        <result property="payAuth"    column="pay_auth"    />
+    </resultMap>
+
+    <sql id="selectBasePayinfoVo">
+        select id, order_no, machine_id, sb_id, sb_name, user_id, goods_id, goods_name, delivery_id, huodao, pay_type, number, price, amount, poundage, open_id, transaction_id, return_no, has_delivery, has_refund, has_notice, has_pay, transfer_id, payChannelType, scan_web, pick_up, sub_mch, delivery_code, delivery_info, status, update_time, create_time, coupon_code, discount, oldamount, disamount, discount_info, huodaos, pay_auth from base_payinfo
+    </sql>
+
+    <select id="selectBasePayinfoList" parameterType="BasePayinfo" resultMap="BasePayinfoResult">
+        <include refid="selectBasePayinfoVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="deliveryId != null "> and delivery_id = #{deliveryId}</if>
+            <if test="huodao != null "> and huodao = #{huodao}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="poundage != null "> and poundage = #{poundage}</if>
+            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
+            <if test="transactionId != null  and transactionId != ''"> and transaction_id = #{transactionId}</if>
+            <if test="returnNo != null  and returnNo != ''"> and return_no = #{returnNo}</if>
+            <if test="hasDelivery != null "> and has_delivery = #{hasDelivery}</if>
+            <if test="hasRefund != null "> and has_refund = #{hasRefund}</if>
+            <if test="hasNotice != null "> and has_notice = #{hasNotice}</if>
+            <if test="hasPay != null "> and has_pay = #{hasPay}</if>
+            <if test="transferId != null "> and transfer_id = #{transferId}</if>
+            <if test="payChannelType != null "> and payChannelType = #{payChannelType}</if>
+            <if test="scanWeb != null "> and scan_web = #{scanWeb}</if>
+            <if test="pickUp != null "> and pick_up = #{pickUp}</if>
+            <if test="subMch != null "> and sub_mch = #{subMch}</if>
+            <if test="deliveryCode != null  and deliveryCode != ''"> and delivery_code = #{deliveryCode}</if>
+            <if test="deliveryInfo != null  and deliveryInfo != ''"> and delivery_info = #{deliveryInfo}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="couponCode != null  and couponCode != ''"> and coupon_code = #{couponCode}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="oldamount != null "> and oldamount = #{oldamount}</if>
+            <if test="disamount != null "> and disamount = #{disamount}</if>
+            <if test="discountInfo != null  and discountInfo != ''"> and discount_info = #{discountInfo}</if>
+            <if test="huodaos != null  and huodaos != ''"> and huodaos = #{huodaos}</if>
+            <if test="payAuth != null "> and pay_auth = #{payAuth}</if>
+        </where>
+    </select>
+    
+    <select id="selectBasePayinfoById" parameterType="Long" resultMap="BasePayinfoResult">
+        <include refid="selectBasePayinfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBasePayinfo" parameterType="BasePayinfo" useGeneratedKeys="true" keyProperty="id">
+        insert into base_payinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="goodsId != null">goods_id,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="deliveryId != null">delivery_id,</if>
+            <if test="huodao != null">huodao,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="number != null">number,</if>
+            <if test="price != null">price,</if>
+            <if test="amount != null">amount,</if>
+            <if test="poundage != null">poundage,</if>
+            <if test="openId != null">open_id,</if>
+            <if test="transactionId != null">transaction_id,</if>
+            <if test="returnNo != null">return_no,</if>
+            <if test="hasDelivery != null">has_delivery,</if>
+            <if test="hasRefund != null">has_refund,</if>
+            <if test="hasNotice != null">has_notice,</if>
+            <if test="hasPay != null">has_pay,</if>
+            <if test="transferId != null">transfer_id,</if>
+            <if test="payChannelType != null">payChannelType,</if>
+            <if test="scanWeb != null">scan_web,</if>
+            <if test="pickUp != null">pick_up,</if>
+            <if test="subMch != null">sub_mch,</if>
+            <if test="deliveryCode != null">delivery_code,</if>
+            <if test="deliveryInfo != null">delivery_info,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="couponCode != null">coupon_code,</if>
+            <if test="discount != null">discount,</if>
+            <if test="oldamount != null">oldamount,</if>
+            <if test="disamount != null">disamount,</if>
+            <if test="discountInfo != null">discount_info,</if>
+            <if test="huodaos != null">huodaos,</if>
+            <if test="payAuth != null">pay_auth,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="deliveryId != null">#{deliveryId},</if>
+            <if test="huodao != null">#{huodao},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="number != null">#{number},</if>
+            <if test="price != null">#{price},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="poundage != null">#{poundage},</if>
+            <if test="openId != null">#{openId},</if>
+            <if test="transactionId != null">#{transactionId},</if>
+            <if test="returnNo != null">#{returnNo},</if>
+            <if test="hasDelivery != null">#{hasDelivery},</if>
+            <if test="hasRefund != null">#{hasRefund},</if>
+            <if test="hasNotice != null">#{hasNotice},</if>
+            <if test="hasPay != null">#{hasPay},</if>
+            <if test="transferId != null">#{transferId},</if>
+            <if test="payChannelType != null">#{payChannelType},</if>
+            <if test="scanWeb != null">#{scanWeb},</if>
+            <if test="pickUp != null">#{pickUp},</if>
+            <if test="subMch != null">#{subMch},</if>
+            <if test="deliveryCode != null">#{deliveryCode},</if>
+            <if test="deliveryInfo != null">#{deliveryInfo},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="couponCode != null">#{couponCode},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="oldamount != null">#{oldamount},</if>
+            <if test="disamount != null">#{disamount},</if>
+            <if test="discountInfo != null">#{discountInfo},</if>
+            <if test="huodaos != null">#{huodaos},</if>
+            <if test="payAuth != null">#{payAuth},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBasePayinfo" parameterType="BasePayinfo">
+        update base_payinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="deliveryId != null">delivery_id = #{deliveryId},</if>
+            <if test="huodao != null">huodao = #{huodao},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="poundage != null">poundage = #{poundage},</if>
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="transactionId != null">transaction_id = #{transactionId},</if>
+            <if test="returnNo != null">return_no = #{returnNo},</if>
+            <if test="hasDelivery != null">has_delivery = #{hasDelivery},</if>
+            <if test="hasRefund != null">has_refund = #{hasRefund},</if>
+            <if test="hasNotice != null">has_notice = #{hasNotice},</if>
+            <if test="hasPay != null">has_pay = #{hasPay},</if>
+            <if test="transferId != null">transfer_id = #{transferId},</if>
+            <if test="payChannelType != null">payChannelType = #{payChannelType},</if>
+            <if test="scanWeb != null">scan_web = #{scanWeb},</if>
+            <if test="pickUp != null">pick_up = #{pickUp},</if>
+            <if test="subMch != null">sub_mch = #{subMch},</if>
+            <if test="deliveryCode != null">delivery_code = #{deliveryCode},</if>
+            <if test="deliveryInfo != null">delivery_info = #{deliveryInfo},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="couponCode != null">coupon_code = #{couponCode},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="oldamount != null">oldamount = #{oldamount},</if>
+            <if test="disamount != null">disamount = #{disamount},</if>
+            <if test="discountInfo != null">discount_info = #{discountInfo},</if>
+            <if test="huodaos != null">huodaos = #{huodaos},</if>
+            <if test="payAuth != null">pay_auth = #{payAuth},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBasePayinfoById" parameterType="Long">
+        delete from base_payinfo where id = #{id}
+    </delete>
+
+    <delete id="deleteBasePayinfoByIds" parameterType="String">
+        delete from base_payinfo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

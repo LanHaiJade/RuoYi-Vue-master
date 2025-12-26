@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseInternalMessageMapper">
+    
+    <resultMap type="BaseInternalMessage" id="BaseInternalMessageResult">
+        <result property="id"    column="id"    />
+        <result property="msg"    column="msg"    />
+        <result property="title"    column="title"    />
+        <result property="type"    column="type"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseInternalMessageVo">
+        select id, msg, title, type, type_name, type_id, update_time, create_time from base_internal_message
+    </sql>
+
+    <select id="selectBaseInternalMessageList" parameterType="BaseInternalMessage" resultMap="BaseInternalMessageResult">
+        <include refid="selectBaseInternalMessageVo"/>
+        <where>  
+            <if test="msg != null  and msg != ''"> and msg = #{msg}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseInternalMessageById" parameterType="Long" resultMap="BaseInternalMessageResult">
+        <include refid="selectBaseInternalMessageVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseInternalMessage" parameterType="BaseInternalMessage" useGeneratedKeys="true" keyProperty="id">
+        insert into base_internal_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="msg != null">msg,</if>
+            <if test="title != null">title,</if>
+            <if test="type != null">type,</if>
+            <if test="typeName != null">type_name,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="msg != null">#{msg},</if>
+            <if test="title != null">#{title},</if>
+            <if test="type != null">#{type},</if>
+            <if test="typeName != null">#{typeName},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseInternalMessage" parameterType="BaseInternalMessage">
+        update base_internal_message
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="msg != null">msg = #{msg},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="typeName != null">type_name = #{typeName},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseInternalMessageById" parameterType="Long">
+        delete from base_internal_message where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseInternalMessageByIds" parameterType="String">
+        delete from base_internal_message where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

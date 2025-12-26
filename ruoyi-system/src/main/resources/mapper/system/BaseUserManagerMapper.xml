@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserManagerMapper">
+    
+    <resultMap type="BaseUserManager" id="BaseUserManagerResult">
+        <result property="userId"    column="user_id"    />
+        <result property="managerId"    column="manager_id"    />
+    </resultMap>
+
+    <sql id="selectBaseUserManagerVo">
+        select user_id, manager_id from base_user_manager
+    </sql>
+
+    <select id="selectBaseUserManagerList" parameterType="BaseUserManager" resultMap="BaseUserManagerResult">
+        <include refid="selectBaseUserManagerVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectBaseUserManagerByUserId" parameterType="Long" resultMap="BaseUserManagerResult">
+        <include refid="selectBaseUserManagerVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertBaseUserManager" parameterType="BaseUserManager">
+        insert into base_user_manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="managerId != null">manager_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="managerId != null">#{managerId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUserManager" parameterType="BaseUserManager">
+        update base_user_manager
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="managerId != null">manager_id = #{managerId},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteBaseUserManagerByUserId" parameterType="Long">
+        delete from base_user_manager where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteBaseUserManagerByUserIds" parameterType="String">
+        delete from base_user_manager where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

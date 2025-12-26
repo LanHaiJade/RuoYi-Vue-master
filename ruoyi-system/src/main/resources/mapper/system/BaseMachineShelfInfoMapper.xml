@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineShelfInfoMapper">
+    
+    <resultMap type="BaseMachineShelfInfo" id="BaseMachineShelfInfoResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="capacity"    column="capacity"    />
+        <result property="stock"    column="stock"    />
+        <result property="price"    column="price"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineShelfInfoVo">
+        select id, sb_id, capacity, stock, price, update_time, create_time from base_machine_shelf_info
+    </sql>
+
+    <select id="selectBaseMachineShelfInfoList" parameterType="BaseMachineShelfInfo" resultMap="BaseMachineShelfInfoResult">
+        <include refid="selectBaseMachineShelfInfoVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="capacity != null  and capacity != ''"> and capacity = #{capacity}</if>
+            <if test="stock != null  and stock != ''"> and stock = #{stock}</if>
+            <if test="price != null  and price != ''"> and price = #{price}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineShelfInfoById" parameterType="Integer" resultMap="BaseMachineShelfInfoResult">
+        <include refid="selectBaseMachineShelfInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineShelfInfo" parameterType="BaseMachineShelfInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_shelf_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="capacity != null">capacity,</if>
+            <if test="stock != null">stock,</if>
+            <if test="price != null">price,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="capacity != null">#{capacity},</if>
+            <if test="stock != null">#{stock},</if>
+            <if test="price != null">#{price},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineShelfInfo" parameterType="BaseMachineShelfInfo">
+        update base_machine_shelf_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="capacity != null">capacity = #{capacity},</if>
+            <if test="stock != null">stock = #{stock},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineShelfInfoById" parameterType="Integer">
+        delete from base_machine_shelf_info where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineShelfInfoByIds" parameterType="String">
+        delete from base_machine_shelf_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

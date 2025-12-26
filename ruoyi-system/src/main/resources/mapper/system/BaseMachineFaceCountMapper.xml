@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineFaceCountMapper">
+    
+    <resultMap type="BaseMachineFaceCount" id="BaseMachineFaceCountResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="openId"    column="open_id"    />
+        <result property="cameraSn"    column="camera_sn"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineFaceCountVo">
+        select id, sb_id, open_id, camera_sn, update_time, create_time from base_machine_face_count
+    </sql>
+
+    <select id="selectBaseMachineFaceCountList" parameterType="BaseMachineFaceCount" resultMap="BaseMachineFaceCountResult">
+        <include refid="selectBaseMachineFaceCountVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
+            <if test="cameraSn != null  and cameraSn != ''"> and camera_sn = #{cameraSn}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineFaceCountById" parameterType="Long" resultMap="BaseMachineFaceCountResult">
+        <include refid="selectBaseMachineFaceCountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineFaceCount" parameterType="BaseMachineFaceCount" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_face_count
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="openId != null">open_id,</if>
+            <if test="cameraSn != null">camera_sn,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="openId != null">#{openId},</if>
+            <if test="cameraSn != null">#{cameraSn},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineFaceCount" parameterType="BaseMachineFaceCount">
+        update base_machine_face_count
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="cameraSn != null">camera_sn = #{cameraSn},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineFaceCountById" parameterType="Long">
+        delete from base_machine_face_count where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineFaceCountByIds" parameterType="String">
+        delete from base_machine_face_count where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

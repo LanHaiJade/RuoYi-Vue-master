@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseKfyhdRegmachMapper">
+    
+    <resultMap type="BaseKfyhdRegmach" id="BaseKfyhdRegmachResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseKfyhdRegmachVo">
+        select id, sb_id, update_time, create_time from base_kfyhd_regmach
+    </sql>
+
+    <select id="selectBaseKfyhdRegmachList" parameterType="BaseKfyhdRegmach" resultMap="BaseKfyhdRegmachResult">
+        <include refid="selectBaseKfyhdRegmachVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseKfyhdRegmachById" parameterType="Integer" resultMap="BaseKfyhdRegmachResult">
+        <include refid="selectBaseKfyhdRegmachVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseKfyhdRegmach" parameterType="BaseKfyhdRegmach" useGeneratedKeys="true" keyProperty="id">
+        insert into base_kfyhd_regmach
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseKfyhdRegmach" parameterType="BaseKfyhdRegmach">
+        update base_kfyhd_regmach
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseKfyhdRegmachById" parameterType="Integer">
+        delete from base_kfyhd_regmach where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseKfyhdRegmachByIds" parameterType="String">
+        delete from base_kfyhd_regmach where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

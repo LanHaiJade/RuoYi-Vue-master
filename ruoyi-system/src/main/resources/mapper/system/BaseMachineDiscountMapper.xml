@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineDiscountMapper">
+    
+    <resultMap type="BaseMachineDiscount" id="BaseMachineDiscountResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="type"    column="type"    />
+        <result property="discount"    column="discount"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineDiscountVo">
+        select id, sb_id, type, discount, update_time, create_time from base_machine_discount
+    </sql>
+
+    <select id="selectBaseMachineDiscountList" parameterType="BaseMachineDiscount" resultMap="BaseMachineDiscountResult">
+        <include refid="selectBaseMachineDiscountVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineDiscountById" parameterType="Integer" resultMap="BaseMachineDiscountResult">
+        <include refid="selectBaseMachineDiscountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineDiscount" parameterType="BaseMachineDiscount" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_discount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="type != null">type,</if>
+            <if test="discount != null">discount,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineDiscount" parameterType="BaseMachineDiscount">
+        update base_machine_discount
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineDiscountById" parameterType="Integer">
+        delete from base_machine_discount where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineDiscountByIds" parameterType="String">
+        delete from base_machine_discount where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

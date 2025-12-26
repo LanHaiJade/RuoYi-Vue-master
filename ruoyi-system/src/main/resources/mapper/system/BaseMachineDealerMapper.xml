@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineDealerMapper">
+    
+    <resultMap type="BaseMachineDealer" id="BaseMachineDealerResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="managerId"    column="manager_id"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineDealerVo">
+        select id, sb_id, manager_id, status, update_time, create_time from base_machine_dealer
+    </sql>
+
+    <select id="selectBaseMachineDealerList" parameterType="BaseMachineDealer" resultMap="BaseMachineDealerResult">
+        <include refid="selectBaseMachineDealerVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="managerId != null "> and manager_id = #{managerId}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineDealerById" parameterType="Long" resultMap="BaseMachineDealerResult">
+        <include refid="selectBaseMachineDealerVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineDealer" parameterType="BaseMachineDealer" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_dealer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="managerId != null">manager_id,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="managerId != null">#{managerId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineDealer" parameterType="BaseMachineDealer">
+        update base_machine_dealer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="managerId != null">manager_id = #{managerId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineDealerById" parameterType="Long">
+        delete from base_machine_dealer where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineDealerByIds" parameterType="String">
+        delete from base_machine_dealer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineParamsMapper">
+    
+    <resultMap type="BaseMachineParams" id="BaseMachineParamsResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="organizationId"    column="organization_id"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="flowLimit"    column="flow_limit"    />
+        <result property="aliK12Id"    column="ali_k12_id"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineParamsVo">
+        select id, sb_id, machine_id, organization_id, school_name, flow_limit, ali_k12_id from base_machine_params
+    </sql>
+
+    <select id="selectBaseMachineParamsList" parameterType="BaseMachineParams" resultMap="BaseMachineParamsResult">
+        <include refid="selectBaseMachineParamsVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="organizationId != null  and organizationId != ''"> and organization_id = #{organizationId}</if>
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="flowLimit != null "> and flow_limit = #{flowLimit}</if>
+            <if test="aliK12Id != null  and aliK12Id != ''"> and ali_k12_id = #{aliK12Id}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineParamsById" parameterType="Long" resultMap="BaseMachineParamsResult">
+        <include refid="selectBaseMachineParamsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineParams" parameterType="BaseMachineParams" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_params
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="machineId != null">machine_id,</if>
+            <if test="organizationId != null">organization_id,</if>
+            <if test="schoolName != null">school_name,</if>
+            <if test="flowLimit != null">flow_limit,</if>
+            <if test="aliK12Id != null">ali_k12_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="machineId != null">#{machineId},</if>
+            <if test="organizationId != null">#{organizationId},</if>
+            <if test="schoolName != null">#{schoolName},</if>
+            <if test="flowLimit != null">#{flowLimit},</if>
+            <if test="aliK12Id != null">#{aliK12Id},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineParams" parameterType="BaseMachineParams">
+        update base_machine_params
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="organizationId != null">organization_id = #{organizationId},</if>
+            <if test="schoolName != null">school_name = #{schoolName},</if>
+            <if test="flowLimit != null">flow_limit = #{flowLimit},</if>
+            <if test="aliK12Id != null">ali_k12_id = #{aliK12Id},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineParamsById" parameterType="Long">
+        delete from base_machine_params where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineParamsByIds" parameterType="String">
+        delete from base_machine_params where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

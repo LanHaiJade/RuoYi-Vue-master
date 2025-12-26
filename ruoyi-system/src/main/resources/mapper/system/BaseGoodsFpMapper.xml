@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseGoodsFpMapper">
+    
+    <resultMap type="BaseGoodsFp" id="BaseGoodsFpResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="containerid"    column="containerid"    />
+        <result property="action"    column="action"    />
+        <result property="goodsid"    column="goodsid"    />
+        <result property="goodsname"    column="goodsname"    />
+        <result property="productpic"    column="productpic"    />
+        <result property="fpgoodsmark"    column="fpgoodsmark"    />
+        <result property="fpwthirdpartyid"    column="fpwthirdpartyid"    />
+        <result property="fpwthirdpartyname"    column="fpwthirdpartyname"    />
+        <result property="suppliername"    column="suppliername"    />
+        <result property="suppliercode"    column="suppliercode"    />
+        <result property="salechnltp"    column="salechnltp"    />
+        <result property="salechnlid"    column="salechnlid"    />
+        <result property="salechnlnm"    column="salechnlnm"    />
+        <result property="strnm"    column="strnm"    />
+        <result property="cmdtyunitprc"    column="cmdtyunitprc"    />
+        <result property="cmdtylinks"    column="cmdtylinks"    />
+        <result property="cmdtyattr"    column="cmdtyattr"    />
+        <result property="cmdtydsc"    column="cmdtydsc"    />
+        <result property="cmdtyst"    column="cmdtyst"    />
+        <result property="prefavy"    column="prefavy"    />
+        <result property="cmdty69cd"    column="cmdty69cd"    />
+        <result property="cmdtyskucd"    column="cmdtyskucd"    />
+        <result property="cmdtyspucd"    column="cmdtyspucd"    />
+        <result property="cmdtytp"    column="cmdtytp"    />
+        <result property="cmdtybrnd"    column="cmdtybrnd"    />
+        <result property="prmsspgtm"    column="prmsspgtm"    />
+        <result property="wthrsprtnonrsnretgds"    column="wthrsprtnonrsnretgds"    />
+        <result property="gntprmsinf"    column="gntprmsinf"    />
+        <result property="wthrprvdinv"    column="wthrprvdinv"    />
+        <result property="category1code"    column="category1code"    />
+        <result property="category1name"    column="category1name"    />
+        <result property="category2code"    column="category2code"    />
+        <result property="category2name"    column="category2name"    />
+        <result property="code"    column="code"    />
+        <result property="categoryname"    column="categoryname"    />
+    </resultMap>
+
+    <sql id="selectBaseGoodsFpVo">
+        select id, sb_id, containerid, action, goodsid, goodsname, productpic, fpgoodsmark, fpwthirdpartyid, fpwthirdpartyname, suppliername, suppliercode, salechnltp, salechnlid, salechnlnm, strnm, cmdtyunitprc, cmdtylinks, cmdtyattr, cmdtydsc, cmdtyst, prefavy, cmdty69cd, cmdtyskucd, cmdtyspucd, cmdtytp, cmdtybrnd, prmsspgtm, wthrsprtnonrsnretgds, gntprmsinf, wthrprvdinv, category1code, category1name, category2code, category2name, code, categoryname from base_goods_fp
+    </sql>
+
+    <select id="selectBaseGoodsFpList" parameterType="BaseGoodsFp" resultMap="BaseGoodsFpResult">
+        <include refid="selectBaseGoodsFpVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="containerid != null  and containerid != ''"> and containerid = #{containerid}</if>
+            <if test="action != null  and action != ''"> and action = #{action}</if>
+            <if test="goodsid != null  and goodsid != ''"> and goodsid = #{goodsid}</if>
+            <if test="goodsname != null  and goodsname != ''"> and goodsname like concat('%', #{goodsname}, '%')</if>
+            <if test="productpic != null  and productpic != ''"> and productpic = #{productpic}</if>
+            <if test="fpgoodsmark != null "> and fpgoodsmark = #{fpgoodsmark}</if>
+            <if test="fpwthirdpartyid != null  and fpwthirdpartyid != ''"> and fpwthirdpartyid = #{fpwthirdpartyid}</if>
+            <if test="fpwthirdpartyname != null  and fpwthirdpartyname != ''"> and fpwthirdpartyname like concat('%', #{fpwthirdpartyname}, '%')</if>
+            <if test="suppliername != null  and suppliername != ''"> and suppliername like concat('%', #{suppliername}, '%')</if>
+            <if test="suppliercode != null  and suppliercode != ''"> and suppliercode = #{suppliercode}</if>
+            <if test="salechnltp != null  and salechnltp != ''"> and salechnltp = #{salechnltp}</if>
+            <if test="salechnlid != null  and salechnlid != ''"> and salechnlid = #{salechnlid}</if>
+            <if test="salechnlnm != null  and salechnlnm != ''"> and salechnlnm = #{salechnlnm}</if>
+            <if test="strnm != null  and strnm != ''"> and strnm = #{strnm}</if>
+            <if test="cmdtyunitprc != null "> and cmdtyunitprc = #{cmdtyunitprc}</if>
+            <if test="cmdtylinks != null  and cmdtylinks != ''"> and cmdtylinks = #{cmdtylinks}</if>
+            <if test="cmdtyattr != null  and cmdtyattr != ''"> and cmdtyattr = #{cmdtyattr}</if>
+            <if test="cmdtydsc != null  and cmdtydsc != ''"> and cmdtydsc = #{cmdtydsc}</if>
+            <if test="cmdtyst != null  and cmdtyst != ''"> and cmdtyst = #{cmdtyst}</if>
+            <if test="prefavy != null  and prefavy != ''"> and prefavy = #{prefavy}</if>
+            <if test="cmdty69cd != null  and cmdty69cd != ''"> and cmdty69cd = #{cmdty69cd}</if>
+            <if test="cmdtyskucd != null  and cmdtyskucd != ''"> and cmdtyskucd = #{cmdtyskucd}</if>
+            <if test="cmdtyspucd != null  and cmdtyspucd != ''"> and cmdtyspucd = #{cmdtyspucd}</if>
+            <if test="cmdtytp != null  and cmdtytp != ''"> and cmdtytp = #{cmdtytp}</if>
+            <if test="cmdtybrnd != null  and cmdtybrnd != ''"> and cmdtybrnd = #{cmdtybrnd}</if>
+            <if test="prmsspgtm != null  and prmsspgtm != ''"> and prmsspgtm = #{prmsspgtm}</if>
+            <if test="wthrsprtnonrsnretgds != null  and wthrsprtnonrsnretgds != ''"> and wthrsprtnonrsnretgds = #{wthrsprtnonrsnretgds}</if>
+            <if test="gntprmsinf != null  and gntprmsinf != ''"> and gntprmsinf = #{gntprmsinf}</if>
+            <if test="wthrprvdinv != null  and wthrprvdinv != ''"> and wthrprvdinv = #{wthrprvdinv}</if>
+            <if test="category1code != null  and category1code != ''"> and category1code = #{category1code}</if>
+            <if test="category1name != null  and category1name != ''"> and category1name like concat('%', #{category1name}, '%')</if>
+            <if test="category2code != null  and category2code != ''"> and category2code = #{category2code}</if>
+            <if test="category2name != null  and category2name != ''"> and category2name like concat('%', #{category2name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="categoryname != null  and categoryname != ''"> and categoryname like concat('%', #{categoryname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseGoodsFpById" parameterType="Long" resultMap="BaseGoodsFpResult">
+        <include refid="selectBaseGoodsFpVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseGoodsFp" parameterType="BaseGoodsFp" useGeneratedKeys="true" keyProperty="id">
+        insert into base_goods_fp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="containerid != null">containerid,</if>
+            <if test="action != null">action,</if>
+            <if test="goodsid != null">goodsid,</if>
+            <if test="goodsname != null">goodsname,</if>
+            <if test="productpic != null">productpic,</if>
+            <if test="fpgoodsmark != null">fpgoodsmark,</if>
+            <if test="fpwthirdpartyid != null">fpwthirdpartyid,</if>
+            <if test="fpwthirdpartyname != null">fpwthirdpartyname,</if>
+            <if test="suppliername != null">suppliername,</if>
+            <if test="suppliercode != null">suppliercode,</if>
+            <if test="salechnltp != null">salechnltp,</if>
+            <if test="salechnlid != null">salechnlid,</if>
+            <if test="salechnlnm != null">salechnlnm,</if>
+            <if test="strnm != null">strnm,</if>
+            <if test="cmdtyunitprc != null">cmdtyunitprc,</if>
+            <if test="cmdtylinks != null">cmdtylinks,</if>
+            <if test="cmdtyattr != null">cmdtyattr,</if>
+            <if test="cmdtydsc != null">cmdtydsc,</if>
+            <if test="cmdtyst != null">cmdtyst,</if>
+            <if test="prefavy != null">prefavy,</if>
+            <if test="cmdty69cd != null">cmdty69cd,</if>
+            <if test="cmdtyskucd != null">cmdtyskucd,</if>
+            <if test="cmdtyspucd != null">cmdtyspucd,</if>
+            <if test="cmdtytp != null">cmdtytp,</if>
+            <if test="cmdtybrnd != null">cmdtybrnd,</if>
+            <if test="prmsspgtm != null">prmsspgtm,</if>
+            <if test="wthrsprtnonrsnretgds != null">wthrsprtnonrsnretgds,</if>
+            <if test="gntprmsinf != null">gntprmsinf,</if>
+            <if test="wthrprvdinv != null">wthrprvdinv,</if>
+            <if test="category1code != null">category1code,</if>
+            <if test="category1name != null">category1name,</if>
+            <if test="category2code != null">category2code,</if>
+            <if test="category2name != null">category2name,</if>
+            <if test="code != null">code,</if>
+            <if test="categoryname != null">categoryname,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="containerid != null">#{containerid},</if>
+            <if test="action != null">#{action},</if>
+            <if test="goodsid != null">#{goodsid},</if>
+            <if test="goodsname != null">#{goodsname},</if>
+            <if test="productpic != null">#{productpic},</if>
+            <if test="fpgoodsmark != null">#{fpgoodsmark},</if>
+            <if test="fpwthirdpartyid != null">#{fpwthirdpartyid},</if>
+            <if test="fpwthirdpartyname != null">#{fpwthirdpartyname},</if>
+            <if test="suppliername != null">#{suppliername},</if>
+            <if test="suppliercode != null">#{suppliercode},</if>
+            <if test="salechnltp != null">#{salechnltp},</if>
+            <if test="salechnlid != null">#{salechnlid},</if>
+            <if test="salechnlnm != null">#{salechnlnm},</if>
+            <if test="strnm != null">#{strnm},</if>
+            <if test="cmdtyunitprc != null">#{cmdtyunitprc},</if>
+            <if test="cmdtylinks != null">#{cmdtylinks},</if>
+            <if test="cmdtyattr != null">#{cmdtyattr},</if>
+            <if test="cmdtydsc != null">#{cmdtydsc},</if>
+            <if test="cmdtyst != null">#{cmdtyst},</if>
+            <if test="prefavy != null">#{prefavy},</if>
+            <if test="cmdty69cd != null">#{cmdty69cd},</if>
+            <if test="cmdtyskucd != null">#{cmdtyskucd},</if>
+            <if test="cmdtyspucd != null">#{cmdtyspucd},</if>
+            <if test="cmdtytp != null">#{cmdtytp},</if>
+            <if test="cmdtybrnd != null">#{cmdtybrnd},</if>
+            <if test="prmsspgtm != null">#{prmsspgtm},</if>
+            <if test="wthrsprtnonrsnretgds != null">#{wthrsprtnonrsnretgds},</if>
+            <if test="gntprmsinf != null">#{gntprmsinf},</if>
+            <if test="wthrprvdinv != null">#{wthrprvdinv},</if>
+            <if test="category1code != null">#{category1code},</if>
+            <if test="category1name != null">#{category1name},</if>
+            <if test="category2code != null">#{category2code},</if>
+            <if test="category2name != null">#{category2name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="categoryname != null">#{categoryname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseGoodsFp" parameterType="BaseGoodsFp">
+        update base_goods_fp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="containerid != null">containerid = #{containerid},</if>
+            <if test="action != null">action = #{action},</if>
+            <if test="goodsid != null">goodsid = #{goodsid},</if>
+            <if test="goodsname != null">goodsname = #{goodsname},</if>
+            <if test="productpic != null">productpic = #{productpic},</if>
+            <if test="fpgoodsmark != null">fpgoodsmark = #{fpgoodsmark},</if>
+            <if test="fpwthirdpartyid != null">fpwthirdpartyid = #{fpwthirdpartyid},</if>
+            <if test="fpwthirdpartyname != null">fpwthirdpartyname = #{fpwthirdpartyname},</if>
+            <if test="suppliername != null">suppliername = #{suppliername},</if>
+            <if test="suppliercode != null">suppliercode = #{suppliercode},</if>
+            <if test="salechnltp != null">salechnltp = #{salechnltp},</if>
+            <if test="salechnlid != null">salechnlid = #{salechnlid},</if>
+            <if test="salechnlnm != null">salechnlnm = #{salechnlnm},</if>
+            <if test="strnm != null">strnm = #{strnm},</if>
+            <if test="cmdtyunitprc != null">cmdtyunitprc = #{cmdtyunitprc},</if>
+            <if test="cmdtylinks != null">cmdtylinks = #{cmdtylinks},</if>
+            <if test="cmdtyattr != null">cmdtyattr = #{cmdtyattr},</if>
+            <if test="cmdtydsc != null">cmdtydsc = #{cmdtydsc},</if>
+            <if test="cmdtyst != null">cmdtyst = #{cmdtyst},</if>
+            <if test="prefavy != null">prefavy = #{prefavy},</if>
+            <if test="cmdty69cd != null">cmdty69cd = #{cmdty69cd},</if>
+            <if test="cmdtyskucd != null">cmdtyskucd = #{cmdtyskucd},</if>
+            <if test="cmdtyspucd != null">cmdtyspucd = #{cmdtyspucd},</if>
+            <if test="cmdtytp != null">cmdtytp = #{cmdtytp},</if>
+            <if test="cmdtybrnd != null">cmdtybrnd = #{cmdtybrnd},</if>
+            <if test="prmsspgtm != null">prmsspgtm = #{prmsspgtm},</if>
+            <if test="wthrsprtnonrsnretgds != null">wthrsprtnonrsnretgds = #{wthrsprtnonrsnretgds},</if>
+            <if test="gntprmsinf != null">gntprmsinf = #{gntprmsinf},</if>
+            <if test="wthrprvdinv != null">wthrprvdinv = #{wthrprvdinv},</if>
+            <if test="category1code != null">category1code = #{category1code},</if>
+            <if test="category1name != null">category1name = #{category1name},</if>
+            <if test="category2code != null">category2code = #{category2code},</if>
+            <if test="category2name != null">category2name = #{category2name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="categoryname != null">categoryname = #{categoryname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseGoodsFpById" parameterType="Long">
+        delete from base_goods_fp where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseGoodsFpByIds" parameterType="String">
+        delete from base_goods_fp where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseOrderThirdMapper">
+    
+    <resultMap type="BaseOrderThird" id="BaseOrderThirdResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="transactionId"    column="transaction_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="huoDao"    column="huo_dao"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="amount"    column="amount"    />
+        <result property="unitPrice"    column="unit_price"    />
+        <result property="num"    column="num"    />
+        <result property="buyName"    column="buy_name"    />
+        <result property="buyId"    column="buy_id"    />
+        <result property="refundAmount"    column="refund_amount"    />
+        <result property="deliveryStatus"    column="delivery_status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseOrderThirdVo">
+        select id, order_no, transaction_id, user_id, sb_id, goods_name, huo_dao, pay_type, amount, unit_price, num, buy_name, buy_id, refund_amount, delivery_status, update_time, create_time from base_order_third
+    </sql>
+
+    <select id="selectBaseOrderThirdList" parameterType="BaseOrderThird" resultMap="BaseOrderThirdResult">
+        <include refid="selectBaseOrderThirdVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="transactionId != null  and transactionId != ''"> and transaction_id = #{transactionId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="huoDao != null  and huoDao != ''"> and huo_dao = #{huoDao}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="unitPrice != null  and unitPrice != ''"> and unit_price = #{unitPrice}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="buyName != null  and buyName != ''"> and buy_name like concat('%', #{buyName}, '%')</if>
+            <if test="buyId != null  and buyId != ''"> and buy_id = #{buyId}</if>
+            <if test="refundAmount != null "> and refund_amount = #{refundAmount}</if>
+            <if test="deliveryStatus != null  and deliveryStatus != ''"> and delivery_status = #{deliveryStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseOrderThirdById" parameterType="Long" resultMap="BaseOrderThirdResult">
+        <include refid="selectBaseOrderThirdVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseOrderThird" parameterType="BaseOrderThird" useGeneratedKeys="true" keyProperty="id">
+        insert into base_order_third
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="transactionId != null">transaction_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="huoDao != null">huo_dao,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="amount != null">amount,</if>
+            <if test="unitPrice != null">unit_price,</if>
+            <if test="num != null">num,</if>
+            <if test="buyName != null">buy_name,</if>
+            <if test="buyId != null">buy_id,</if>
+            <if test="refundAmount != null">refund_amount,</if>
+            <if test="deliveryStatus != null">delivery_status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="transactionId != null">#{transactionId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="huoDao != null">#{huoDao},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="unitPrice != null">#{unitPrice},</if>
+            <if test="num != null">#{num},</if>
+            <if test="buyName != null">#{buyName},</if>
+            <if test="buyId != null">#{buyId},</if>
+            <if test="refundAmount != null">#{refundAmount},</if>
+            <if test="deliveryStatus != null">#{deliveryStatus},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseOrderThird" parameterType="BaseOrderThird">
+        update base_order_third
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="transactionId != null">transaction_id = #{transactionId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="huoDao != null">huo_dao = #{huoDao},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="unitPrice != null">unit_price = #{unitPrice},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="buyName != null">buy_name = #{buyName},</if>
+            <if test="buyId != null">buy_id = #{buyId},</if>
+            <if test="refundAmount != null">refund_amount = #{refundAmount},</if>
+            <if test="deliveryStatus != null">delivery_status = #{deliveryStatus},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseOrderThirdById" parameterType="Long">
+        delete from base_order_third where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseOrderThirdByIds" parameterType="String">
+        delete from base_order_third where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

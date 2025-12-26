@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSubscriberMapper">
+    
+    <resultMap type="BaseSubscriber" id="BaseSubscriberResult">
+        <result property="id"    column="id"    />
+        <result property="openId"    column="open_id"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseSubscriberVo">
+        select id, open_id, status, create_time from base_subscriber
+    </sql>
+
+    <select id="selectBaseSubscriberList" parameterType="BaseSubscriber" resultMap="BaseSubscriberResult">
+        <include refid="selectBaseSubscriberVo"/>
+        <where>  
+            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSubscriberById" parameterType="Long" resultMap="BaseSubscriberResult">
+        <include refid="selectBaseSubscriberVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseSubscriber" parameterType="BaseSubscriber" useGeneratedKeys="true" keyProperty="id">
+        insert into base_subscriber
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="openId != null">open_id,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="openId != null">#{openId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSubscriber" parameterType="BaseSubscriber">
+        update base_subscriber
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseSubscriberById" parameterType="Long">
+        delete from base_subscriber where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseSubscriberByIds" parameterType="String">
+        delete from base_subscriber where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

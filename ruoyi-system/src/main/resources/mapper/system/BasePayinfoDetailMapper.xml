@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BasePayinfoDetailMapper">
+    
+    <resultMap type="BasePayinfoDetail" id="BasePayinfoDetailResult">
+        <result property="id"    column="id"    />
+        <result property="payinfoId"    column="payinfo_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="number"    column="number"    />
+        <result property="price"    column="price"    />
+        <result property="amount"    column="amount"    />
+        <result property="goodsAttr"    column="goods_attr"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="huoDao"    column="huo_dao"    />
+        <result property="payStatus"    column="pay_status"    />
+        <result property="hasDelivery"    column="has_delivery"    />
+        <result property="hasRefund"    column="has_refund"    />
+        <result property="bjl"    column="bjl"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="oldamount"    column="oldamount"    />
+        <result property="disamount"    column="disamount"    />
+        <result property="discountInfo"    column="discount_info"    />
+    </resultMap>
+
+    <sql id="selectBasePayinfoDetailVo">
+        select id, payinfo_id, user_id, sb_id, goods_id, goods_name, number, price, amount, goods_attr, update_time, create_time, huo_dao, pay_status, has_delivery, has_refund, bjl, pay_type, order_no, oldamount, disamount, discount_info from base_payinfo_detail
+    </sql>
+
+    <select id="selectBasePayinfoDetailList" parameterType="BasePayinfoDetail" resultMap="BasePayinfoDetailResult">
+        <include refid="selectBasePayinfoDetailVo"/>
+        <where>  
+            <if test="payinfoId != null "> and payinfo_id = #{payinfoId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="goodsAttr != null  and goodsAttr != ''"> and goods_attr = #{goodsAttr}</if>
+            <if test="huoDao != null "> and huo_dao = #{huoDao}</if>
+            <if test="payStatus != null "> and pay_status = #{payStatus}</if>
+            <if test="hasDelivery != null "> and has_delivery = #{hasDelivery}</if>
+            <if test="hasRefund != null "> and has_refund = #{hasRefund}</if>
+            <if test="bjl != null  and bjl != ''"> and bjl = #{bjl}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="oldamount != null "> and oldamount = #{oldamount}</if>
+            <if test="disamount != null "> and disamount = #{disamount}</if>
+            <if test="discountInfo != null  and discountInfo != ''"> and discount_info = #{discountInfo}</if>
+        </where>
+    </select>
+    
+    <select id="selectBasePayinfoDetailById" parameterType="Long" resultMap="BasePayinfoDetailResult">
+        <include refid="selectBasePayinfoDetailVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBasePayinfoDetail" parameterType="BasePayinfoDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into base_payinfo_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payinfoId != null">payinfo_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="goodsId != null">goods_id,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="number != null">number,</if>
+            <if test="price != null">price,</if>
+            <if test="amount != null">amount,</if>
+            <if test="goodsAttr != null">goods_attr,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="huoDao != null">huo_dao,</if>
+            <if test="payStatus != null">pay_status,</if>
+            <if test="hasDelivery != null">has_delivery,</if>
+            <if test="hasRefund != null">has_refund,</if>
+            <if test="bjl != null">bjl,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="orderNo != null">order_no,</if>
+            <if test="oldamount != null">oldamount,</if>
+            <if test="disamount != null">disamount,</if>
+            <if test="discountInfo != null">discount_info,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payinfoId != null">#{payinfoId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="number != null">#{number},</if>
+            <if test="price != null">#{price},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="goodsAttr != null">#{goodsAttr},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="huoDao != null">#{huoDao},</if>
+            <if test="payStatus != null">#{payStatus},</if>
+            <if test="hasDelivery != null">#{hasDelivery},</if>
+            <if test="hasRefund != null">#{hasRefund},</if>
+            <if test="bjl != null">#{bjl},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="oldamount != null">#{oldamount},</if>
+            <if test="disamount != null">#{disamount},</if>
+            <if test="discountInfo != null">#{discountInfo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBasePayinfoDetail" parameterType="BasePayinfoDetail">
+        update base_payinfo_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="payinfoId != null">payinfo_id = #{payinfoId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="goodsAttr != null">goods_attr = #{goodsAttr},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="huoDao != null">huo_dao = #{huoDao},</if>
+            <if test="payStatus != null">pay_status = #{payStatus},</if>
+            <if test="hasDelivery != null">has_delivery = #{hasDelivery},</if>
+            <if test="hasRefund != null">has_refund = #{hasRefund},</if>
+            <if test="bjl != null">bjl = #{bjl},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="oldamount != null">oldamount = #{oldamount},</if>
+            <if test="disamount != null">disamount = #{disamount},</if>
+            <if test="discountInfo != null">discount_info = #{discountInfo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBasePayinfoDetailById" parameterType="Long">
+        delete from base_payinfo_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteBasePayinfoDetailByIds" parameterType="String">
+        delete from base_payinfo_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

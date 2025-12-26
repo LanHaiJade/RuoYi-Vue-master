@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseRoleAuthorityMapper">
+    
+    <resultMap type="BaseRoleAuthority" id="BaseRoleAuthorityResult">
+        <result property="id"    column="id"    />
+        <result property="authorityId"    column="authority_id"    />
+        <result property="roleId"    column="role_id"    />
+    </resultMap>
+
+    <sql id="selectBaseRoleAuthorityVo">
+        select id, authority_id, role_id from base_role_authority
+    </sql>
+
+    <select id="selectBaseRoleAuthorityList" parameterType="BaseRoleAuthority" resultMap="BaseRoleAuthorityResult">
+        <include refid="selectBaseRoleAuthorityVo"/>
+        <where>  
+            <if test="authorityId != null "> and authority_id = #{authorityId}</if>
+            <if test="roleId != null "> and role_id = #{roleId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseRoleAuthorityById" parameterType="Long" resultMap="BaseRoleAuthorityResult">
+        <include refid="selectBaseRoleAuthorityVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseRoleAuthority" parameterType="BaseRoleAuthority" useGeneratedKeys="true" keyProperty="id">
+        insert into base_role_authority
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="authorityId != null">authority_id,</if>
+            <if test="roleId != null">role_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="authorityId != null">#{authorityId},</if>
+            <if test="roleId != null">#{roleId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseRoleAuthority" parameterType="BaseRoleAuthority">
+        update base_role_authority
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="authorityId != null">authority_id = #{authorityId},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseRoleAuthorityById" parameterType="Long">
+        delete from base_role_authority where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseRoleAuthorityByIds" parameterType="String">
+        delete from base_role_authority where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

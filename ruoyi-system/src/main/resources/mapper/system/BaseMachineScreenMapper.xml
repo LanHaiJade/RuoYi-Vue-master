@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineScreenMapper">
+    
+    <resultMap type="BaseMachineScreen" id="BaseMachineScreenResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="screen"    column="screen"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineScreenVo">
+        select id, sb_id, screen, status from base_machine_screen
+    </sql>
+
+    <select id="selectBaseMachineScreenList" parameterType="BaseMachineScreen" resultMap="BaseMachineScreenResult">
+        <include refid="selectBaseMachineScreenVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="screen != null "> and screen = #{screen}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineScreenById" parameterType="Long" resultMap="BaseMachineScreenResult">
+        <include refid="selectBaseMachineScreenVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineScreen" parameterType="BaseMachineScreen" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_screen
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="screen != null">screen,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="screen != null">#{screen},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineScreen" parameterType="BaseMachineScreen">
+        update base_machine_screen
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="screen != null">screen = #{screen},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineScreenById" parameterType="Long">
+        delete from base_machine_screen where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineScreenByIds" parameterType="String">
+        delete from base_machine_screen where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

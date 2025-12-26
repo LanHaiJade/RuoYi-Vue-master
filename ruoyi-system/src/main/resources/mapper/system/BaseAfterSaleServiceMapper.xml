@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseAfterSaleServiceMapper">
+    
+    <resultMap type="BaseAfterSaleService" id="BaseAfterSaleServiceResult">
+        <result property="id"    column="id"    />
+        <result property="responseSpeed"    column="response_speed"    />
+        <result property="serviceAttitude"    column="service_attitude"    />
+        <result property="professionalism"    column="professionalism"    />
+        <result property="serviceScore"    column="service_score"    />
+        <result property="productScore"    column="product_score"    />
+        <result property="problem"    column="problem"    />
+        <result property="customerPhone"    column="customer_phone"    />
+        <result property="workerName"    column="worker_name"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseAfterSaleServiceVo">
+        select id, response_speed, service_attitude, professionalism, service_score, product_score, problem, customer_phone, worker_name, create_time from base_after_sale_service
+    </sql>
+
+    <select id="selectBaseAfterSaleServiceList" parameterType="BaseAfterSaleService" resultMap="BaseAfterSaleServiceResult">
+        <include refid="selectBaseAfterSaleServiceVo"/>
+        <where>  
+            <if test="responseSpeed != null  and responseSpeed != ''"> and response_speed = #{responseSpeed}</if>
+            <if test="serviceAttitude != null  and serviceAttitude != ''"> and service_attitude = #{serviceAttitude}</if>
+            <if test="professionalism != null  and professionalism != ''"> and professionalism = #{professionalism}</if>
+            <if test="serviceScore != null  and serviceScore != ''"> and service_score = #{serviceScore}</if>
+            <if test="productScore != null  and productScore != ''"> and product_score = #{productScore}</if>
+            <if test="problem != null  and problem != ''"> and problem = #{problem}</if>
+            <if test="customerPhone != null  and customerPhone != ''"> and customer_phone = #{customerPhone}</if>
+            <if test="workerName != null  and workerName != ''"> and worker_name like concat('%', #{workerName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseAfterSaleServiceById" parameterType="Long" resultMap="BaseAfterSaleServiceResult">
+        <include refid="selectBaseAfterSaleServiceVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseAfterSaleService" parameterType="BaseAfterSaleService" useGeneratedKeys="true" keyProperty="id">
+        insert into base_after_sale_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="responseSpeed != null">response_speed,</if>
+            <if test="serviceAttitude != null">service_attitude,</if>
+            <if test="professionalism != null">professionalism,</if>
+            <if test="serviceScore != null">service_score,</if>
+            <if test="productScore != null">product_score,</if>
+            <if test="problem != null">problem,</if>
+            <if test="customerPhone != null">customer_phone,</if>
+            <if test="workerName != null">worker_name,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="responseSpeed != null">#{responseSpeed},</if>
+            <if test="serviceAttitude != null">#{serviceAttitude},</if>
+            <if test="professionalism != null">#{professionalism},</if>
+            <if test="serviceScore != null">#{serviceScore},</if>
+            <if test="productScore != null">#{productScore},</if>
+            <if test="problem != null">#{problem},</if>
+            <if test="customerPhone != null">#{customerPhone},</if>
+            <if test="workerName != null">#{workerName},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseAfterSaleService" parameterType="BaseAfterSaleService">
+        update base_after_sale_service
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="responseSpeed != null">response_speed = #{responseSpeed},</if>
+            <if test="serviceAttitude != null">service_attitude = #{serviceAttitude},</if>
+            <if test="professionalism != null">professionalism = #{professionalism},</if>
+            <if test="serviceScore != null">service_score = #{serviceScore},</if>
+            <if test="productScore != null">product_score = #{productScore},</if>
+            <if test="problem != null">problem = #{problem},</if>
+            <if test="customerPhone != null">customer_phone = #{customerPhone},</if>
+            <if test="workerName != null">worker_name = #{workerName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseAfterSaleServiceById" parameterType="Long">
+        delete from base_after_sale_service where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseAfterSaleServiceByIds" parameterType="String">
+        delete from base_after_sale_service where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

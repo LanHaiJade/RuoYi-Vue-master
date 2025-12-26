@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.GoodscategoryMapper">
+    
+    <resultMap type="Goodscategory" id="GoodscategoryResult">
+        <result property="categoryid"    column="categoryid"    />
+        <result property="category1code"    column="category1code"    />
+        <result property="category1name"    column="category1name"    />
+        <result property="category2code"    column="category2code"    />
+        <result property="category2name"    column="category2name"    />
+        <result property="code"    column="code"    />
+        <result property="categoryname"    column="categoryname"    />
+        <result property="parentid"    column="parentid"    />
+        <result property="iconurl"    column="iconurl"    />
+        <result property="creater"    column="creater"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="updater"    column="updater"    />
+        <result property="updatetime"    column="updatetime"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectGoodscategoryVo">
+        select categoryid, category1code, category1name, category2code, category2name, code, categoryname, parentid, iconurl, creater, createtime, updater, updatetime, status, remark from goodscategory
+    </sql>
+
+    <select id="selectGoodscategoryList" parameterType="Goodscategory" resultMap="GoodscategoryResult">
+        <include refid="selectGoodscategoryVo"/>
+        <where>  
+            <if test="category1code != null  and category1code != ''"> and category1code = #{category1code}</if>
+            <if test="category1name != null  and category1name != ''"> and category1name like concat('%', #{category1name}, '%')</if>
+            <if test="category2code != null  and category2code != ''"> and category2code = #{category2code}</if>
+            <if test="category2name != null  and category2name != ''"> and category2name like concat('%', #{category2name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="categoryname != null  and categoryname != ''"> and categoryname like concat('%', #{categoryname}, '%')</if>
+            <if test="parentid != null  and parentid != ''"> and parentid = #{parentid}</if>
+            <if test="iconurl != null  and iconurl != ''"> and iconurl = #{iconurl}</if>
+            <if test="creater != null  and creater != ''"> and creater = #{creater}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+            <if test="updatetime != null "> and updatetime = #{updatetime}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectGoodscategoryByCategoryid" parameterType="String" resultMap="GoodscategoryResult">
+        <include refid="selectGoodscategoryVo"/>
+        where categoryid = #{categoryid}
+    </select>
+
+    <insert id="insertGoodscategory" parameterType="Goodscategory">
+        insert into goodscategory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryid != null">categoryid,</if>
+            <if test="category1code != null and category1code != ''">category1code,</if>
+            <if test="category1name != null and category1name != ''">category1name,</if>
+            <if test="category2code != null and category2code != ''">category2code,</if>
+            <if test="category2name != null and category2name != ''">category2name,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="categoryname != null and categoryname != ''">categoryname,</if>
+            <if test="parentid != null and parentid != ''">parentid,</if>
+            <if test="iconurl != null">iconurl,</if>
+            <if test="creater != null and creater != ''">creater,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updatetime != null">updatetime,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryid != null">#{categoryid},</if>
+            <if test="category1code != null and category1code != ''">#{category1code},</if>
+            <if test="category1name != null and category1name != ''">#{category1name},</if>
+            <if test="category2code != null and category2code != ''">#{category2code},</if>
+            <if test="category2name != null and category2name != ''">#{category2name},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="categoryname != null and categoryname != ''">#{categoryname},</if>
+            <if test="parentid != null and parentid != ''">#{parentid},</if>
+            <if test="iconurl != null">#{iconurl},</if>
+            <if test="creater != null and creater != ''">#{creater},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updatetime != null">#{updatetime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGoodscategory" parameterType="Goodscategory">
+        update goodscategory
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="category1code != null and category1code != ''">category1code = #{category1code},</if>
+            <if test="category1name != null and category1name != ''">category1name = #{category1name},</if>
+            <if test="category2code != null and category2code != ''">category2code = #{category2code},</if>
+            <if test="category2name != null and category2name != ''">category2name = #{category2name},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="categoryname != null and categoryname != ''">categoryname = #{categoryname},</if>
+            <if test="parentid != null and parentid != ''">parentid = #{parentid},</if>
+            <if test="iconurl != null">iconurl = #{iconurl},</if>
+            <if test="creater != null and creater != ''">creater = #{creater},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where categoryid = #{categoryid}
+    </update>
+
+    <delete id="deleteGoodscategoryByCategoryid" parameterType="String">
+        delete from goodscategory where categoryid = #{categoryid}
+    </delete>
+
+    <delete id="deleteGoodscategoryByCategoryids" parameterType="String">
+        delete from goodscategory where categoryid in 
+        <foreach item="categoryid" collection="array" open="(" separator="," close=")">
+            #{categoryid}
+        </foreach>
+    </delete>
+</mapper>

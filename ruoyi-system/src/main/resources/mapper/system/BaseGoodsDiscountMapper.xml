@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseGoodsDiscountMapper">
+    
+    <resultMap type="BaseGoodsDiscount" id="BaseGoodsDiscountResult">
+        <result property="id"    column="id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="discount"    column="discount"    />
+        <result property="type"    column="type"    />
+        <result property="maxPrice"    column="max_price"    />
+    </resultMap>
+
+    <sql id="selectBaseGoodsDiscountVo">
+        select id, goods_id, sb_id, user_id, discount, type, max_price from base_goods_discount
+    </sql>
+
+    <select id="selectBaseGoodsDiscountList" parameterType="BaseGoodsDiscount" resultMap="BaseGoodsDiscountResult">
+        <include refid="selectBaseGoodsDiscountVo"/>
+        <where>  
+            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="maxPrice != null "> and max_price = #{maxPrice}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseGoodsDiscountById" parameterType="Long" resultMap="BaseGoodsDiscountResult">
+        <include refid="selectBaseGoodsDiscountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseGoodsDiscount" parameterType="BaseGoodsDiscount" useGeneratedKeys="true" keyProperty="id">
+        insert into base_goods_discount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">goods_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="discount != null">discount,</if>
+            <if test="type != null">type,</if>
+            <if test="maxPrice != null">max_price,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="type != null">#{type},</if>
+            <if test="maxPrice != null">#{maxPrice},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseGoodsDiscount" parameterType="BaseGoodsDiscount">
+        update base_goods_discount
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="maxPrice != null">max_price = #{maxPrice},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseGoodsDiscountById" parameterType="Long">
+        delete from base_goods_discount where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseGoodsDiscountByIds" parameterType="String">
+        delete from base_goods_discount where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

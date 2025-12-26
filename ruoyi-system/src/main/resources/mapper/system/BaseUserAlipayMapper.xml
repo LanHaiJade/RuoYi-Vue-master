@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserAlipayMapper">
+    
+    <resultMap type="BaseUserAlipay" id="BaseUserAlipayResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="batchNo"    column="batch_no"    />
+        <result property="account"    column="account"    />
+        <result property="contactName"    column="contact_name"    />
+        <result property="contactMobile"    column="contact_mobile"    />
+        <result property="contactEmail"    column="contact_email"    />
+        <result property="scenePic"    column="scene_pic"    />
+        <result property="boardPic"    column="board_pic"    />
+        <result property="status"    column="status"    />
+        <result property="message"    column="message"    />
+        <result property="appAuthToken"    column="app_auth_token"    />
+        <result property="pid"    column="pid"    />
+        <result property="appId"    column="app_id"    />
+        <result property="confirmUrl"    column="confirm_url"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="externalId"    column="external_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="smid"    column="smid"    />
+        <result property="idNo"    column="id_no"    />
+        <result property="franchiseeId"    column="franchiseeId"    />
+        <result property="mccCode"    column="mcc_code"    />
+        <result property="ptype"    column="ptype"    />
+        <result property="merchantType"    column="merchant_type"    />
+        <result property="merchantName"    column="merchant_name"    />
+        <result property="aliasName"    column="alias_name"    />
+        <result property="mcc"    column="mcc"    />
+        <result property="certNo"    column="cert_no"    />
+        <result property="certType"    column="cert_type"    />
+        <result property="legalName"    column="legal_name"    />
+        <result property="legalCertNo"    column="legal_cert_no"    />
+        <result property="inDoorImagesUrl"    column="in_door_images_url"    />
+        <result property="inDoorImagesId"    column="in_door_images_id"    />
+        <result property="outDoorImagesUrl"    column="out_door_images_url"    />
+        <result property="outDoorImagesId"    column="out_door_images_id"    />
+        <result property="certImageUrl"    column="cert_image_url"    />
+        <result property="certImageId"    column="cert_image_id"    />
+        <result property="certImageBackUrl"    column="cert_image_back_url"    />
+        <result property="certImageBackId"    column="cert_image_back_id"    />
+        <result property="legalCertFrontImageUrl"    column="legal_cert_front_image_url"    />
+        <result property="legalCertFrontImageId"    column="legal_cert_front_image_id"    />
+        <result property="legalCertBackImageUrl"    column="legal_cert_back_image_url"    />
+        <result property="legalCertBackImageId"    column="legal_cert_back_image_id"    />
+        <result property="zStatus"    column="z_status"    />
+        <result property="zmsg"    column="zmsg"    />
+        <result property="provinceCode"    column="province_code"    />
+        <result property="cityCode"    column="city_code"    />
+        <result property="districtCode"    column="district_code"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
+    <sql id="selectBaseUserAlipayVo">
+        select id, user_id, batch_no, account, contact_name, contact_mobile, contact_email, scene_pic, board_pic, status, message, app_auth_token, pid, app_id, confirm_url, update_time, create_time, external_id, order_id, smid, id_no, franchiseeId, mcc_code, ptype, merchant_type, merchant_name, alias_name, mcc, cert_no, cert_type, legal_name, legal_cert_no, in_door_images_url, in_door_images_id, out_door_images_url, out_door_images_id, cert_image_url, cert_image_id, cert_image_back_url, cert_image_back_id, legal_cert_front_image_url, legal_cert_front_image_id, legal_cert_back_image_url, legal_cert_back_image_id, z_status, zmsg, province_code, city_code, district_code, address from base_user_alipay
+    </sql>
+
+    <select id="selectBaseUserAlipayList" parameterType="BaseUserAlipay" resultMap="BaseUserAlipayResult">
+        <include refid="selectBaseUserAlipayVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="batchNo != null  and batchNo != ''"> and batch_no = #{batchNo}</if>
+            <if test="account != null  and account != ''"> and account = #{account}</if>
+            <if test="contactName != null  and contactName != ''"> and contact_name like concat('%', #{contactName}, '%')</if>
+            <if test="contactMobile != null  and contactMobile != ''"> and contact_mobile = #{contactMobile}</if>
+            <if test="contactEmail != null  and contactEmail != ''"> and contact_email = #{contactEmail}</if>
+            <if test="scenePic != null  and scenePic != ''"> and scene_pic = #{scenePic}</if>
+            <if test="boardPic != null  and boardPic != ''"> and board_pic = #{boardPic}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="message != null  and message != ''"> and message = #{message}</if>
+            <if test="appAuthToken != null  and appAuthToken != ''"> and app_auth_token = #{appAuthToken}</if>
+            <if test="pid != null  and pid != ''"> and pid = #{pid}</if>
+            <if test="appId != null  and appId != ''"> and app_id = #{appId}</if>
+            <if test="confirmUrl != null  and confirmUrl != ''"> and confirm_url = #{confirmUrl}</if>
+            <if test="externalId != null  and externalId != ''"> and external_id = #{externalId}</if>
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="smid != null  and smid != ''"> and smid = #{smid}</if>
+            <if test="idNo != null  and idNo != ''"> and id_no = #{idNo}</if>
+            <if test="franchiseeId != null  and franchiseeId != ''"> and franchiseeId = #{franchiseeId}</if>
+            <if test="mccCode != null  and mccCode != ''"> and mcc_code = #{mccCode}</if>
+            <if test="ptype != null "> and ptype = #{ptype}</if>
+            <if test="merchantType != null  and merchantType != ''"> and merchant_type = #{merchantType}</if>
+            <if test="merchantName != null  and merchantName != ''"> and merchant_name like concat('%', #{merchantName}, '%')</if>
+            <if test="aliasName != null  and aliasName != ''"> and alias_name like concat('%', #{aliasName}, '%')</if>
+            <if test="mcc != null  and mcc != ''"> and mcc = #{mcc}</if>
+            <if test="certNo != null  and certNo != ''"> and cert_no = #{certNo}</if>
+            <if test="certType != null  and certType != ''"> and cert_type = #{certType}</if>
+            <if test="legalName != null  and legalName != ''"> and legal_name like concat('%', #{legalName}, '%')</if>
+            <if test="legalCertNo != null  and legalCertNo != ''"> and legal_cert_no = #{legalCertNo}</if>
+            <if test="inDoorImagesUrl != null  and inDoorImagesUrl != ''"> and in_door_images_url = #{inDoorImagesUrl}</if>
+            <if test="inDoorImagesId != null  and inDoorImagesId != ''"> and in_door_images_id = #{inDoorImagesId}</if>
+            <if test="outDoorImagesUrl != null  and outDoorImagesUrl != ''"> and out_door_images_url = #{outDoorImagesUrl}</if>
+            <if test="outDoorImagesId != null  and outDoorImagesId != ''"> and out_door_images_id = #{outDoorImagesId}</if>
+            <if test="certImageUrl != null  and certImageUrl != ''"> and cert_image_url = #{certImageUrl}</if>
+            <if test="certImageId != null  and certImageId != ''"> and cert_image_id = #{certImageId}</if>
+            <if test="certImageBackUrl != null  and certImageBackUrl != ''"> and cert_image_back_url = #{certImageBackUrl}</if>
+            <if test="certImageBackId != null  and certImageBackId != ''"> and cert_image_back_id = #{certImageBackId}</if>
+            <if test="legalCertFrontImageUrl != null  and legalCertFrontImageUrl != ''"> and legal_cert_front_image_url = #{legalCertFrontImageUrl}</if>
+            <if test="legalCertFrontImageId != null  and legalCertFrontImageId != ''"> and legal_cert_front_image_id = #{legalCertFrontImageId}</if>
+            <if test="legalCertBackImageUrl != null  and legalCertBackImageUrl != ''"> and legal_cert_back_image_url = #{legalCertBackImageUrl}</if>
+            <if test="legalCertBackImageId != null  and legalCertBackImageId != ''"> and legal_cert_back_image_id = #{legalCertBackImageId}</if>
+            <if test="zStatus != null "> and z_status = #{zStatus}</if>
+            <if test="zmsg != null  and zmsg != ''"> and zmsg = #{zmsg}</if>
+            <if test="provinceCode != null  and provinceCode != ''"> and province_code = #{provinceCode}</if>
+            <if test="cityCode != null  and cityCode != ''"> and city_code = #{cityCode}</if>
+            <if test="districtCode != null  and districtCode != ''"> and district_code = #{districtCode}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseUserAlipayById" parameterType="Long" resultMap="BaseUserAlipayResult">
+        <include refid="selectBaseUserAlipayVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseUserAlipay" parameterType="BaseUserAlipay" useGeneratedKeys="true" keyProperty="id">
+        insert into base_user_alipay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="batchNo != null">batch_no,</if>
+            <if test="account != null">account,</if>
+            <if test="contactName != null">contact_name,</if>
+            <if test="contactMobile != null">contact_mobile,</if>
+            <if test="contactEmail != null">contact_email,</if>
+            <if test="scenePic != null">scene_pic,</if>
+            <if test="boardPic != null">board_pic,</if>
+            <if test="status != null">status,</if>
+            <if test="message != null">message,</if>
+            <if test="appAuthToken != null">app_auth_token,</if>
+            <if test="pid != null">pid,</if>
+            <if test="appId != null">app_id,</if>
+            <if test="confirmUrl != null">confirm_url,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="externalId != null">external_id,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="smid != null">smid,</if>
+            <if test="idNo != null">id_no,</if>
+            <if test="franchiseeId != null">franchiseeId,</if>
+            <if test="mccCode != null">mcc_code,</if>
+            <if test="ptype != null">ptype,</if>
+            <if test="merchantType != null">merchant_type,</if>
+            <if test="merchantName != null">merchant_name,</if>
+            <if test="aliasName != null">alias_name,</if>
+            <if test="mcc != null">mcc,</if>
+            <if test="certNo != null">cert_no,</if>
+            <if test="certType != null">cert_type,</if>
+            <if test="legalName != null">legal_name,</if>
+            <if test="legalCertNo != null">legal_cert_no,</if>
+            <if test="inDoorImagesUrl != null">in_door_images_url,</if>
+            <if test="inDoorImagesId != null">in_door_images_id,</if>
+            <if test="outDoorImagesUrl != null">out_door_images_url,</if>
+            <if test="outDoorImagesId != null">out_door_images_id,</if>
+            <if test="certImageUrl != null">cert_image_url,</if>
+            <if test="certImageId != null">cert_image_id,</if>
+            <if test="certImageBackUrl != null">cert_image_back_url,</if>
+            <if test="certImageBackId != null">cert_image_back_id,</if>
+            <if test="legalCertFrontImageUrl != null">legal_cert_front_image_url,</if>
+            <if test="legalCertFrontImageId != null">legal_cert_front_image_id,</if>
+            <if test="legalCertBackImageUrl != null">legal_cert_back_image_url,</if>
+            <if test="legalCertBackImageId != null">legal_cert_back_image_id,</if>
+            <if test="zStatus != null">z_status,</if>
+            <if test="zmsg != null">zmsg,</if>
+            <if test="provinceCode != null">province_code,</if>
+            <if test="cityCode != null">city_code,</if>
+            <if test="districtCode != null">district_code,</if>
+            <if test="address != null">address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="batchNo != null">#{batchNo},</if>
+            <if test="account != null">#{account},</if>
+            <if test="contactName != null">#{contactName},</if>
+            <if test="contactMobile != null">#{contactMobile},</if>
+            <if test="contactEmail != null">#{contactEmail},</if>
+            <if test="scenePic != null">#{scenePic},</if>
+            <if test="boardPic != null">#{boardPic},</if>
+            <if test="status != null">#{status},</if>
+            <if test="message != null">#{message},</if>
+            <if test="appAuthToken != null">#{appAuthToken},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="appId != null">#{appId},</if>
+            <if test="confirmUrl != null">#{confirmUrl},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="externalId != null">#{externalId},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="smid != null">#{smid},</if>
+            <if test="idNo != null">#{idNo},</if>
+            <if test="franchiseeId != null">#{franchiseeId},</if>
+            <if test="mccCode != null">#{mccCode},</if>
+            <if test="ptype != null">#{ptype},</if>
+            <if test="merchantType != null">#{merchantType},</if>
+            <if test="merchantName != null">#{merchantName},</if>
+            <if test="aliasName != null">#{aliasName},</if>
+            <if test="mcc != null">#{mcc},</if>
+            <if test="certNo != null">#{certNo},</if>
+            <if test="certType != null">#{certType},</if>
+            <if test="legalName != null">#{legalName},</if>
+            <if test="legalCertNo != null">#{legalCertNo},</if>
+            <if test="inDoorImagesUrl != null">#{inDoorImagesUrl},</if>
+            <if test="inDoorImagesId != null">#{inDoorImagesId},</if>
+            <if test="outDoorImagesUrl != null">#{outDoorImagesUrl},</if>
+            <if test="outDoorImagesId != null">#{outDoorImagesId},</if>
+            <if test="certImageUrl != null">#{certImageUrl},</if>
+            <if test="certImageId != null">#{certImageId},</if>
+            <if test="certImageBackUrl != null">#{certImageBackUrl},</if>
+            <if test="certImageBackId != null">#{certImageBackId},</if>
+            <if test="legalCertFrontImageUrl != null">#{legalCertFrontImageUrl},</if>
+            <if test="legalCertFrontImageId != null">#{legalCertFrontImageId},</if>
+            <if test="legalCertBackImageUrl != null">#{legalCertBackImageUrl},</if>
+            <if test="legalCertBackImageId != null">#{legalCertBackImageId},</if>
+            <if test="zStatus != null">#{zStatus},</if>
+            <if test="zmsg != null">#{zmsg},</if>
+            <if test="provinceCode != null">#{provinceCode},</if>
+            <if test="cityCode != null">#{cityCode},</if>
+            <if test="districtCode != null">#{districtCode},</if>
+            <if test="address != null">#{address},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUserAlipay" parameterType="BaseUserAlipay">
+        update base_user_alipay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="batchNo != null">batch_no = #{batchNo},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="contactName != null">contact_name = #{contactName},</if>
+            <if test="contactMobile != null">contact_mobile = #{contactMobile},</if>
+            <if test="contactEmail != null">contact_email = #{contactEmail},</if>
+            <if test="scenePic != null">scene_pic = #{scenePic},</if>
+            <if test="boardPic != null">board_pic = #{boardPic},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="appAuthToken != null">app_auth_token = #{appAuthToken},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="appId != null">app_id = #{appId},</if>
+            <if test="confirmUrl != null">confirm_url = #{confirmUrl},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="externalId != null">external_id = #{externalId},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="smid != null">smid = #{smid},</if>
+            <if test="idNo != null">id_no = #{idNo},</if>
+            <if test="franchiseeId != null">franchiseeId = #{franchiseeId},</if>
+            <if test="mccCode != null">mcc_code = #{mccCode},</if>
+            <if test="ptype != null">ptype = #{ptype},</if>
+            <if test="merchantType != null">merchant_type = #{merchantType},</if>
+            <if test="merchantName != null">merchant_name = #{merchantName},</if>
+            <if test="aliasName != null">alias_name = #{aliasName},</if>
+            <if test="mcc != null">mcc = #{mcc},</if>
+            <if test="certNo != null">cert_no = #{certNo},</if>
+            <if test="certType != null">cert_type = #{certType},</if>
+            <if test="legalName != null">legal_name = #{legalName},</if>
+            <if test="legalCertNo != null">legal_cert_no = #{legalCertNo},</if>
+            <if test="inDoorImagesUrl != null">in_door_images_url = #{inDoorImagesUrl},</if>
+            <if test="inDoorImagesId != null">in_door_images_id = #{inDoorImagesId},</if>
+            <if test="outDoorImagesUrl != null">out_door_images_url = #{outDoorImagesUrl},</if>
+            <if test="outDoorImagesId != null">out_door_images_id = #{outDoorImagesId},</if>
+            <if test="certImageUrl != null">cert_image_url = #{certImageUrl},</if>
+            <if test="certImageId != null">cert_image_id = #{certImageId},</if>
+            <if test="certImageBackUrl != null">cert_image_back_url = #{certImageBackUrl},</if>
+            <if test="certImageBackId != null">cert_image_back_id = #{certImageBackId},</if>
+            <if test="legalCertFrontImageUrl != null">legal_cert_front_image_url = #{legalCertFrontImageUrl},</if>
+            <if test="legalCertFrontImageId != null">legal_cert_front_image_id = #{legalCertFrontImageId},</if>
+            <if test="legalCertBackImageUrl != null">legal_cert_back_image_url = #{legalCertBackImageUrl},</if>
+            <if test="legalCertBackImageId != null">legal_cert_back_image_id = #{legalCertBackImageId},</if>
+            <if test="zStatus != null">z_status = #{zStatus},</if>
+            <if test="zmsg != null">zmsg = #{zmsg},</if>
+            <if test="provinceCode != null">province_code = #{provinceCode},</if>
+            <if test="cityCode != null">city_code = #{cityCode},</if>
+            <if test="districtCode != null">district_code = #{districtCode},</if>
+            <if test="address != null">address = #{address},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseUserAlipayById" parameterType="Long">
+        delete from base_user_alipay where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseUserAlipayByIds" parameterType="String">
+        delete from base_user_alipay where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

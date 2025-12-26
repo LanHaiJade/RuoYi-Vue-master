@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineBcrMapper">
+    
+    <resultMap type="BaseMachineBcr" id="BaseMachineBcrResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="price"    column="price"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineBcrVo">
+        select id, sb_id, order_no, price, status, create_time, update_time from base_machine_bcr
+    </sql>
+
+    <select id="selectBaseMachineBcrList" parameterType="BaseMachineBcr" resultMap="BaseMachineBcrResult">
+        <include refid="selectBaseMachineBcrVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineBcrById" parameterType="Integer" resultMap="BaseMachineBcrResult">
+        <include refid="selectBaseMachineBcrVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineBcr" parameterType="BaseMachineBcr" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_bcr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="orderNo != null">order_no,</if>
+            <if test="price != null">price,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="price != null">#{price},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineBcr" parameterType="BaseMachineBcr">
+        update base_machine_bcr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineBcrById" parameterType="Integer">
+        delete from base_machine_bcr where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineBcrByIds" parameterType="String">
+        delete from base_machine_bcr where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

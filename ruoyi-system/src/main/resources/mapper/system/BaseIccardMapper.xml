@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseIccardMapper">
+    
+    <resultMap type="BaseIccard" id="BaseIccardResult">
+        <result property="id"    column="id"    />
+        <result property="idNo"    column="id_no"    />
+        <result property="cpuNo"    column="cpu_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="name"    column="name"    />
+        <result property="status"    column="status"    />
+        <result property="balance"    column="balance"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="phone"    column="phone"    />
+        <result property="ctrlUserId"    column="ctrl_user_id"    />
+        <result property="ctrlUserName"    column="ctrl_user_name"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBaseIccardVo">
+        select id, id_no, cpu_no, user_id, name, status, balance, update_time, create_time, phone, ctrl_user_id, ctrl_user_name, remark from base_iccard
+    </sql>
+
+    <select id="selectBaseIccardList" parameterType="BaseIccard" resultMap="BaseIccardResult">
+        <include refid="selectBaseIccardVo"/>
+        <where>  
+            <if test="idNo != null  and idNo != ''"> and id_no = #{idNo}</if>
+            <if test="cpuNo != null  and cpuNo != ''"> and cpu_no = #{cpuNo}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="balance != null "> and balance = #{balance}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="ctrlUserId != null "> and ctrl_user_id = #{ctrlUserId}</if>
+            <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseIccardById" parameterType="Long" resultMap="BaseIccardResult">
+        <include refid="selectBaseIccardVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseIccard" parameterType="BaseIccard" useGeneratedKeys="true" keyProperty="id">
+        insert into base_iccard
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="idNo != null">id_no,</if>
+            <if test="cpuNo != null">cpu_no,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="name != null">name,</if>
+            <if test="status != null">status,</if>
+            <if test="balance != null">balance,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="phone != null">phone,</if>
+            <if test="ctrlUserId != null">ctrl_user_id,</if>
+            <if test="ctrlUserName != null">ctrl_user_name,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="idNo != null">#{idNo},</if>
+            <if test="cpuNo != null">#{cpuNo},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="status != null">#{status},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="ctrlUserId != null">#{ctrlUserId},</if>
+            <if test="ctrlUserName != null">#{ctrlUserName},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseIccard" parameterType="BaseIccard">
+        update base_iccard
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="idNo != null">id_no = #{idNo},</if>
+            <if test="cpuNo != null">cpu_no = #{cpuNo},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="ctrlUserId != null">ctrl_user_id = #{ctrlUserId},</if>
+            <if test="ctrlUserName != null">ctrl_user_name = #{ctrlUserName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseIccardById" parameterType="Long">
+        delete from base_iccard where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseIccardByIds" parameterType="String">
+        delete from base_iccard where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

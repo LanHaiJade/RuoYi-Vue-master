@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseActiveAdvMapper">
+    
+    <resultMap type="BaseActiveAdv" id="BaseActiveAdvResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="advUrl"    column="adv_url"    />
+        <result property="advTime"    column="adv_time"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="belongType"    column="belong_type"    />
+    </resultMap>
+
+    <sql id="selectBaseActiveAdvVo">
+        select id, sb_id, adv_url, adv_time, status, update_time, create_time, belong_type from base_active_adv
+    </sql>
+
+    <select id="selectBaseActiveAdvList" parameterType="BaseActiveAdv" resultMap="BaseActiveAdvResult">
+        <include refid="selectBaseActiveAdvVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="advUrl != null  and advUrl != ''"> and adv_url = #{advUrl}</if>
+            <if test="advTime != null  and advTime != ''"> and adv_time = #{advTime}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="belongType != null "> and belong_type = #{belongType}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseActiveAdvById" parameterType="Long" resultMap="BaseActiveAdvResult">
+        <include refid="selectBaseActiveAdvVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseActiveAdv" parameterType="BaseActiveAdv" useGeneratedKeys="true" keyProperty="id">
+        insert into base_active_adv
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="advUrl != null">adv_url,</if>
+            <if test="advTime != null">adv_time,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="belongType != null">belong_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="advUrl != null">#{advUrl},</if>
+            <if test="advTime != null">#{advTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="belongType != null">#{belongType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseActiveAdv" parameterType="BaseActiveAdv">
+        update base_active_adv
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="advUrl != null">adv_url = #{advUrl},</if>
+            <if test="advTime != null">adv_time = #{advTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="belongType != null">belong_type = #{belongType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseActiveAdvById" parameterType="Long">
+        delete from base_active_adv where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseActiveAdvByIds" parameterType="String">
+        delete from base_active_adv where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

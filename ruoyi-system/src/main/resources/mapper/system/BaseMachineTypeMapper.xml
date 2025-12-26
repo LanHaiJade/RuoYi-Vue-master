@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineTypeMapper">
+    
+    <resultMap type="BaseMachineType" id="BaseMachineTypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="settingHd"    column="setting_hd"    />
+        <result property="startDoor"    column="start_door"    />
+        <result property="mergeGoods"    column="merge_goods"    />
+        <result property="pickUp"    column="pick_up"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineTypeVo">
+        select id, name, user_id, setting_hd, start_door, merge_goods, pick_up, sort, status from base_machine_type
+    </sql>
+
+    <select id="selectBaseMachineTypeList" parameterType="BaseMachineType" resultMap="BaseMachineTypeResult">
+        <include refid="selectBaseMachineTypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="settingHd != null "> and setting_hd = #{settingHd}</if>
+            <if test="startDoor != null "> and start_door = #{startDoor}</if>
+            <if test="mergeGoods != null "> and merge_goods = #{mergeGoods}</if>
+            <if test="pickUp != null "> and pick_up = #{pickUp}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineTypeById" parameterType="Long" resultMap="BaseMachineTypeResult">
+        <include refid="selectBaseMachineTypeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineType" parameterType="BaseMachineType" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="settingHd != null">setting_hd,</if>
+            <if test="startDoor != null">start_door,</if>
+            <if test="mergeGoods != null">merge_goods,</if>
+            <if test="pickUp != null">pick_up,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="settingHd != null">#{settingHd},</if>
+            <if test="startDoor != null">#{startDoor},</if>
+            <if test="mergeGoods != null">#{mergeGoods},</if>
+            <if test="pickUp != null">#{pickUp},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineType" parameterType="BaseMachineType">
+        update base_machine_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="settingHd != null">setting_hd = #{settingHd},</if>
+            <if test="startDoor != null">start_door = #{startDoor},</if>
+            <if test="mergeGoods != null">merge_goods = #{mergeGoods},</if>
+            <if test="pickUp != null">pick_up = #{pickUp},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineTypeById" parameterType="Long">
+        delete from base_machine_type where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineTypeByIds" parameterType="String">
+        delete from base_machine_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

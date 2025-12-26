@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseOrderMtMapper">
+    
+    <resultMap type="BaseOrderMt" id="BaseOrderMtResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="appPoiCode"    column="app_poi_code"    />
+        <result property="foodName"    column="food_name"    />
+        <result property="total"    column="total"    />
+        <result property="status"    column="status"    />
+        <result property="deliveryStatus"    column="delivery_status"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="dcode"    column="dcode"    />
+        <result property="huodaos"    column="huodaos"    />
+        <result property="deliveryInfo"    column="delivery_info"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseOrderMtVo">
+        select id, order_id, app_poi_code, food_name, total, status, delivery_status, sb_id, user_id, dcode, huodaos, delivery_info, update_time, create_time from base_order_mt
+    </sql>
+
+    <select id="selectBaseOrderMtList" parameterType="BaseOrderMt" resultMap="BaseOrderMtResult">
+        <include refid="selectBaseOrderMtVo"/>
+        <where>  
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="appPoiCode != null  and appPoiCode != ''"> and app_poi_code = #{appPoiCode}</if>
+            <if test="foodName != null  and foodName != ''"> and food_name like concat('%', #{foodName}, '%')</if>
+            <if test="total != null "> and total = #{total}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="deliveryStatus != null "> and delivery_status = #{deliveryStatus}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="dcode != null  and dcode != ''"> and dcode = #{dcode}</if>
+            <if test="huodaos != null  and huodaos != ''"> and huodaos = #{huodaos}</if>
+            <if test="deliveryInfo != null  and deliveryInfo != ''"> and delivery_info = #{deliveryInfo}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseOrderMtById" parameterType="Integer" resultMap="BaseOrderMtResult">
+        <include refid="selectBaseOrderMtVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseOrderMt" parameterType="BaseOrderMt" useGeneratedKeys="true" keyProperty="id">
+        insert into base_order_mt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="appPoiCode != null">app_poi_code,</if>
+            <if test="foodName != null">food_name,</if>
+            <if test="total != null">total,</if>
+            <if test="status != null">status,</if>
+            <if test="deliveryStatus != null">delivery_status,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="dcode != null">dcode,</if>
+            <if test="huodaos != null">huodaos,</if>
+            <if test="deliveryInfo != null">delivery_info,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="appPoiCode != null">#{appPoiCode},</if>
+            <if test="foodName != null">#{foodName},</if>
+            <if test="total != null">#{total},</if>
+            <if test="status != null">#{status},</if>
+            <if test="deliveryStatus != null">#{deliveryStatus},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="dcode != null">#{dcode},</if>
+            <if test="huodaos != null">#{huodaos},</if>
+            <if test="deliveryInfo != null">#{deliveryInfo},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseOrderMt" parameterType="BaseOrderMt">
+        update base_order_mt
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="appPoiCode != null">app_poi_code = #{appPoiCode},</if>
+            <if test="foodName != null">food_name = #{foodName},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="deliveryStatus != null">delivery_status = #{deliveryStatus},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="dcode != null">dcode = #{dcode},</if>
+            <if test="huodaos != null">huodaos = #{huodaos},</if>
+            <if test="deliveryInfo != null">delivery_info = #{deliveryInfo},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseOrderMtById" parameterType="Integer">
+        delete from base_order_mt where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseOrderMtByIds" parameterType="String">
+        delete from base_order_mt where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

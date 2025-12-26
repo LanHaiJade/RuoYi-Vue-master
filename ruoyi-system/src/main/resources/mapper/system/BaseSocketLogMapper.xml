@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSocketLogMapper">
+    
+    <resultMap type="BaseSocketLog" id="BaseSocketLogResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="socketId"    column="socket_id"    />
+        <result property="receiveSend"    column="receive_send"    />
+        <result property="command"    column="command"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseSocketLogVo">
+        select id, sb_id, socket_id, receive_send, command, create_time from base_socket_log
+    </sql>
+
+    <select id="selectBaseSocketLogList" parameterType="BaseSocketLog" resultMap="BaseSocketLogResult">
+        <include refid="selectBaseSocketLogVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="socketId != null  and socketId != ''"> and socket_id = #{socketId}</if>
+            <if test="receiveSend != null  and receiveSend != ''"> and receive_send = #{receiveSend}</if>
+            <if test="command != null  and command != ''"> and command = #{command}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSocketLogById" parameterType="Long" resultMap="BaseSocketLogResult">
+        <include refid="selectBaseSocketLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseSocketLog" parameterType="BaseSocketLog" useGeneratedKeys="true" keyProperty="id">
+        insert into base_socket_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="socketId != null">socket_id,</if>
+            <if test="receiveSend != null">receive_send,</if>
+            <if test="command != null">command,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="socketId != null">#{socketId},</if>
+            <if test="receiveSend != null">#{receiveSend},</if>
+            <if test="command != null">#{command},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSocketLog" parameterType="BaseSocketLog">
+        update base_socket_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="socketId != null">socket_id = #{socketId},</if>
+            <if test="receiveSend != null">receive_send = #{receiveSend},</if>
+            <if test="command != null">command = #{command},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseSocketLogById" parameterType="Long">
+        delete from base_socket_log where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseSocketLogByIds" parameterType="String">
+        delete from base_socket_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

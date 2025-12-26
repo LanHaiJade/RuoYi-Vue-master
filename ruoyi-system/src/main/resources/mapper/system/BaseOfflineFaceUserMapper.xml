@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseOfflineFaceUserMapper">
+    
+    <resultMap type="BaseOfflineFaceUser" id="BaseOfflineFaceUserResult">
+        <result property="id"    column="id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="certType"    column="cert_type"    />
+        <result property="certId"    column="cert_id"    />
+        <result property="userType"    column="user_type"    />
+        <result property="className"    column="class_name"    />
+        <result property="occupation"    column="occupation"    />
+        <result property="organizationId"    column="organization_id"    />
+        <result property="account"    column="account"    />
+        <result property="openId"    column="openId"    />
+        <result property="userId"    column="user_id"    />
+        <result property="limitAmount"    column="limit_amount"    />
+        <result property="buyNum"    column="buy_num"    />
+        <result property="outUserId"    column="out_user_id"    />
+        <result property="contractState"    column="contractState"    />
+        <result property="faceImageOk"    column="faceImageOk"    />
+    </resultMap>
+
+    <sql id="selectBaseOfflineFaceUserVo">
+        select id, user_name, school_name, cert_type, cert_id, user_type, class_name, occupation, organization_id, account, openId, user_id, limit_amount, buy_num, out_user_id, contractState, faceImageOk from base_offline_face_user
+    </sql>
+
+    <select id="selectBaseOfflineFaceUserList" parameterType="BaseOfflineFaceUser" resultMap="BaseOfflineFaceUserResult">
+        <include refid="selectBaseOfflineFaceUserVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="certType != null  and certType != ''"> and cert_type = #{certType}</if>
+            <if test="certId != null  and certId != ''"> and cert_id = #{certId}</if>
+            <if test="userType != null  and userType != ''"> and user_type = #{userType}</if>
+            <if test="className != null  and className != ''"> and class_name like concat('%', #{className}, '%')</if>
+            <if test="occupation != null  and occupation != ''"> and occupation = #{occupation}</if>
+            <if test="organizationId != null  and organizationId != ''"> and organization_id = #{organizationId}</if>
+            <if test="account != null  and account != ''"> and account = #{account}</if>
+            <if test="openId != null  and openId != ''"> and openId = #{openId}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="limitAmount != null "> and limit_amount = #{limitAmount}</if>
+            <if test="buyNum != null "> and buy_num = #{buyNum}</if>
+            <if test="outUserId != null  and outUserId != ''"> and out_user_id = #{outUserId}</if>
+            <if test="contractState != null  and contractState != ''"> and contractState = #{contractState}</if>
+            <if test="faceImageOk != null "> and faceImageOk = #{faceImageOk}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseOfflineFaceUserById" parameterType="Long" resultMap="BaseOfflineFaceUserResult">
+        <include refid="selectBaseOfflineFaceUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseOfflineFaceUser" parameterType="BaseOfflineFaceUser" useGeneratedKeys="true" keyProperty="id">
+        insert into base_offline_face_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="schoolName != null">school_name,</if>
+            <if test="certType != null">cert_type,</if>
+            <if test="certId != null">cert_id,</if>
+            <if test="userType != null">user_type,</if>
+            <if test="className != null">class_name,</if>
+            <if test="occupation != null">occupation,</if>
+            <if test="organizationId != null">organization_id,</if>
+            <if test="account != null">account,</if>
+            <if test="openId != null">openId,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="limitAmount != null">limit_amount,</if>
+            <if test="buyNum != null">buy_num,</if>
+            <if test="outUserId != null">out_user_id,</if>
+            <if test="contractState != null">contractState,</if>
+            <if test="faceImageOk != null">faceImageOk,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="schoolName != null">#{schoolName},</if>
+            <if test="certType != null">#{certType},</if>
+            <if test="certId != null">#{certId},</if>
+            <if test="userType != null">#{userType},</if>
+            <if test="className != null">#{className},</if>
+            <if test="occupation != null">#{occupation},</if>
+            <if test="organizationId != null">#{organizationId},</if>
+            <if test="account != null">#{account},</if>
+            <if test="openId != null">#{openId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="limitAmount != null">#{limitAmount},</if>
+            <if test="buyNum != null">#{buyNum},</if>
+            <if test="outUserId != null">#{outUserId},</if>
+            <if test="contractState != null">#{contractState},</if>
+            <if test="faceImageOk != null">#{faceImageOk},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseOfflineFaceUser" parameterType="BaseOfflineFaceUser">
+        update base_offline_face_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="schoolName != null">school_name = #{schoolName},</if>
+            <if test="certType != null">cert_type = #{certType},</if>
+            <if test="certId != null">cert_id = #{certId},</if>
+            <if test="userType != null">user_type = #{userType},</if>
+            <if test="className != null">class_name = #{className},</if>
+            <if test="occupation != null">occupation = #{occupation},</if>
+            <if test="organizationId != null">organization_id = #{organizationId},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="openId != null">openId = #{openId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="limitAmount != null">limit_amount = #{limitAmount},</if>
+            <if test="buyNum != null">buy_num = #{buyNum},</if>
+            <if test="outUserId != null">out_user_id = #{outUserId},</if>
+            <if test="contractState != null">contractState = #{contractState},</if>
+            <if test="faceImageOk != null">faceImageOk = #{faceImageOk},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseOfflineFaceUserById" parameterType="Long">
+        delete from base_offline_face_user where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseOfflineFaceUserByIds" parameterType="String">
+        delete from base_offline_face_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

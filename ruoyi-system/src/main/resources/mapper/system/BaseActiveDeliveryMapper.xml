@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseActiveDeliveryMapper">
+    
+    <resultMap type="BaseActiveDelivery" id="BaseActiveDeliveryResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="huodao"    column="huodao"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="returnNo"    column="return_no"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseActiveDeliveryVo">
+        select id, order_no, sb_id, huodao, pay_type, return_no, status, update_time, create_time from base_active_delivery
+    </sql>
+
+    <select id="selectBaseActiveDeliveryList" parameterType="BaseActiveDelivery" resultMap="BaseActiveDeliveryResult">
+        <include refid="selectBaseActiveDeliveryVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="huodao != null "> and huodao = #{huodao}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="returnNo != null  and returnNo != ''"> and return_no = #{returnNo}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseActiveDeliveryById" parameterType="Long" resultMap="BaseActiveDeliveryResult">
+        <include refid="selectBaseActiveDeliveryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseActiveDelivery" parameterType="BaseActiveDelivery" useGeneratedKeys="true" keyProperty="id">
+        insert into base_active_delivery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">order_no,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="huodao != null">huodao,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="returnNo != null">return_no,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="huodao != null">#{huodao},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="returnNo != null">#{returnNo},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseActiveDelivery" parameterType="BaseActiveDelivery">
+        update base_active_delivery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="huodao != null">huodao = #{huodao},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="returnNo != null">return_no = #{returnNo},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseActiveDeliveryById" parameterType="Long">
+        delete from base_active_delivery where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseActiveDeliveryByIds" parameterType="String">
+        delete from base_active_delivery where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

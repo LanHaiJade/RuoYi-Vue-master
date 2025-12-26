@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseCashinfoMapper">
+    
+    <resultMap type="BaseCashinfo" id="BaseCashinfoResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="cashType"    column="cash_type"    />
+        <result property="price"    column="price"    />
+        <result property="amount"    column="amount"    />
+        <result property="returnTime"    column="return_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseCashinfoVo">
+        select id, machine_id, sb_id, sb_name, user_id, pay_type, cash_type, price, amount, return_time, update_time, create_time from base_cashinfo
+    </sql>
+
+    <select id="selectBaseCashinfoList" parameterType="BaseCashinfo" resultMap="BaseCashinfoResult">
+        <include refid="selectBaseCashinfoVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="cashType != null "> and cash_type = #{cashType}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="returnTime != null  and returnTime != ''"> and return_time = #{returnTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseCashinfoById" parameterType="Long" resultMap="BaseCashinfoResult">
+        <include refid="selectBaseCashinfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseCashinfo" parameterType="BaseCashinfo" useGeneratedKeys="true" keyProperty="id">
+        insert into base_cashinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="cashType != null">cash_type,</if>
+            <if test="price != null">price,</if>
+            <if test="amount != null">amount,</if>
+            <if test="returnTime != null">return_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="cashType != null">#{cashType},</if>
+            <if test="price != null">#{price},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="returnTime != null">#{returnTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseCashinfo" parameterType="BaseCashinfo">
+        update base_cashinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="cashType != null">cash_type = #{cashType},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="returnTime != null">return_time = #{returnTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseCashinfoById" parameterType="Long">
+        delete from base_cashinfo where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseCashinfoByIds" parameterType="String">
+        delete from base_cashinfo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

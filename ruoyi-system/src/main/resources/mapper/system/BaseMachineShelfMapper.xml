@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineShelfMapper">
+    
+    <resultMap type="BaseMachineShelf" id="BaseMachineShelfResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="type"    column="type"    />
+        <result property="huodao"    column="huodao"    />
+        <result property="capacity"    column="capacity"    />
+        <result property="stock"    column="stock"    />
+        <result property="price"    column="price"    />
+        <result property="promotion"    column="promotion"    />
+        <result property="promotionPrice"    column="promotion_price"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="costPrice"    column="cost_price"    />
+        <result property="discount"    column="discount"    />
+        <result property="hidden"    column="hidden"    />
+        <result property="brandId"    column="brand_id"    />
+        <result property="brandName"    column="brand_name"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineShelfVo">
+        select id, machine_id, sb_id, sb_name, goods_id, goods_name, type, huodao, capacity, stock, price, promotion, promotion_price, status, update_time, create_time, cost_price, discount, hidden, brand_id, brand_name from base_machine_shelf
+    </sql>
+
+    <select id="selectBaseMachineShelfList" parameterType="BaseMachineShelf" resultMap="BaseMachineShelfResult">
+        <include refid="selectBaseMachineShelfVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="huodao != null "> and huodao = #{huodao}</if>
+            <if test="capacity != null "> and capacity = #{capacity}</if>
+            <if test="stock != null "> and stock = #{stock}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="promotion != null "> and promotion = #{promotion}</if>
+            <if test="promotionPrice != null "> and promotion_price = #{promotionPrice}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="costPrice != null "> and cost_price = #{costPrice}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="hidden != null "> and hidden = #{hidden}</if>
+            <if test="brandId != null  and brandId != ''"> and brand_id = #{brandId}</if>
+            <if test="brandName != null  and brandName != ''"> and brand_name like concat('%', #{brandName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineShelfById" parameterType="Long" resultMap="BaseMachineShelfResult">
+        <include refid="selectBaseMachineShelfVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineShelf" parameterType="BaseMachineShelf" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_shelf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="goodsId != null">goods_id,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="type != null">type,</if>
+            <if test="huodao != null">huodao,</if>
+            <if test="capacity != null">capacity,</if>
+            <if test="stock != null">stock,</if>
+            <if test="price != null">price,</if>
+            <if test="promotion != null">promotion,</if>
+            <if test="promotionPrice != null">promotion_price,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="costPrice != null">cost_price,</if>
+            <if test="discount != null">discount,</if>
+            <if test="hidden != null">hidden,</if>
+            <if test="brandId != null">brand_id,</if>
+            <if test="brandName != null">brand_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="type != null">#{type},</if>
+            <if test="huodao != null">#{huodao},</if>
+            <if test="capacity != null">#{capacity},</if>
+            <if test="stock != null">#{stock},</if>
+            <if test="price != null">#{price},</if>
+            <if test="promotion != null">#{promotion},</if>
+            <if test="promotionPrice != null">#{promotionPrice},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="costPrice != null">#{costPrice},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="hidden != null">#{hidden},</if>
+            <if test="brandId != null">#{brandId},</if>
+            <if test="brandName != null">#{brandName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineShelf" parameterType="BaseMachineShelf">
+        update base_machine_shelf
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="huodao != null">huodao = #{huodao},</if>
+            <if test="capacity != null">capacity = #{capacity},</if>
+            <if test="stock != null">stock = #{stock},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="promotion != null">promotion = #{promotion},</if>
+            <if test="promotionPrice != null">promotion_price = #{promotionPrice},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="costPrice != null">cost_price = #{costPrice},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="hidden != null">hidden = #{hidden},</if>
+            <if test="brandId != null">brand_id = #{brandId},</if>
+            <if test="brandName != null">brand_name = #{brandName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineShelfById" parameterType="Long">
+        delete from base_machine_shelf where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineShelfByIds" parameterType="String">
+        delete from base_machine_shelf where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

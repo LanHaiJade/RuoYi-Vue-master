@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseSysMenuMapper">
+    
+    <resultMap type="BaseSysMenu" id="BaseSysMenuResult">
+        <result property="menuId"    column="menu_id"    />
+        <result property="menuName"    column="menu_name"    />
+        <result property="level"    column="level"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="path"    column="path"    />
+        <result property="icon"    column="icon"    />
+        <result property="tag"    column="tag"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBaseSysMenuVo">
+        select menu_id, menu_name, level, parent_id, order_num, path, icon, tag, update_time, remark from base_sys_menu
+    </sql>
+
+    <select id="selectBaseSysMenuList" parameterType="BaseSysMenu" resultMap="BaseSysMenuResult">
+        <include refid="selectBaseSysMenuVo"/>
+        <where>  
+            <if test="menuName != null  and menuName != ''"> and menu_name like concat('%', #{menuName}, '%')</if>
+            <if test="level != null  and level != ''"> and level = #{level}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="path != null  and path != ''"> and path = #{path}</if>
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="tag != null  and tag != ''"> and tag = #{tag}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseSysMenuByMenuId" parameterType="Long" resultMap="BaseSysMenuResult">
+        <include refid="selectBaseSysMenuVo"/>
+        where menu_id = #{menuId}
+    </select>
+
+    <insert id="insertBaseSysMenu" parameterType="BaseSysMenu" useGeneratedKeys="true" keyProperty="menuId">
+        insert into base_sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">menu_name,</if>
+            <if test="level != null and level != ''">level,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="path != null">path,</if>
+            <if test="icon != null">icon,</if>
+            <if test="tag != null">tag,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">#{menuName},</if>
+            <if test="level != null and level != ''">#{level},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="path != null">#{path},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="tag != null">#{tag},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseSysMenu" parameterType="BaseSysMenu">
+        update base_sys_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
+            <if test="level != null and level != ''">level = #{level},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="path != null">path = #{path},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="tag != null">tag = #{tag},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where menu_id = #{menuId}
+    </update>
+
+    <delete id="deleteBaseSysMenuByMenuId" parameterType="Long">
+        delete from base_sys_menu where menu_id = #{menuId}
+    </delete>
+
+    <delete id="deleteBaseSysMenuByMenuIds" parameterType="String">
+        delete from base_sys_menu where menu_id in 
+        <foreach item="menuId" collection="array" open="(" separator="," close=")">
+            #{menuId}
+        </foreach>
+    </delete>
+</mapper>

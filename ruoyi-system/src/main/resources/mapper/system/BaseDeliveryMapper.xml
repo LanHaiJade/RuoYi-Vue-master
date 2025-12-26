@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseDeliveryMapper">
+    
+    <resultMap type="BaseDelivery" id="BaseDeliveryResult">
+        <result property="id"    column="id"    />
+        <result property="machineId"    column="machine_id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="goodsId"    column="goods_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="payinfoId"    column="payInfo_id"    />
+        <result property="huodao"    column="huodao"    />
+        <result property="amount"    column="amount"    />
+        <result property="returnNo"    column="return_no"    />
+        <result property="returnTime"    column="return_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="paymentType"    column="payment_type"    />
+    </resultMap>
+
+    <sql id="selectBaseDeliveryVo">
+        select id, machine_id, sb_id, sb_name, user_id, goods_id, goods_name, payInfo_id, huodao, amount, return_no, return_time, update_time, create_time, payment_type from base_delivery
+    </sql>
+
+    <select id="selectBaseDeliveryList" parameterType="BaseDelivery" resultMap="BaseDeliveryResult">
+        <include refid="selectBaseDeliveryVo"/>
+        <where>  
+            <if test="machineId != null "> and machine_id = #{machineId}</if>
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="payinfoId != null "> and payInfo_id = #{payinfoId}</if>
+            <if test="huodao != null "> and huodao = #{huodao}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="returnNo != null  and returnNo != ''"> and return_no = #{returnNo}</if>
+            <if test="returnTime != null  and returnTime != ''"> and return_time = #{returnTime}</if>
+            <if test="paymentType != null "> and payment_type = #{paymentType}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseDeliveryById" parameterType="Long" resultMap="BaseDeliveryResult">
+        <include refid="selectBaseDeliveryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseDelivery" parameterType="BaseDelivery" useGeneratedKeys="true" keyProperty="id">
+        insert into base_delivery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">machine_id,</if>
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="goodsId != null">goods_id,</if>
+            <if test="goodsName != null">goods_name,</if>
+            <if test="payinfoId != null">payInfo_id,</if>
+            <if test="huodao != null">huodao,</if>
+            <if test="amount != null">amount,</if>
+            <if test="returnNo != null">return_no,</if>
+            <if test="returnTime != null">return_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="paymentType != null">payment_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="machineId != null">#{machineId},</if>
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="payinfoId != null">#{payinfoId},</if>
+            <if test="huodao != null">#{huodao},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="returnNo != null">#{returnNo},</if>
+            <if test="returnTime != null">#{returnTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="paymentType != null">#{paymentType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseDelivery" parameterType="BaseDelivery">
+        update base_delivery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="machineId != null">machine_id = #{machineId},</if>
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="payinfoId != null">payInfo_id = #{payinfoId},</if>
+            <if test="huodao != null">huodao = #{huodao},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="returnNo != null">return_no = #{returnNo},</if>
+            <if test="returnTime != null">return_time = #{returnTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="paymentType != null">payment_type = #{paymentType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseDeliveryById" parameterType="Long">
+        delete from base_delivery where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseDeliveryByIds" parameterType="String">
+        delete from base_delivery where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

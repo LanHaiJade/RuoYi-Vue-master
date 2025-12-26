@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseFpWorkSheetMapper">
+    
+    <resultMap type="BaseFpWorkSheet" id="BaseFpWorkSheetResult">
+        <result property="id"    column="id"    />
+        <result property="orderNo"    column="orderNo"    />
+        <result property="worksheetno"    column="worksheetno"    />
+        <result property="problemdefid"    column="problemdefid"    />
+        <result property="source"    column="source"    />
+        <result property="wsdescription"    column="wsdescription"    />
+        <result property="pic1"    column="pic1"    />
+        <result property="pic2"    column="pic2"    />
+        <result property="pic3"    column="pic3"    />
+        <result property="pic4"    column="pic4"    />
+        <result property="pic5"    column="pic5"    />
+        <result property="appid"    column="appid"    />
+        <result property="ciphertext"    column="ciphertext"    />
+        <result property="reportTime"    column="report_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="feedBackInfo"    column="feedBackInfo"    />
+    </resultMap>
+
+    <sql id="selectBaseFpWorkSheetVo">
+        select id, orderNo, worksheetno, problemdefid, source, wsdescription, pic1, pic2, pic3, pic4, pic5, appid, ciphertext, report_time, remark, status, feedBackInfo from base_fp_work_sheet
+    </sql>
+
+    <select id="selectBaseFpWorkSheetList" parameterType="BaseFpWorkSheet" resultMap="BaseFpWorkSheetResult">
+        <include refid="selectBaseFpWorkSheetVo"/>
+        <where>  
+            <if test="orderNo != null  and orderNo != ''"> and orderNo = #{orderNo}</if>
+            <if test="worksheetno != null  and worksheetno != ''"> and worksheetno = #{worksheetno}</if>
+            <if test="problemdefid != null  and problemdefid != ''"> and problemdefid = #{problemdefid}</if>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="wsdescription != null  and wsdescription != ''"> and wsdescription = #{wsdescription}</if>
+            <if test="pic1 != null  and pic1 != ''"> and pic1 = #{pic1}</if>
+            <if test="pic2 != null  and pic2 != ''"> and pic2 = #{pic2}</if>
+            <if test="pic3 != null  and pic3 != ''"> and pic3 = #{pic3}</if>
+            <if test="pic4 != null  and pic4 != ''"> and pic4 = #{pic4}</if>
+            <if test="pic5 != null  and pic5 != ''"> and pic5 = #{pic5}</if>
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="ciphertext != null  and ciphertext != ''"> and ciphertext = #{ciphertext}</if>
+            <if test="reportTime != null  and reportTime != ''"> and report_time = #{reportTime}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="feedBackInfo != null  and feedBackInfo != ''"> and feedBackInfo = #{feedBackInfo}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseFpWorkSheetById" parameterType="Integer" resultMap="BaseFpWorkSheetResult">
+        <include refid="selectBaseFpWorkSheetVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseFpWorkSheet" parameterType="BaseFpWorkSheet" useGeneratedKeys="true" keyProperty="id">
+        insert into base_fp_work_sheet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">orderNo,</if>
+            <if test="worksheetno != null">worksheetno,</if>
+            <if test="problemdefid != null">problemdefid,</if>
+            <if test="source != null">source,</if>
+            <if test="wsdescription != null">wsdescription,</if>
+            <if test="pic1 != null">pic1,</if>
+            <if test="pic2 != null">pic2,</if>
+            <if test="pic3 != null">pic3,</if>
+            <if test="pic4 != null">pic4,</if>
+            <if test="pic5 != null">pic5,</if>
+            <if test="appid != null">appid,</if>
+            <if test="ciphertext != null">ciphertext,</if>
+            <if test="reportTime != null">report_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="feedBackInfo != null">feedBackInfo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="worksheetno != null">#{worksheetno},</if>
+            <if test="problemdefid != null">#{problemdefid},</if>
+            <if test="source != null">#{source},</if>
+            <if test="wsdescription != null">#{wsdescription},</if>
+            <if test="pic1 != null">#{pic1},</if>
+            <if test="pic2 != null">#{pic2},</if>
+            <if test="pic3 != null">#{pic3},</if>
+            <if test="pic4 != null">#{pic4},</if>
+            <if test="pic5 != null">#{pic5},</if>
+            <if test="appid != null">#{appid},</if>
+            <if test="ciphertext != null">#{ciphertext},</if>
+            <if test="reportTime != null">#{reportTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="feedBackInfo != null">#{feedBackInfo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseFpWorkSheet" parameterType="BaseFpWorkSheet">
+        update base_fp_work_sheet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNo != null">orderNo = #{orderNo},</if>
+            <if test="worksheetno != null">worksheetno = #{worksheetno},</if>
+            <if test="problemdefid != null">problemdefid = #{problemdefid},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="wsdescription != null">wsdescription = #{wsdescription},</if>
+            <if test="pic1 != null">pic1 = #{pic1},</if>
+            <if test="pic2 != null">pic2 = #{pic2},</if>
+            <if test="pic3 != null">pic3 = #{pic3},</if>
+            <if test="pic4 != null">pic4 = #{pic4},</if>
+            <if test="pic5 != null">pic5 = #{pic5},</if>
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="ciphertext != null">ciphertext = #{ciphertext},</if>
+            <if test="reportTime != null">report_time = #{reportTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="feedBackInfo != null">feedBackInfo = #{feedBackInfo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseFpWorkSheetById" parameterType="Integer">
+        delete from base_fp_work_sheet where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseFpWorkSheetByIds" parameterType="String">
+        delete from base_fp_work_sheet where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

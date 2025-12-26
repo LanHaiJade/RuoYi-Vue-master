@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineFpMapper">
+    
+    <resultMap type="BaseMachineFp" id="BaseMachineFpResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="machinesn"    column="machinesn"    />
+        <result property="doosposturl"    column="doosposturl"    />
+        <result property="bindRack"    column="bind_rack"    />
+        <result property="registerRack"    column="register_rack"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineFpVo">
+        select id, sb_id, machinesn, doosposturl, bind_rack, register_rack from base_machine_fp
+    </sql>
+
+    <select id="selectBaseMachineFpList" parameterType="BaseMachineFp" resultMap="BaseMachineFpResult">
+        <include refid="selectBaseMachineFpVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="machinesn != null  and machinesn != ''"> and machinesn = #{machinesn}</if>
+            <if test="doosposturl != null  and doosposturl != ''"> and doosposturl = #{doosposturl}</if>
+            <if test="bindRack != null "> and bind_rack = #{bindRack}</if>
+            <if test="registerRack != null "> and register_rack = #{registerRack}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineFpById" parameterType="Long" resultMap="BaseMachineFpResult">
+        <include refid="selectBaseMachineFpVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineFp" parameterType="BaseMachineFp" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_fp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="machinesn != null">machinesn,</if>
+            <if test="doosposturl != null">doosposturl,</if>
+            <if test="bindRack != null">bind_rack,</if>
+            <if test="registerRack != null">register_rack,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="machinesn != null">#{machinesn},</if>
+            <if test="doosposturl != null">#{doosposturl},</if>
+            <if test="bindRack != null">#{bindRack},</if>
+            <if test="registerRack != null">#{registerRack},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineFp" parameterType="BaseMachineFp">
+        update base_machine_fp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="machinesn != null">machinesn = #{machinesn},</if>
+            <if test="doosposturl != null">doosposturl = #{doosposturl},</if>
+            <if test="bindRack != null">bind_rack = #{bindRack},</if>
+            <if test="registerRack != null">register_rack = #{registerRack},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineFpById" parameterType="Long">
+        delete from base_machine_fp where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineFpByIds" parameterType="String">
+        delete from base_machine_fp where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

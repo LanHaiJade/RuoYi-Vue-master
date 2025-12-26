@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserAutoRefundMapper">
+    
+    <resultMap type="BaseUserAutoRefund" id="BaseUserAutoRefundResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="auto"    column="auto"    />
+        <result property="num"    column="num"    />
+        <result property="status1"    column="status1"    />
+        <result property="status2"    column="status2"    />
+        <result property="status3"    column="status3"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="refundNumber"    column="refund_number"    />
+        <result property="refundTime"    column="refund_time"    />
+        <result property="maxRefundNumber"    column="max_refund_number"    />
+    </resultMap>
+
+    <sql id="selectBaseUserAutoRefundVo">
+        select id, user_id, auto, num, status1, status2, status3, update_time, create_time, refund_number, refund_time, max_refund_number from base_user_auto_refund
+    </sql>
+
+    <select id="selectBaseUserAutoRefundList" parameterType="BaseUserAutoRefund" resultMap="BaseUserAutoRefundResult">
+        <include refid="selectBaseUserAutoRefundVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="auto != null "> and auto = #{auto}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="status1 != null "> and status1 = #{status1}</if>
+            <if test="status2 != null "> and status2 = #{status2}</if>
+            <if test="status3 != null "> and status3 = #{status3}</if>
+            <if test="refundNumber != null "> and refund_number = #{refundNumber}</if>
+            <if test="refundTime != null "> and refund_time = #{refundTime}</if>
+            <if test="maxRefundNumber != null "> and max_refund_number = #{maxRefundNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseUserAutoRefundById" parameterType="Integer" resultMap="BaseUserAutoRefundResult">
+        <include refid="selectBaseUserAutoRefundVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseUserAutoRefund" parameterType="BaseUserAutoRefund" useGeneratedKeys="true" keyProperty="id">
+        insert into base_user_auto_refund
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="auto != null">auto,</if>
+            <if test="num != null">num,</if>
+            <if test="status1 != null">status1,</if>
+            <if test="status2 != null">status2,</if>
+            <if test="status3 != null">status3,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="refundNumber != null">refund_number,</if>
+            <if test="refundTime != null">refund_time,</if>
+            <if test="maxRefundNumber != null">max_refund_number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="auto != null">#{auto},</if>
+            <if test="num != null">#{num},</if>
+            <if test="status1 != null">#{status1},</if>
+            <if test="status2 != null">#{status2},</if>
+            <if test="status3 != null">#{status3},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="refundNumber != null">#{refundNumber},</if>
+            <if test="refundTime != null">#{refundTime},</if>
+            <if test="maxRefundNumber != null">#{maxRefundNumber},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUserAutoRefund" parameterType="BaseUserAutoRefund">
+        update base_user_auto_refund
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="auto != null">auto = #{auto},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="status1 != null">status1 = #{status1},</if>
+            <if test="status2 != null">status2 = #{status2},</if>
+            <if test="status3 != null">status3 = #{status3},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="refundNumber != null">refund_number = #{refundNumber},</if>
+            <if test="refundTime != null">refund_time = #{refundTime},</if>
+            <if test="maxRefundNumber != null">max_refund_number = #{maxRefundNumber},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseUserAutoRefundById" parameterType="Integer">
+        delete from base_user_auto_refund where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseUserAutoRefundByIds" parameterType="String">
+        delete from base_user_auto_refund where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

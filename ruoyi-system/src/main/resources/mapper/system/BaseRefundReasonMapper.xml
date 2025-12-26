@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseRefundReasonMapper">
+    
+    <resultMap type="BaseRefundReason" id="BaseRefundReasonResult">
+        <result property="baseRefundReasonId"    column="base_refund_reason_id"    />
+        <result property="title"    column="title"    />
+        <result property="isEnable"    column="is_enable"    />
+        <result property="sortNo"    column="sort_no"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="deleteTime"    column="delete_time"    />
+    </resultMap>
+
+    <sql id="selectBaseRefundReasonVo">
+        select base_refund_reason_id, title, is_enable, sort_no, is_delete, delete_time from base_refund_reason
+    </sql>
+
+    <select id="selectBaseRefundReasonList" parameterType="BaseRefundReason" resultMap="BaseRefundReasonResult">
+        <include refid="selectBaseRefundReasonVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="isEnable != null  and isEnable != ''"> and is_enable = #{isEnable}</if>
+            <if test="sortNo != null "> and sort_no = #{sortNo}</if>
+            <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="deleteTime != null "> and delete_time = #{deleteTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseRefundReasonByBaseRefundReasonId" parameterType="String" resultMap="BaseRefundReasonResult">
+        <include refid="selectBaseRefundReasonVo"/>
+        where base_refund_reason_id = #{baseRefundReasonId}
+    </select>
+
+    <insert id="insertBaseRefundReason" parameterType="BaseRefundReason">
+        insert into base_refund_reason
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="baseRefundReasonId != null">base_refund_reason_id,</if>
+            <if test="title != null">title,</if>
+            <if test="isEnable != null">is_enable,</if>
+            <if test="sortNo != null">sort_no,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="deleteTime != null">delete_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="baseRefundReasonId != null">#{baseRefundReasonId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="isEnable != null">#{isEnable},</if>
+            <if test="sortNo != null">#{sortNo},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="deleteTime != null">#{deleteTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseRefundReason" parameterType="BaseRefundReason">
+        update base_refund_reason
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="isEnable != null">is_enable = #{isEnable},</if>
+            <if test="sortNo != null">sort_no = #{sortNo},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="deleteTime != null">delete_time = #{deleteTime},</if>
+        </trim>
+        where base_refund_reason_id = #{baseRefundReasonId}
+    </update>
+
+    <delete id="deleteBaseRefundReasonByBaseRefundReasonId" parameterType="String">
+        delete from base_refund_reason where base_refund_reason_id = #{baseRefundReasonId}
+    </delete>
+
+    <delete id="deleteBaseRefundReasonByBaseRefundReasonIds" parameterType="String">
+        delete from base_refund_reason where base_refund_reason_id in 
+        <foreach item="baseRefundReasonId" collection="array" open="(" separator="," close=")">
+            #{baseRefundReasonId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseBinMapper">
+    
+    <resultMap type="BaseBin" id="BaseBinResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="versionNumber"    column="version_number"    />
+        <result property="url"    column="url"    />
+        <result property="packetName"    column="packet_name"    />
+        <result property="machineType"    column="machine_type"    />
+        <result property="coerce"    column="coerce"    />
+        <result property="remark"    column="remark"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseBinVo">
+        select id, name, version_number, url, packet_name, machine_type, coerce, remark, update_time, create_time from base_bin
+    </sql>
+
+    <select id="selectBaseBinList" parameterType="BaseBin" resultMap="BaseBinResult">
+        <include refid="selectBaseBinVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="versionNumber != null  and versionNumber != ''"> and version_number = #{versionNumber}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="packetName != null  and packetName != ''"> and packet_name like concat('%', #{packetName}, '%')</if>
+            <if test="machineType != null  and machineType != ''"> and machine_type = #{machineType}</if>
+            <if test="coerce != null "> and coerce = #{coerce}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseBinById" parameterType="Integer" resultMap="BaseBinResult">
+        <include refid="selectBaseBinVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseBin" parameterType="BaseBin" useGeneratedKeys="true" keyProperty="id">
+        insert into base_bin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="versionNumber != null">version_number,</if>
+            <if test="url != null">url,</if>
+            <if test="packetName != null">packet_name,</if>
+            <if test="machineType != null">machine_type,</if>
+            <if test="coerce != null">coerce,</if>
+            <if test="remark != null">remark,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="versionNumber != null">#{versionNumber},</if>
+            <if test="url != null">#{url},</if>
+            <if test="packetName != null">#{packetName},</if>
+            <if test="machineType != null">#{machineType},</if>
+            <if test="coerce != null">#{coerce},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseBin" parameterType="BaseBin">
+        update base_bin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="versionNumber != null">version_number = #{versionNumber},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="packetName != null">packet_name = #{packetName},</if>
+            <if test="machineType != null">machine_type = #{machineType},</if>
+            <if test="coerce != null">coerce = #{coerce},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseBinById" parameterType="Integer">
+        delete from base_bin where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseBinByIds" parameterType="String">
+        delete from base_bin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

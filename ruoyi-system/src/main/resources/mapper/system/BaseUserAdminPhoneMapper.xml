@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserAdminPhoneMapper">
+    
+    <resultMap type="BaseUserAdminPhone" id="BaseUserAdminPhoneResult">
+        <result property="id"    column="id"    />
+        <result property="user"    column="user"    />
+        <result property="phone"    column="phone"    />
+        <result property="code"    column="code"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBaseUserAdminPhoneVo">
+        select id, user, phone, code, update_time, create_time from base_user_admin_phone
+    </sql>
+
+    <select id="selectBaseUserAdminPhoneList" parameterType="BaseUserAdminPhone" resultMap="BaseUserAdminPhoneResult">
+        <include refid="selectBaseUserAdminPhoneVo"/>
+        <where>  
+            <if test="user != null  and user != ''"> and user = #{user}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseUserAdminPhoneById" parameterType="Integer" resultMap="BaseUserAdminPhoneResult">
+        <include refid="selectBaseUserAdminPhoneVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseUserAdminPhone" parameterType="BaseUserAdminPhone" useGeneratedKeys="true" keyProperty="id">
+        insert into base_user_admin_phone
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user != null">user,</if>
+            <if test="phone != null">phone,</if>
+            <if test="code != null">code,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="user != null">#{user},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="code != null">#{code},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUserAdminPhone" parameterType="BaseUserAdminPhone">
+        update base_user_admin_phone
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="user != null">user = #{user},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseUserAdminPhoneById" parameterType="Integer">
+        delete from base_user_admin_phone where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseUserAdminPhoneByIds" parameterType="String">
+        delete from base_user_admin_phone where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

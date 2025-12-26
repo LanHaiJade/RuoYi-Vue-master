@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseRegisterCodeMapper">
+    
+    <resultMap type="BaseRegisterCode" id="BaseRegisterCodeResult">
+        <result property="id"    column="id"    />
+        <result property="phone"    column="phone"    />
+        <result property="registerCode"    column="register_code"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="codeType"    column="code_type"    />
+    </resultMap>
+
+    <sql id="selectBaseRegisterCodeVo">
+        select id, phone, register_code, create_time, code_type from base_register_code
+    </sql>
+
+    <select id="selectBaseRegisterCodeList" parameterType="BaseRegisterCode" resultMap="BaseRegisterCodeResult">
+        <include refid="selectBaseRegisterCodeVo"/>
+        <where>  
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="registerCode != null  and registerCode != ''"> and register_code = #{registerCode}</if>
+            <if test="codeType != null  and codeType != ''"> and code_type = #{codeType}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseRegisterCodeById" parameterType="Long" resultMap="BaseRegisterCodeResult">
+        <include refid="selectBaseRegisterCodeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseRegisterCode" parameterType="BaseRegisterCode" useGeneratedKeys="true" keyProperty="id">
+        insert into base_register_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="phone != null">phone,</if>
+            <if test="registerCode != null">register_code,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="codeType != null">code_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="phone != null">#{phone},</if>
+            <if test="registerCode != null">#{registerCode},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="codeType != null">#{codeType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseRegisterCode" parameterType="BaseRegisterCode">
+        update base_register_code
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="registerCode != null">register_code = #{registerCode},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="codeType != null">code_type = #{codeType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseRegisterCodeById" parameterType="Long">
+        delete from base_register_code where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseRegisterCodeByIds" parameterType="String">
+        delete from base_register_code where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

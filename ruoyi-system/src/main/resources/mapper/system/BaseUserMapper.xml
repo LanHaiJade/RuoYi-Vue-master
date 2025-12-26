@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseUserMapper">
+    
+    <resultMap type="BaseUser" id="BaseUserResult">
+        <result property="id"    column="id"    />
+        <result property="openId"    column="open_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="password"    column="password"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="area"    column="area"    />
+        <result property="address"    column="address"    />
+        <result property="contact"    column="contact"    />
+        <result property="shopAuth"    column="shop_auth"    />
+        <result property="payAuth"    column="pay_auth"    />
+        <result property="payMethod"    column="pay_method"    />
+        <result property="mpAppid"    column="mp_appid"    />
+        <result property="mpSecret"    column="mp_secret"    />
+        <result property="mpToken"    column="mp_token"    />
+        <result property="mchId"    column="mch_id"    />
+        <result property="apiKey"    column="api_key"    />
+        <result property="wxP12"    column="wx_p12"    />
+        <result property="alipayPid"    column="alipay_pid"    />
+        <result property="alipayAppid"    column="alipay_appid"    />
+        <result property="alipayAuthtoken"    column="alipay_authToken"    />
+        <result property="alipayAlipaypublickey2"    column="alipay_alipayPublicKey2"    />
+        <result property="alipaySigntype"    column="alipay_signType"    />
+        <result property="wxSubmch"    column="wx_submch"    />
+        <result property="alipaySubmch"    column="alipay_submch"    />
+        <result property="oneword"    column="oneword"    />
+        <result property="accountNo"    column="accountNo"    />
+        <result property="accountName"    column="accountName"    />
+        <result property="bankName"    column="bankName"    />
+        <result property="alipayAccountno"    column="alipay_accountNo"    />
+        <result property="lastLogintime"    column="last_logintime"    />
+        <result property="lastLoginip"    column="last_loginip"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="balance"    column="balance"    />
+        <result property="integral"    column="integral"    />
+        <result property="discount"    column="discount"    />
+        <result property="token"    column="token"    />
+        <result property="payType"    column="payType"    />
+        <result property="ratedis"    column="ratedis"    />
+        <result property="logo"    column="logo"    />
+        <result property="fpOperatorId"    column="fp_operator_id"    />
+        <result property="company"    column="company"    />
+        <result property="fppayPrivatekey"    column="fppay_privateKey"    />
+        <result property="fppayPublickey"    column="fppay_publicKey"    />
+        <result property="operatorUserId"    column="operator_user_id"    />
+        <result property="alipayPrivatekey"    column="alipay_privateKey"    />
+        <result property="scene"    column="scene"    />
+        <result property="alipaySmid"    column="alipay_smid"    />
+        <result property="organizationId"    column="organization_id"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="iccardQuota"    column="iccard_quota"    />
+        <result property="memberQuota"    column="member_quota"    />
+        <result property="contactPhone"    column="contact_phone"    />
+        <result property="split"    column="split"    />
+        <result property="aliConType"    column="ali_con_type"    />
+        <result property="ghlMerchantid"    column="ghl_merchantId"    />
+        <result property="ghlTerminalid"    column="ghl_terminalId"    />
+        <result property="ghlPrivatekey"    column="ghl_privateKey"    />
+        <result property="aliSchoolId"    column="ali_school_id"    />
+        <result property="lrSw"    column="lr_sw"    />
+        <result property="priceSw"    column="price_sw"    />
+        <result property="refundSw"    column="refund_sw"    />
+        <result property="ban"    column="ban"    />
+        <result property="registerSign"    column="register_sign"    />
+        <result property="pscDate"    column="psc_date"    />
+        <result property="pscCount"    column="psc_count"    />
+        <result property="country"    column="country"    />
+        <result property="timeZone"    column="time_zone"    />
+    </resultMap>
+
+    <sql id="selectBaseUserVo">
+        select id, open_id, user_name, password, email, phone, province, city, area, address, contact, shop_auth, pay_auth, pay_method, mp_appid, mp_secret, mp_token, mch_id, api_key, wx_p12, alipay_pid, alipay_appid, alipay_authToken, alipay_alipayPublicKey2, alipay_signType, wx_submch, alipay_submch, oneword, accountNo, accountName, bankName, alipay_accountNo, last_logintime, last_loginip, status, sort, create_time, balance, integral, discount, token, payType, ratedis, logo, fp_operator_id, company, fppay_privateKey, fppay_publicKey, operator_user_id, alipay_privateKey, scene, alipay_smid, organization_id, school_name, iccard_quota, member_quota, contact_phone, split, ali_con_type, ghl_merchantId, ghl_terminalId, ghl_privateKey, ali_school_id, lr_sw, price_sw, refund_sw, ban, register_sign, psc_date, psc_count, country, time_zone from base_user
+    </sql>
+
+    <select id="selectBaseUserList" parameterType="BaseUser" resultMap="BaseUserResult">
+        <include refid="selectBaseUserVo"/>
+        <where>  
+            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="contact != null  and contact != ''"> and contact = #{contact}</if>
+            <if test="shopAuth != null "> and shop_auth = #{shopAuth}</if>
+            <if test="payAuth != null "> and pay_auth = #{payAuth}</if>
+            <if test="payMethod != null  and payMethod != ''"> and pay_method = #{payMethod}</if>
+            <if test="mpAppid != null  and mpAppid != ''"> and mp_appid = #{mpAppid}</if>
+            <if test="mpSecret != null  and mpSecret != ''"> and mp_secret = #{mpSecret}</if>
+            <if test="mpToken != null  and mpToken != ''"> and mp_token = #{mpToken}</if>
+            <if test="mchId != null  and mchId != ''"> and mch_id = #{mchId}</if>
+            <if test="apiKey != null  and apiKey != ''"> and api_key = #{apiKey}</if>
+            <if test="wxP12 != null  and wxP12 != ''"> and wx_p12 = #{wxP12}</if>
+            <if test="alipayPid != null  and alipayPid != ''"> and alipay_pid = #{alipayPid}</if>
+            <if test="alipayAppid != null  and alipayAppid != ''"> and alipay_appid = #{alipayAppid}</if>
+            <if test="alipayAuthtoken != null  and alipayAuthtoken != ''"> and alipay_authToken = #{alipayAuthtoken}</if>
+            <if test="alipayAlipaypublickey2 != null  and alipayAlipaypublickey2 != ''"> and alipay_alipayPublicKey2 = #{alipayAlipaypublickey2}</if>
+            <if test="alipaySigntype != null  and alipaySigntype != ''"> and alipay_signType = #{alipaySigntype}</if>
+            <if test="wxSubmch != null "> and wx_submch = #{wxSubmch}</if>
+            <if test="alipaySubmch != null "> and alipay_submch = #{alipaySubmch}</if>
+            <if test="oneword != null  and oneword != ''"> and oneword = #{oneword}</if>
+            <if test="accountNo != null  and accountNo != ''"> and accountNo = #{accountNo}</if>
+            <if test="accountName != null  and accountName != ''"> and accountName like concat('%', #{accountName}, '%')</if>
+            <if test="bankName != null  and bankName != ''"> and bankName like concat('%', #{bankName}, '%')</if>
+            <if test="alipayAccountno != null  and alipayAccountno != ''"> and alipay_accountNo = #{alipayAccountno}</if>
+            <if test="lastLogintime != null "> and last_logintime = #{lastLogintime}</if>
+            <if test="lastLoginip != null  and lastLoginip != ''"> and last_loginip = #{lastLoginip}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="balance != null "> and balance = #{balance}</if>
+            <if test="integral != null "> and integral = #{integral}</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="token != null  and token != ''"> and token = #{token}</if>
+            <if test="payType != null "> and payType = #{payType}</if>
+            <if test="ratedis != null "> and ratedis = #{ratedis}</if>
+            <if test="logo != null  and logo != ''"> and logo = #{logo}</if>
+            <if test="fpOperatorId != null  and fpOperatorId != ''"> and fp_operator_id = #{fpOperatorId}</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="fppayPrivatekey != null  and fppayPrivatekey != ''"> and fppay_privateKey = #{fppayPrivatekey}</if>
+            <if test="fppayPublickey != null  and fppayPublickey != ''"> and fppay_publicKey = #{fppayPublickey}</if>
+            <if test="operatorUserId != null "> and operator_user_id = #{operatorUserId}</if>
+            <if test="alipayPrivatekey != null  and alipayPrivatekey != ''"> and alipay_privateKey = #{alipayPrivatekey}</if>
+            <if test="scene != null "> and scene = #{scene}</if>
+            <if test="alipaySmid != null  and alipaySmid != ''"> and alipay_smid = #{alipaySmid}</if>
+            <if test="organizationId != null  and organizationId != ''"> and organization_id = #{organizationId}</if>
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="iccardQuota != null "> and iccard_quota = #{iccardQuota}</if>
+            <if test="memberQuota != null "> and member_quota = #{memberQuota}</if>
+            <if test="contactPhone != null  and contactPhone != ''"> and contact_phone = #{contactPhone}</if>
+            <if test="split != null "> and split = #{split}</if>
+            <if test="aliConType != null "> and ali_con_type = #{aliConType}</if>
+            <if test="ghlMerchantid != null  and ghlMerchantid != ''"> and ghl_merchantId = #{ghlMerchantid}</if>
+            <if test="ghlTerminalid != null  and ghlTerminalid != ''"> and ghl_terminalId = #{ghlTerminalid}</if>
+            <if test="ghlPrivatekey != null  and ghlPrivatekey != ''"> and ghl_privateKey = #{ghlPrivatekey}</if>
+            <if test="aliSchoolId != null  and aliSchoolId != ''"> and ali_school_id = #{aliSchoolId}</if>
+            <if test="lrSw != null "> and lr_sw = #{lrSw}</if>
+            <if test="priceSw != null "> and price_sw = #{priceSw}</if>
+            <if test="refundSw != null "> and refund_sw = #{refundSw}</if>
+            <if test="ban != null "> and ban = #{ban}</if>
+            <if test="registerSign != null "> and register_sign = #{registerSign}</if>
+            <if test="pscDate != null "> and psc_date = #{pscDate}</if>
+            <if test="pscCount != null "> and psc_count = #{pscCount}</if>
+            <if test="country != null  and country != ''"> and country = #{country}</if>
+            <if test="timeZone != null "> and time_zone = #{timeZone}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseUserById" parameterType="Long" resultMap="BaseUserResult">
+        <include refid="selectBaseUserVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectBaseUserByPhone" parameterType="String" resultMap="BaseUserResult">
+        <include refid="selectBaseUserVo"/>
+        where phone = #{Phone}
+    </select>
+
+    <insert id="insertBaseUser" parameterType="BaseUser" useGeneratedKeys="true" keyProperty="id">
+        insert into base_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="openId != null">open_id,</if>
+            <if test="userName != null and userName != ''">user_name,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="email != null">email,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="area != null">area,</if>
+            <if test="address != null">address,</if>
+            <if test="contact != null">contact,</if>
+            <if test="shopAuth != null">shop_auth,</if>
+            <if test="payAuth != null">pay_auth,</if>
+            <if test="payMethod != null">pay_method,</if>
+            <if test="mpAppid != null">mp_appid,</if>
+            <if test="mpSecret != null">mp_secret,</if>
+            <if test="mpToken != null">mp_token,</if>
+            <if test="mchId != null">mch_id,</if>
+            <if test="apiKey != null">api_key,</if>
+            <if test="wxP12 != null">wx_p12,</if>
+            <if test="alipayPid != null">alipay_pid,</if>
+            <if test="alipayAppid != null">alipay_appid,</if>
+            <if test="alipayAuthtoken != null">alipay_authToken,</if>
+            <if test="alipayAlipaypublickey2 != null">alipay_alipayPublicKey2,</if>
+            <if test="alipaySigntype != null">alipay_signType,</if>
+            <if test="wxSubmch != null">wx_submch,</if>
+            <if test="alipaySubmch != null">alipay_submch,</if>
+            <if test="oneword != null">oneword,</if>
+            <if test="accountNo != null">accountNo,</if>
+            <if test="accountName != null">accountName,</if>
+            <if test="bankName != null">bankName,</if>
+            <if test="alipayAccountno != null">alipay_accountNo,</if>
+            <if test="lastLogintime != null">last_logintime,</if>
+            <if test="lastLoginip != null">last_loginip,</if>
+            <if test="status != null">status,</if>
+            <if test="sort != null">sort,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="balance != null">balance,</if>
+            <if test="integral != null">integral,</if>
+            <if test="discount != null">discount,</if>
+            <if test="token != null">token,</if>
+            <if test="payType != null">payType,</if>
+            <if test="ratedis != null">ratedis,</if>
+            <if test="logo != null">logo,</if>
+            <if test="fpOperatorId != null">fp_operator_id,</if>
+            <if test="company != null">company,</if>
+            <if test="fppayPrivatekey != null">fppay_privateKey,</if>
+            <if test="fppayPublickey != null">fppay_publicKey,</if>
+            <if test="operatorUserId != null">operator_user_id,</if>
+            <if test="alipayPrivatekey != null">alipay_privateKey,</if>
+            <if test="scene != null">scene,</if>
+            <if test="alipaySmid != null">alipay_smid,</if>
+            <if test="organizationId != null">organization_id,</if>
+            <if test="schoolName != null">school_name,</if>
+            <if test="iccardQuota != null">iccard_quota,</if>
+            <if test="memberQuota != null">member_quota,</if>
+            <if test="contactPhone != null">contact_phone,</if>
+            <if test="split != null">split,</if>
+            <if test="aliConType != null">ali_con_type,</if>
+            <if test="ghlMerchantid != null">ghl_merchantId,</if>
+            <if test="ghlTerminalid != null">ghl_terminalId,</if>
+            <if test="ghlPrivatekey != null">ghl_privateKey,</if>
+            <if test="aliSchoolId != null">ali_school_id,</if>
+            <if test="lrSw != null">lr_sw,</if>
+            <if test="priceSw != null">price_sw,</if>
+            <if test="refundSw != null">refund_sw,</if>
+            <if test="ban != null">ban,</if>
+            <if test="registerSign != null">register_sign,</if>
+            <if test="pscDate != null">psc_date,</if>
+            <if test="pscCount != null">psc_count,</if>
+            <if test="country != null">country,</if>
+            <if test="timeZone != null">time_zone,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="openId != null">#{openId},</if>
+            <if test="userName != null and userName != ''">#{userName},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="area != null">#{area},</if>
+            <if test="address != null">#{address},</if>
+            <if test="contact != null">#{contact},</if>
+            <if test="shopAuth != null">#{shopAuth},</if>
+            <if test="payAuth != null">#{payAuth},</if>
+            <if test="payMethod != null">#{payMethod},</if>
+            <if test="mpAppid != null">#{mpAppid},</if>
+            <if test="mpSecret != null">#{mpSecret},</if>
+            <if test="mpToken != null">#{mpToken},</if>
+            <if test="mchId != null">#{mchId},</if>
+            <if test="apiKey != null">#{apiKey},</if>
+            <if test="wxP12 != null">#{wxP12},</if>
+            <if test="alipayPid != null">#{alipayPid},</if>
+            <if test="alipayAppid != null">#{alipayAppid},</if>
+            <if test="alipayAuthtoken != null">#{alipayAuthtoken},</if>
+            <if test="alipayAlipaypublickey2 != null">#{alipayAlipaypublickey2},</if>
+            <if test="alipaySigntype != null">#{alipaySigntype},</if>
+            <if test="wxSubmch != null">#{wxSubmch},</if>
+            <if test="alipaySubmch != null">#{alipaySubmch},</if>
+            <if test="oneword != null">#{oneword},</if>
+            <if test="accountNo != null">#{accountNo},</if>
+            <if test="accountName != null">#{accountName},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="alipayAccountno != null">#{alipayAccountno},</if>
+            <if test="lastLogintime != null">#{lastLogintime},</if>
+            <if test="lastLoginip != null">#{lastLoginip},</if>
+            <if test="status != null">#{status},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="integral != null">#{integral},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="token != null">#{token},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="ratedis != null">#{ratedis},</if>
+            <if test="logo != null">#{logo},</if>
+            <if test="fpOperatorId != null">#{fpOperatorId},</if>
+            <if test="company != null">#{company},</if>
+            <if test="fppayPrivatekey != null">#{fppayPrivatekey},</if>
+            <if test="fppayPublickey != null">#{fppayPublickey},</if>
+            <if test="operatorUserId != null">#{operatorUserId},</if>
+            <if test="alipayPrivatekey != null">#{alipayPrivatekey},</if>
+            <if test="scene != null">#{scene},</if>
+            <if test="alipaySmid != null">#{alipaySmid},</if>
+            <if test="organizationId != null">#{organizationId},</if>
+            <if test="schoolName != null">#{schoolName},</if>
+            <if test="iccardQuota != null">#{iccardQuota},</if>
+            <if test="memberQuota != null">#{memberQuota},</if>
+            <if test="contactPhone != null">#{contactPhone},</if>
+            <if test="split != null">#{split},</if>
+            <if test="aliConType != null">#{aliConType},</if>
+            <if test="ghlMerchantid != null">#{ghlMerchantid},</if>
+            <if test="ghlTerminalid != null">#{ghlTerminalid},</if>
+            <if test="ghlPrivatekey != null">#{ghlPrivatekey},</if>
+            <if test="aliSchoolId != null">#{aliSchoolId},</if>
+            <if test="lrSw != null">#{lrSw},</if>
+            <if test="priceSw != null">#{priceSw},</if>
+            <if test="refundSw != null">#{refundSw},</if>
+            <if test="ban != null">#{ban},</if>
+            <if test="registerSign != null">#{registerSign},</if>
+            <if test="pscDate != null">#{pscDate},</if>
+            <if test="pscCount != null">#{pscCount},</if>
+            <if test="country != null">#{country},</if>
+            <if test="timeZone != null">#{timeZone},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseUser" parameterType="BaseUser">
+        update base_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="userName != null and userName != ''">user_name = #{userName},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="contact != null">contact = #{contact},</if>
+            <if test="shopAuth != null">shop_auth = #{shopAuth},</if>
+            <if test="payAuth != null">pay_auth = #{payAuth},</if>
+            <if test="payMethod != null">pay_method = #{payMethod},</if>
+            <if test="mpAppid != null">mp_appid = #{mpAppid},</if>
+            <if test="mpSecret != null">mp_secret = #{mpSecret},</if>
+            <if test="mpToken != null">mp_token = #{mpToken},</if>
+            <if test="mchId != null">mch_id = #{mchId},</if>
+            <if test="apiKey != null">api_key = #{apiKey},</if>
+            <if test="wxP12 != null">wx_p12 = #{wxP12},</if>
+            <if test="alipayPid != null">alipay_pid = #{alipayPid},</if>
+            <if test="alipayAppid != null">alipay_appid = #{alipayAppid},</if>
+            <if test="alipayAuthtoken != null">alipay_authToken = #{alipayAuthtoken},</if>
+            <if test="alipayAlipaypublickey2 != null">alipay_alipayPublicKey2 = #{alipayAlipaypublickey2},</if>
+            <if test="alipaySigntype != null">alipay_signType = #{alipaySigntype},</if>
+            <if test="wxSubmch != null">wx_submch = #{wxSubmch},</if>
+            <if test="alipaySubmch != null">alipay_submch = #{alipaySubmch},</if>
+            <if test="oneword != null">oneword = #{oneword},</if>
+            <if test="accountNo != null">accountNo = #{accountNo},</if>
+            <if test="accountName != null">accountName = #{accountName},</if>
+            <if test="bankName != null">bankName = #{bankName},</if>
+            <if test="alipayAccountno != null">alipay_accountNo = #{alipayAccountno},</if>
+            <if test="lastLogintime != null">last_logintime = #{lastLogintime},</if>
+            <if test="lastLoginip != null">last_loginip = #{lastLoginip},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="integral != null">integral = #{integral},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="token != null">token = #{token},</if>
+            <if test="payType != null">payType = #{payType},</if>
+            <if test="ratedis != null">ratedis = #{ratedis},</if>
+            <if test="logo != null">logo = #{logo},</if>
+            <if test="fpOperatorId != null">fp_operator_id = #{fpOperatorId},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="fppayPrivatekey != null">fppay_privateKey = #{fppayPrivatekey},</if>
+            <if test="fppayPublickey != null">fppay_publicKey = #{fppayPublickey},</if>
+            <if test="operatorUserId != null">operator_user_id = #{operatorUserId},</if>
+            <if test="alipayPrivatekey != null">alipay_privateKey = #{alipayPrivatekey},</if>
+            <if test="scene != null">scene = #{scene},</if>
+            <if test="alipaySmid != null">alipay_smid = #{alipaySmid},</if>
+            <if test="organizationId != null">organization_id = #{organizationId},</if>
+            <if test="schoolName != null">school_name = #{schoolName},</if>
+            <if test="iccardQuota != null">iccard_quota = #{iccardQuota},</if>
+            <if test="memberQuota != null">member_quota = #{memberQuota},</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="split != null">split = #{split},</if>
+            <if test="aliConType != null">ali_con_type = #{aliConType},</if>
+            <if test="ghlMerchantid != null">ghl_merchantId = #{ghlMerchantid},</if>
+            <if test="ghlTerminalid != null">ghl_terminalId = #{ghlTerminalid},</if>
+            <if test="ghlPrivatekey != null">ghl_privateKey = #{ghlPrivatekey},</if>
+            <if test="aliSchoolId != null">ali_school_id = #{aliSchoolId},</if>
+            <if test="lrSw != null">lr_sw = #{lrSw},</if>
+            <if test="priceSw != null">price_sw = #{priceSw},</if>
+            <if test="refundSw != null">refund_sw = #{refundSw},</if>
+            <if test="ban != null">ban = #{ban},</if>
+            <if test="registerSign != null">register_sign = #{registerSign},</if>
+            <if test="pscDate != null">psc_date = #{pscDate},</if>
+            <if test="pscCount != null">psc_count = #{pscCount},</if>
+            <if test="country != null">country = #{country},</if>
+            <if test="timeZone != null">time_zone = #{timeZone},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseUserById" parameterType="Long">
+        delete from base_user where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseUserByIds" parameterType="String">
+        delete from base_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

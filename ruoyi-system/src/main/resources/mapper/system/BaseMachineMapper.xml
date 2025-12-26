@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineMapper">
+    
+    <resultMap type="BaseMachine" id="BaseMachineResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="sbName"    column="sb_name"    />
+        <result property="iccid"    column="iccid"    />
+        <result property="version"    column="version"    />
+        <result property="hardVersion"    column="hard_version"    />
+        <result property="sbNo"    column="sb_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="zbqYue"    column="zbq_yue"    />
+        <result property="ybqYue"    column="ybq_yue"    />
+        <result property="status"    column="status"    />
+        <result property="zbqStatus"    column="zbq_status"    />
+        <result property="ybqStatus"    column="ybq_status"    />
+        <result property="ysjStatus"    column="ysj_status"    />
+        <result property="kzbStatus"    column="kzb_status"    />
+        <result property="gprsStatus"    column="gprs_status"    />
+        <result property="errorStatus"    column="error_status"    />
+        <result property="network"    column="network"    />
+        <result property="slotsum"    column="slotsum"    />
+        <result property="boxnum"    column="boxnum"    />
+        <result property="ds"    column="ds"    />
+        <result property="leftStatus"    column="left_status"    />
+        <result property="rightStatus"    column="right_status"    />
+        <result property="leftTemperature"    column="left_temperature"    />
+        <result property="rightTemperature"    column="right_temperature"    />
+        <result property="type"    column="type"    />
+        <result property="model"    column="model"    />
+        <result property="controlStatus"    column="control_status"    />
+        <result property="machineType"    column="machine_type"    />
+        <result property="unsold"    column="unsold"    />
+        <result property="hardwareType"    column="hardware_type"    />
+        <result property="sort"    column="sort"    />
+        <result property="json"    column="json"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="ip"    column="ip"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="district"    column="district"    />
+        <result property="address"    column="address"    />
+        <result property="replenishTime"    column="replenish_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="rent"    column="rent"    />
+        <result property="moboSn"    column="mobo_sn"    />
+        <result property="cameraSn"    column="camera_sn"    />
+        <result property="buyQuota"    column="buy_quota"    />
+        <result property="autoRefund"    column="auto_refund"    />
+        <result property="fpType"    column="fp_type"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="huodaoShow"    column="huodao_show"    />
+        <result property="serEndTime"    column="ser_end_time"    />
+        <result property="rentSer"    column="rent_ser"    />
+        <result property="alisettled"    column="alisettled"    />
+        <result property="aliTerId"    column="ali_ter_id"    />
+        <result property="mtId"    column="mt_id"    />
+        <result property="svlc"    column="svlc"    />
+        <result property="svlcTime"    column="svlc_time"    />
+        <result property="erpOrderNo"    column="erp_order_no"    />
+        <result property="zbTime"    column="zb_time"    />
+        <result property="shRemark"    column="sh_remark"    />
+        <result property="ghType"    column="gh_type"    />
+        <result property="ghSh"    column="gh_sh"    />
+        <result property="ghXk"    column="gh_xk"    />
+        <result property="ghTime"    column="gh_time"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineVo">
+        select id, sb_id, sb_name, iccid, version, hard_version, sb_no, user_id, end_time, zbq_yue, ybq_yue, status, zbq_status, ybq_status, ysj_status, kzb_status, gprs_status, error_status, network, slotsum, boxnum, ds, left_status, right_status, left_temperature, right_temperature, type, model, control_status, machine_type, unsold, hardware_type, sort, json, latitude, longitude, ip, province, city, district, address, replenish_time, update_time, create_time, rent, mobo_sn, camera_sn, buy_quota, auto_refund, fp_type, order_no, huodao_show, ser_end_time, rent_ser, alisettled, ali_ter_id, mt_id, svlc, svlc_time, erp_order_no, zb_time, sh_remark, gh_type, gh_sh, gh_xk, gh_time from base_machine
+    </sql>
+
+    <select id="selectBaseMachineList" parameterType="BaseMachine" resultMap="BaseMachineResult">
+        <include refid="selectBaseMachineVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="iccid != null  and iccid != ''"> and iccid = #{iccid}</if>
+            <if test="version != null  and version != ''"> and version = #{version}</if>
+            <if test="hardVersion != null  and hardVersion != ''"> and hard_version = #{hardVersion}</if>
+            <if test="sbNo != null  and sbNo != ''"> and sb_no = #{sbNo}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="zbqYue != null "> and zbq_yue = #{zbqYue}</if>
+            <if test="ybqYue != null "> and ybq_yue = #{ybqYue}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="zbqStatus != null "> and zbq_status = #{zbqStatus}</if>
+            <if test="ybqStatus != null "> and ybq_status = #{ybqStatus}</if>
+            <if test="ysjStatus != null "> and ysj_status = #{ysjStatus}</if>
+            <if test="kzbStatus != null "> and kzb_status = #{kzbStatus}</if>
+            <if test="gprsStatus != null "> and gprs_status = #{gprsStatus}</if>
+            <if test="errorStatus != null "> and error_status = #{errorStatus}</if>
+            <if test="network != null "> and network = #{network}</if>
+            <if test="slotsum != null "> and slotsum = #{slotsum}</if>
+            <if test="boxnum != null "> and boxnum = #{boxnum}</if>
+            <if test="ds != null "> and ds = #{ds}</if>
+            <if test="leftStatus != null "> and left_status = #{leftStatus}</if>
+            <if test="rightStatus != null "> and right_status = #{rightStatus}</if>
+            <if test="leftTemperature != null  and leftTemperature != ''"> and left_temperature = #{leftTemperature}</if>
+            <if test="rightTemperature != null  and rightTemperature != ''"> and right_temperature = #{rightTemperature}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="controlStatus != null "> and control_status = #{controlStatus}</if>
+            <if test="machineType != null "> and machine_type = #{machineType}</if>
+            <if test="unsold != null "> and unsold = #{unsold}</if>
+            <if test="hardwareType != null "> and hardware_type = #{hardwareType}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="json != null  and json != ''"> and json = #{json}</if>
+            <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
+            <if test="longitude != null  and longitude != ''"> and longitude = #{longitude}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="district != null  and district != ''"> and district = #{district}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="replenishTime != null "> and replenish_time = #{replenishTime}</if>
+            <if test="rent != null "> and rent = #{rent}</if>
+            <if test="moboSn != null  and moboSn != ''"> and mobo_sn = #{moboSn}</if>
+            <if test="cameraSn != null  and cameraSn != ''"> and camera_sn = #{cameraSn}</if>
+            <if test="buyQuota != null "> and buy_quota = #{buyQuota}</if>
+            <if test="autoRefund != null "> and auto_refund = #{autoRefund}</if>
+            <if test="fpType != null "> and fp_type = #{fpType}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="huodaoShow != null  and huodaoShow != ''"> and huodao_show = #{huodaoShow}</if>
+            <if test="serEndTime != null "> and ser_end_time = #{serEndTime}</if>
+            <if test="rentSer != null "> and rent_ser = #{rentSer}</if>
+            <if test="alisettled != null "> and alisettled = #{alisettled}</if>
+            <if test="aliTerId != null  and aliTerId != ''"> and ali_ter_id = #{aliTerId}</if>
+            <if test="mtId != null  and mtId != ''"> and mt_id = #{mtId}</if>
+            <if test="svlc != null "> and svlc = #{svlc}</if>
+            <if test="svlcTime != null "> and svlc_time = #{svlcTime}</if>
+            <if test="erpOrderNo != null  and erpOrderNo != ''"> and erp_order_no = #{erpOrderNo}</if>
+            <if test="zbTime != null "> and zb_time = #{zbTime}</if>
+            <if test="shRemark != null  and shRemark != ''"> and sh_remark = #{shRemark}</if>
+            <if test="ghType != null "> and gh_type = #{ghType}</if>
+            <if test="ghSh != null  and ghSh != ''"> and gh_sh = #{ghSh}</if>
+            <if test="ghXk != null  and ghXk != ''"> and gh_xk = #{ghXk}</if>
+            <if test="ghTime != null "> and gh_time = #{ghTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineById" parameterType="Long" resultMap="BaseMachineResult">
+        <include refid="selectBaseMachineVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachine" parameterType="BaseMachine" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="sbName != null">sb_name,</if>
+            <if test="iccid != null">iccid,</if>
+            <if test="version != null">version,</if>
+            <if test="hardVersion != null">hard_version,</if>
+            <if test="sbNo != null">sb_no,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="zbqYue != null">zbq_yue,</if>
+            <if test="ybqYue != null">ybq_yue,</if>
+            <if test="status != null">status,</if>
+            <if test="zbqStatus != null">zbq_status,</if>
+            <if test="ybqStatus != null">ybq_status,</if>
+            <if test="ysjStatus != null">ysj_status,</if>
+            <if test="kzbStatus != null">kzb_status,</if>
+            <if test="gprsStatus != null">gprs_status,</if>
+            <if test="errorStatus != null">error_status,</if>
+            <if test="network != null">network,</if>
+            <if test="slotsum != null">slotsum,</if>
+            <if test="boxnum != null">boxnum,</if>
+            <if test="ds != null">ds,</if>
+            <if test="leftStatus != null">left_status,</if>
+            <if test="rightStatus != null">right_status,</if>
+            <if test="leftTemperature != null">left_temperature,</if>
+            <if test="rightTemperature != null">right_temperature,</if>
+            <if test="type != null">type,</if>
+            <if test="model != null">model,</if>
+            <if test="controlStatus != null">control_status,</if>
+            <if test="machineType != null">machine_type,</if>
+            <if test="unsold != null">unsold,</if>
+            <if test="hardwareType != null">hardware_type,</if>
+            <if test="sort != null">sort,</if>
+            <if test="json != null">json,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="ip != null">ip,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="district != null">district,</if>
+            <if test="address != null">address,</if>
+            <if test="replenishTime != null">replenish_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="rent != null">rent,</if>
+            <if test="moboSn != null">mobo_sn,</if>
+            <if test="cameraSn != null">camera_sn,</if>
+            <if test="buyQuota != null">buy_quota,</if>
+            <if test="autoRefund != null">auto_refund,</if>
+            <if test="fpType != null">fp_type,</if>
+            <if test="orderNo != null">order_no,</if>
+            <if test="huodaoShow != null">huodao_show,</if>
+            <if test="serEndTime != null">ser_end_time,</if>
+            <if test="rentSer != null">rent_ser,</if>
+            <if test="alisettled != null">alisettled,</if>
+            <if test="aliTerId != null">ali_ter_id,</if>
+            <if test="mtId != null">mt_id,</if>
+            <if test="svlc != null">svlc,</if>
+            <if test="svlcTime != null">svlc_time,</if>
+            <if test="erpOrderNo != null">erp_order_no,</if>
+            <if test="zbTime != null">zb_time,</if>
+            <if test="shRemark != null">sh_remark,</if>
+            <if test="ghType != null">gh_type,</if>
+            <if test="ghSh != null">gh_sh,</if>
+            <if test="ghXk != null">gh_xk,</if>
+            <if test="ghTime != null">gh_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="sbName != null">#{sbName},</if>
+            <if test="iccid != null">#{iccid},</if>
+            <if test="version != null">#{version},</if>
+            <if test="hardVersion != null">#{hardVersion},</if>
+            <if test="sbNo != null">#{sbNo},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="zbqYue != null">#{zbqYue},</if>
+            <if test="ybqYue != null">#{ybqYue},</if>
+            <if test="status != null">#{status},</if>
+            <if test="zbqStatus != null">#{zbqStatus},</if>
+            <if test="ybqStatus != null">#{ybqStatus},</if>
+            <if test="ysjStatus != null">#{ysjStatus},</if>
+            <if test="kzbStatus != null">#{kzbStatus},</if>
+            <if test="gprsStatus != null">#{gprsStatus},</if>
+            <if test="errorStatus != null">#{errorStatus},</if>
+            <if test="network != null">#{network},</if>
+            <if test="slotsum != null">#{slotsum},</if>
+            <if test="boxnum != null">#{boxnum},</if>
+            <if test="ds != null">#{ds},</if>
+            <if test="leftStatus != null">#{leftStatus},</if>
+            <if test="rightStatus != null">#{rightStatus},</if>
+            <if test="leftTemperature != null">#{leftTemperature},</if>
+            <if test="rightTemperature != null">#{rightTemperature},</if>
+            <if test="type != null">#{type},</if>
+            <if test="model != null">#{model},</if>
+            <if test="controlStatus != null">#{controlStatus},</if>
+            <if test="machineType != null">#{machineType},</if>
+            <if test="unsold != null">#{unsold},</if>
+            <if test="hardwareType != null">#{hardwareType},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="json != null">#{json},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="district != null">#{district},</if>
+            <if test="address != null">#{address},</if>
+            <if test="replenishTime != null">#{replenishTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="rent != null">#{rent},</if>
+            <if test="moboSn != null">#{moboSn},</if>
+            <if test="cameraSn != null">#{cameraSn},</if>
+            <if test="buyQuota != null">#{buyQuota},</if>
+            <if test="autoRefund != null">#{autoRefund},</if>
+            <if test="fpType != null">#{fpType},</if>
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="huodaoShow != null">#{huodaoShow},</if>
+            <if test="serEndTime != null">#{serEndTime},</if>
+            <if test="rentSer != null">#{rentSer},</if>
+            <if test="alisettled != null">#{alisettled},</if>
+            <if test="aliTerId != null">#{aliTerId},</if>
+            <if test="mtId != null">#{mtId},</if>
+            <if test="svlc != null">#{svlc},</if>
+            <if test="svlcTime != null">#{svlcTime},</if>
+            <if test="erpOrderNo != null">#{erpOrderNo},</if>
+            <if test="zbTime != null">#{zbTime},</if>
+            <if test="shRemark != null">#{shRemark},</if>
+            <if test="ghType != null">#{ghType},</if>
+            <if test="ghSh != null">#{ghSh},</if>
+            <if test="ghXk != null">#{ghXk},</if>
+            <if test="ghTime != null">#{ghTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachine" parameterType="BaseMachine">
+        update base_machine
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="sbName != null">sb_name = #{sbName},</if>
+            <if test="iccid != null">iccid = #{iccid},</if>
+            <if test="version != null">version = #{version},</if>
+            <if test="hardVersion != null">hard_version = #{hardVersion},</if>
+            <if test="sbNo != null">sb_no = #{sbNo},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="zbqYue != null">zbq_yue = #{zbqYue},</if>
+            <if test="ybqYue != null">ybq_yue = #{ybqYue},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="zbqStatus != null">zbq_status = #{zbqStatus},</if>
+            <if test="ybqStatus != null">ybq_status = #{ybqStatus},</if>
+            <if test="ysjStatus != null">ysj_status = #{ysjStatus},</if>
+            <if test="kzbStatus != null">kzb_status = #{kzbStatus},</if>
+            <if test="gprsStatus != null">gprs_status = #{gprsStatus},</if>
+            <if test="errorStatus != null">error_status = #{errorStatus},</if>
+            <if test="network != null">network = #{network},</if>
+            <if test="slotsum != null">slotsum = #{slotsum},</if>
+            <if test="boxnum != null">boxnum = #{boxnum},</if>
+            <if test="ds != null">ds = #{ds},</if>
+            <if test="leftStatus != null">left_status = #{leftStatus},</if>
+            <if test="rightStatus != null">right_status = #{rightStatus},</if>
+            <if test="leftTemperature != null">left_temperature = #{leftTemperature},</if>
+            <if test="rightTemperature != null">right_temperature = #{rightTemperature},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="controlStatus != null">control_status = #{controlStatus},</if>
+            <if test="machineType != null">machine_type = #{machineType},</if>
+            <if test="unsold != null">unsold = #{unsold},</if>
+            <if test="hardwareType != null">hardware_type = #{hardwareType},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="json != null">json = #{json},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="district != null">district = #{district},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="replenishTime != null">replenish_time = #{replenishTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="rent != null">rent = #{rent},</if>
+            <if test="moboSn != null">mobo_sn = #{moboSn},</if>
+            <if test="cameraSn != null">camera_sn = #{cameraSn},</if>
+            <if test="buyQuota != null">buy_quota = #{buyQuota},</if>
+            <if test="autoRefund != null">auto_refund = #{autoRefund},</if>
+            <if test="fpType != null">fp_type = #{fpType},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="huodaoShow != null">huodao_show = #{huodaoShow},</if>
+            <if test="serEndTime != null">ser_end_time = #{serEndTime},</if>
+            <if test="rentSer != null">rent_ser = #{rentSer},</if>
+            <if test="alisettled != null">alisettled = #{alisettled},</if>
+            <if test="aliTerId != null">ali_ter_id = #{aliTerId},</if>
+            <if test="mtId != null">mt_id = #{mtId},</if>
+            <if test="svlc != null">svlc = #{svlc},</if>
+            <if test="svlcTime != null">svlc_time = #{svlcTime},</if>
+            <if test="erpOrderNo != null">erp_order_no = #{erpOrderNo},</if>
+            <if test="zbTime != null">zb_time = #{zbTime},</if>
+            <if test="shRemark != null">sh_remark = #{shRemark},</if>
+            <if test="ghType != null">gh_type = #{ghType},</if>
+            <if test="ghSh != null">gh_sh = #{ghSh},</if>
+            <if test="ghXk != null">gh_xk = #{ghXk},</if>
+            <if test="ghTime != null">gh_time = #{ghTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineById" parameterType="Long">
+        delete from base_machine where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineByIds" parameterType="String">
+        delete from base_machine where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

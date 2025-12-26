@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BaseMachineUnitStatusMapper">
+    
+    <resultMap type="BaseMachineUnitStatus" id="BaseMachineUnitStatusResult">
+        <result property="id"    column="id"    />
+        <result property="sbId"    column="sb_id"    />
+        <result property="zbqStatus"    column="zbq_status"    />
+        <result property="ybqStatus"    column="ybq_status"    />
+        <result property="zbqNum"    column="zbq_num"    />
+        <result property="ybqNum"    column="ybq_num"    />
+        <result property="ter1Mode"    column="ter1_mode"    />
+        <result property="ter1Ter"    column="ter1_ter"    />
+        <result property="ter2Mode"    column="ter2_mode"    />
+        <result property="ter2Ter"    column="ter2_ter"    />
+        <result property="ter3Mode"    column="ter3_mode"    />
+        <result property="ter3Ter"    column="ter3_ter"    />
+        <result property="ter4Mode"    column="ter4_mode"    />
+        <result property="ter4Ter"    column="ter4_ter"    />
+        <result property="kzb1Stauts"    column="kzb1_stauts"    />
+        <result property="kzb2Stauts"    column="kzb2_stauts"    />
+        <result property="kzb3Stauts"    column="kzb3_stauts"    />
+        <result property="kzb4Stauts"    column="kzb4_stauts"    />
+        <result property="xjbStatus"    column="xjb_status"    />
+        <result property="sjb1Status"    column="sjb1_status"    />
+        <result property="sjb2Status"    column="sjb2_status"    />
+        <result property="sjb3Status"    column="sjb3_status"    />
+        <result property="sjb4Status"    column="sjb4_status"    />
+        <result property="downStatus"    column="down_status"    />
+        <result property="stockStatus"    column="stock_status"    />
+        <result property="mergeStatus"    column="merge_status"    />
+        <result property="rebateStatus"    column="rebate_status"    />
+        <result property="dhStatus"    column="dh_status"    />
+        <result property="kzb1Version"    column="kzb1_version"    />
+        <result property="kzb2Version"    column="kzb2_version"    />
+        <result property="kzb3Version"    column="kzb3_version"    />
+        <result property="kzb4Version"    column="kzb4_version"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="ter1Set"    column="ter1_set"    />
+        <result property="comStatus"    column="com_status"    />
+        <result property="fanStatus"    column="fan_status"    />
+        <result property="dpSet"    column="dp_set"    />
+        <result property="ddSet"    column="dd_set"    />
+        <result property="enable"    column="enable"    />
+    </resultMap>
+
+    <sql id="selectBaseMachineUnitStatusVo">
+        select id, sb_id, zbq_status, ybq_status, zbq_num, ybq_num, ter1_mode, ter1_ter, ter2_mode, ter2_ter, ter3_mode, ter3_ter, ter4_mode, ter4_ter, kzb1_stauts, kzb2_stauts, kzb3_stauts, kzb4_stauts, xjb_status, sjb1_status, sjb2_status, sjb3_status, sjb4_status, down_status, stock_status, merge_status, rebate_status, dh_status, kzb1_version, kzb2_version, kzb3_version, kzb4_version, update_time, create_time, ter1_set, com_status, fan_status, dp_set, dd_set, enable from base_machine_unit_status
+    </sql>
+
+    <select id="selectBaseMachineUnitStatusList" parameterType="BaseMachineUnitStatus" resultMap="BaseMachineUnitStatusResult">
+        <include refid="selectBaseMachineUnitStatusVo"/>
+        <where>  
+            <if test="sbId != null  and sbId != ''"> and sb_id = #{sbId}</if>
+            <if test="zbqStatus != null "> and zbq_status = #{zbqStatus}</if>
+            <if test="ybqStatus != null "> and ybq_status = #{ybqStatus}</if>
+            <if test="zbqNum != null "> and zbq_num = #{zbqNum}</if>
+            <if test="ybqNum != null "> and ybq_num = #{ybqNum}</if>
+            <if test="ter1Mode != null "> and ter1_mode = #{ter1Mode}</if>
+            <if test="ter1Ter != null "> and ter1_ter = #{ter1Ter}</if>
+            <if test="ter2Mode != null "> and ter2_mode = #{ter2Mode}</if>
+            <if test="ter2Ter != null "> and ter2_ter = #{ter2Ter}</if>
+            <if test="ter3Mode != null "> and ter3_mode = #{ter3Mode}</if>
+            <if test="ter3Ter != null "> and ter3_ter = #{ter3Ter}</if>
+            <if test="ter4Mode != null "> and ter4_mode = #{ter4Mode}</if>
+            <if test="ter4Ter != null "> and ter4_ter = #{ter4Ter}</if>
+            <if test="kzb1Stauts != null "> and kzb1_stauts = #{kzb1Stauts}</if>
+            <if test="kzb2Stauts != null "> and kzb2_stauts = #{kzb2Stauts}</if>
+            <if test="kzb3Stauts != null "> and kzb3_stauts = #{kzb3Stauts}</if>
+            <if test="kzb4Stauts != null "> and kzb4_stauts = #{kzb4Stauts}</if>
+            <if test="xjbStatus != null "> and xjb_status = #{xjbStatus}</if>
+            <if test="sjb1Status != null "> and sjb1_status = #{sjb1Status}</if>
+            <if test="sjb2Status != null "> and sjb2_status = #{sjb2Status}</if>
+            <if test="sjb3Status != null "> and sjb3_status = #{sjb3Status}</if>
+            <if test="sjb4Status != null "> and sjb4_status = #{sjb4Status}</if>
+            <if test="downStatus != null "> and down_status = #{downStatus}</if>
+            <if test="stockStatus != null "> and stock_status = #{stockStatus}</if>
+            <if test="mergeStatus != null "> and merge_status = #{mergeStatus}</if>
+            <if test="rebateStatus != null "> and rebate_status = #{rebateStatus}</if>
+            <if test="dhStatus != null "> and dh_status = #{dhStatus}</if>
+            <if test="kzb1Version != null  and kzb1Version != ''"> and kzb1_version = #{kzb1Version}</if>
+            <if test="kzb2Version != null  and kzb2Version != ''"> and kzb2_version = #{kzb2Version}</if>
+            <if test="kzb3Version != null  and kzb3Version != ''"> and kzb3_version = #{kzb3Version}</if>
+            <if test="kzb4Version != null  and kzb4Version != ''"> and kzb4_version = #{kzb4Version}</if>
+            <if test="ter1Set != null "> and ter1_set = #{ter1Set}</if>
+            <if test="comStatus != null "> and com_status = #{comStatus}</if>
+            <if test="fanStatus != null "> and fan_status = #{fanStatus}</if>
+            <if test="dpSet != null "> and dp_set = #{dpSet}</if>
+            <if test="ddSet != null "> and dd_set = #{ddSet}</if>
+            <if test="enable != null "> and enable = #{enable}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMachineUnitStatusById" parameterType="Integer" resultMap="BaseMachineUnitStatusResult">
+        <include refid="selectBaseMachineUnitStatusVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMachineUnitStatus" parameterType="BaseMachineUnitStatus" useGeneratedKeys="true" keyProperty="id">
+        insert into base_machine_unit_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">sb_id,</if>
+            <if test="zbqStatus != null">zbq_status,</if>
+            <if test="ybqStatus != null">ybq_status,</if>
+            <if test="zbqNum != null">zbq_num,</if>
+            <if test="ybqNum != null">ybq_num,</if>
+            <if test="ter1Mode != null">ter1_mode,</if>
+            <if test="ter1Ter != null">ter1_ter,</if>
+            <if test="ter2Mode != null">ter2_mode,</if>
+            <if test="ter2Ter != null">ter2_ter,</if>
+            <if test="ter3Mode != null">ter3_mode,</if>
+            <if test="ter3Ter != null">ter3_ter,</if>
+            <if test="ter4Mode != null">ter4_mode,</if>
+            <if test="ter4Ter != null">ter4_ter,</if>
+            <if test="kzb1Stauts != null">kzb1_stauts,</if>
+            <if test="kzb2Stauts != null">kzb2_stauts,</if>
+            <if test="kzb3Stauts != null">kzb3_stauts,</if>
+            <if test="kzb4Stauts != null">kzb4_stauts,</if>
+            <if test="xjbStatus != null">xjb_status,</if>
+            <if test="sjb1Status != null">sjb1_status,</if>
+            <if test="sjb2Status != null">sjb2_status,</if>
+            <if test="sjb3Status != null">sjb3_status,</if>
+            <if test="sjb4Status != null">sjb4_status,</if>
+            <if test="downStatus != null">down_status,</if>
+            <if test="stockStatus != null">stock_status,</if>
+            <if test="mergeStatus != null">merge_status,</if>
+            <if test="rebateStatus != null">rebate_status,</if>
+            <if test="dhStatus != null">dh_status,</if>
+            <if test="kzb1Version != null">kzb1_version,</if>
+            <if test="kzb2Version != null">kzb2_version,</if>
+            <if test="kzb3Version != null">kzb3_version,</if>
+            <if test="kzb4Version != null">kzb4_version,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="ter1Set != null">ter1_set,</if>
+            <if test="comStatus != null">com_status,</if>
+            <if test="fanStatus != null">fan_status,</if>
+            <if test="dpSet != null">dp_set,</if>
+            <if test="ddSet != null">dd_set,</if>
+            <if test="enable != null">enable,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sbId != null">#{sbId},</if>
+            <if test="zbqStatus != null">#{zbqStatus},</if>
+            <if test="ybqStatus != null">#{ybqStatus},</if>
+            <if test="zbqNum != null">#{zbqNum},</if>
+            <if test="ybqNum != null">#{ybqNum},</if>
+            <if test="ter1Mode != null">#{ter1Mode},</if>
+            <if test="ter1Ter != null">#{ter1Ter},</if>
+            <if test="ter2Mode != null">#{ter2Mode},</if>
+            <if test="ter2Ter != null">#{ter2Ter},</if>
+            <if test="ter3Mode != null">#{ter3Mode},</if>
+            <if test="ter3Ter != null">#{ter3Ter},</if>
+            <if test="ter4Mode != null">#{ter4Mode},</if>
+            <if test="ter4Ter != null">#{ter4Ter},</if>
+            <if test="kzb1Stauts != null">#{kzb1Stauts},</if>
+            <if test="kzb2Stauts != null">#{kzb2Stauts},</if>
+            <if test="kzb3Stauts != null">#{kzb3Stauts},</if>
+            <if test="kzb4Stauts != null">#{kzb4Stauts},</if>
+            <if test="xjbStatus != null">#{xjbStatus},</if>
+            <if test="sjb1Status != null">#{sjb1Status},</if>
+            <if test="sjb2Status != null">#{sjb2Status},</if>
+            <if test="sjb3Status != null">#{sjb3Status},</if>
+            <if test="sjb4Status != null">#{sjb4Status},</if>
+            <if test="downStatus != null">#{downStatus},</if>
+            <if test="stockStatus != null">#{stockStatus},</if>
+            <if test="mergeStatus != null">#{mergeStatus},</if>
+            <if test="rebateStatus != null">#{rebateStatus},</if>
+            <if test="dhStatus != null">#{dhStatus},</if>
+            <if test="kzb1Version != null">#{kzb1Version},</if>
+            <if test="kzb2Version != null">#{kzb2Version},</if>
+            <if test="kzb3Version != null">#{kzb3Version},</if>
+            <if test="kzb4Version != null">#{kzb4Version},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="ter1Set != null">#{ter1Set},</if>
+            <if test="comStatus != null">#{comStatus},</if>
+            <if test="fanStatus != null">#{fanStatus},</if>
+            <if test="dpSet != null">#{dpSet},</if>
+            <if test="ddSet != null">#{ddSet},</if>
+            <if test="enable != null">#{enable},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMachineUnitStatus" parameterType="BaseMachineUnitStatus">
+        update base_machine_unit_status
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sbId != null">sb_id = #{sbId},</if>
+            <if test="zbqStatus != null">zbq_status = #{zbqStatus},</if>
+            <if test="ybqStatus != null">ybq_status = #{ybqStatus},</if>
+            <if test="zbqNum != null">zbq_num = #{zbqNum},</if>
+            <if test="ybqNum != null">ybq_num = #{ybqNum},</if>
+            <if test="ter1Mode != null">ter1_mode = #{ter1Mode},</if>
+            <if test="ter1Ter != null">ter1_ter = #{ter1Ter},</if>
+            <if test="ter2Mode != null">ter2_mode = #{ter2Mode},</if>
+            <if test="ter2Ter != null">ter2_ter = #{ter2Ter},</if>
+            <if test="ter3Mode != null">ter3_mode = #{ter3Mode},</if>
+            <if test="ter3Ter != null">ter3_ter = #{ter3Ter},</if>
+            <if test="ter4Mode != null">ter4_mode = #{ter4Mode},</if>
+            <if test="ter4Ter != null">ter4_ter = #{ter4Ter},</if>
+            <if test="kzb1Stauts != null">kzb1_stauts = #{kzb1Stauts},</if>
+            <if test="kzb2Stauts != null">kzb2_stauts = #{kzb2Stauts},</if>
+            <if test="kzb3Stauts != null">kzb3_stauts = #{kzb3Stauts},</if>
+            <if test="kzb4Stauts != null">kzb4_stauts = #{kzb4Stauts},</if>
+            <if test="xjbStatus != null">xjb_status = #{xjbStatus},</if>
+            <if test="sjb1Status != null">sjb1_status = #{sjb1Status},</if>
+            <if test="sjb2Status != null">sjb2_status = #{sjb2Status},</if>
+            <if test="sjb3Status != null">sjb3_status = #{sjb3Status},</if>
+            <if test="sjb4Status != null">sjb4_status = #{sjb4Status},</if>
+            <if test="downStatus != null">down_status = #{downStatus},</if>
+            <if test="stockStatus != null">stock_status = #{stockStatus},</if>
+            <if test="mergeStatus != null">merge_status = #{mergeStatus},</if>
+            <if test="rebateStatus != null">rebate_status = #{rebateStatus},</if>
+            <if test="dhStatus != null">dh_status = #{dhStatus},</if>
+            <if test="kzb1Version != null">kzb1_version = #{kzb1Version},</if>
+            <if test="kzb2Version != null">kzb2_version = #{kzb2Version},</if>
+            <if test="kzb3Version != null">kzb3_version = #{kzb3Version},</if>
+            <if test="kzb4Version != null">kzb4_version = #{kzb4Version},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="ter1Set != null">ter1_set = #{ter1Set},</if>
+            <if test="comStatus != null">com_status = #{comStatus},</if>
+            <if test="fanStatus != null">fan_status = #{fanStatus},</if>
+            <if test="dpSet != null">dp_set = #{dpSet},</if>
+            <if test="ddSet != null">dd_set = #{ddSet},</if>
+            <if test="enable != null">enable = #{enable},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMachineUnitStatusById" parameterType="Integer">
+        delete from base_machine_unit_status where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMachineUnitStatusByIds" parameterType="String">
+        delete from base_machine_unit_status where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
