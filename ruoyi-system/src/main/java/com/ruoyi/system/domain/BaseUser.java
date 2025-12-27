@@ -34,7 +34,7 @@ public class BaseUser extends BaseEntity
     private String password;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "${邮箱}", readConverterExp = "$column.readConverterExp()")
     private String email;
 
     /** $column.columnComment */
@@ -238,7 +238,7 @@ public class BaseUser extends BaseEntity
     private BigDecimal memberQuota;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "${联系电话}", readConverterExp = "$column.readConverterExp()")
     private String contactPhone;
 
     /** $column.columnComment */
@@ -294,11 +294,11 @@ public class BaseUser extends BaseEntity
     private Integer pscCount;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "${国家}", readConverterExp = "$column.readConverterExp()")
     private String country;
 
     /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "${时区}", readConverterExp = "$column.readConverterExp()")
     private Integer timeZone;
 
     public void setId(Long id) 

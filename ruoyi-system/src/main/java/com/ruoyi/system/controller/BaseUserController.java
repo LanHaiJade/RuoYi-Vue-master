@@ -70,22 +70,22 @@ public class BaseUserController extends BaseController
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增运营商用户
      */
     @PreAuthorize("@ss.hasPermi('system:user:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
-    @PostMapping
+    @Log(title = "【新增运营商】", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody BaseUser baseUser)
     {
-        return toAjax(baseUserService.insertBaseUser(baseUser));
+        return baseUserService.insertBaseUser(baseUser);
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改【更新用户信息】
      */
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @Log(title = "【更新用户信息】", businessType = BusinessType.UPDATE)
+    @PutMapping("/edit")
     public AjaxResult edit(@RequestBody BaseUser baseUser)
     {
         return toAjax(baseUserService.updateBaseUser(baseUser));

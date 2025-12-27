@@ -1,6 +1,8 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.BaseUser;
 
 /**
@@ -40,7 +42,7 @@ public interface IBaseUserService
      * @param baseUser 【请填写功能名称】
      * @return 结果
      */
-    public int insertBaseUser(BaseUser baseUser);
+    public AjaxResult insertBaseUser(BaseUser baseUser);
 
     /**
      * 修改【请填写功能名称】

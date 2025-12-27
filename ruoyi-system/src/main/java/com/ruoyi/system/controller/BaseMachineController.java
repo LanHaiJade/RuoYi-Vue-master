@@ -35,7 +35,7 @@ public class BaseMachineController extends BaseController
     private IBaseMachineService baseMachineService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询【设备列表】列表
      */
     @PreAuthorize("@ss.hasPermi('system:machine:list')")
     @GetMapping("/list")
