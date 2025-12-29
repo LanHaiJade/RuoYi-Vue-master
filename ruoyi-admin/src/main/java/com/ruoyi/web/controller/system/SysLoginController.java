@@ -81,6 +81,16 @@ public class SysLoginController
         LoginUser loginUser = SecurityUtils.getLoginUser();
         SysUser user = loginUser.getUser();
         BaseUser baseUser = baseUserService.selectBaseUserByPhone(loginUser.getUsername());
+        if(baseUser == null && "admin".equals(loginUser.getUsername())){
+            baseUser = new BaseUser();
+            baseUser.setUserName(user.getNickName());
+            baseUser.setEmail(user.getEmail());
+            baseUser.setCreateTime(user.getCreateTime());
+            baseUser.setCountry("中国");
+            baseUser.setPhone(user.getPhonenumber());
+            baseUser.setContactPhone(user.getPhonenumber());
+            baseUser.setId(loginUser.getUserId());
+        }
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);
         // 权限集合
