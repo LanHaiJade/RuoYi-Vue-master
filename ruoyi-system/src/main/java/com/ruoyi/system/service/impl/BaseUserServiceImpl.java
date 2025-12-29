@@ -89,7 +89,7 @@ public class BaseUserServiceImpl implements IBaseUserService
         baseUser.setWxSubmch((long) Status.Invalid.getStatus());
         baseUser.setAlipaySubmch((long) Status.Invalid.getStatus());
         baseUser.setBalance(BigDecimal.valueOf(0));
-        baseUser.setIntegral(Long.valueOf(0));
+        baseUser.setIntegral(0L);
         baseUser.setStatus((long) Status.Normal.getStatus());
         baseUser.setSort((long) Status.Normal.getStatus());
         int rows = baseUserMapper.insertBaseUser(baseUser);
