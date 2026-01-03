@@ -2,6 +2,7 @@ package com.ruoyi.system.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,10 +35,11 @@ public class BaseUserController extends BaseController
     @Autowired
     private IBaseUserService baseUserService;
 
+
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @PreAuthorize("@ss.hasPermi('system:smuser:list')")
     @GetMapping("/list")
     public TableDataInfo list(BaseUser baseUser)
     {
@@ -49,7 +51,7 @@ public class BaseUserController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:user:export')")
+    @PreAuthorize("@ss.hasPermi('system:smuser:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BaseUser baseUser)
@@ -62,7 +64,7 @@ public class BaseUserController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:user:query')")
+    @PreAuthorize("@ss.hasPermi('system:smuser:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -70,12 +72,10 @@ public class BaseUserController extends BaseController
     }
 
     /**
-     * 新增运营商用户
+     * 注册新增运营商用户
      */
-    @PreAuthorize("@ss.hasPermi('system:user:add')")
-    @Log(title = "【新增运营商】", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    public AjaxResult add(@RequestBody BaseUser baseUser)
+    @PostMapping("/register")
+    public AjaxResult add(@RequestBody BaseUser baseUser, String code,String uuid)
     {
         return baseUserService.insertBaseUser(baseUser);
     }
@@ -83,7 +83,7 @@ public class BaseUserController extends BaseController
     /**
      * 修改【更新用户信息】
      */
-    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @PreAuthorize("@ss.hasPermi('system:smuser:edit')")
     @Log(title = "【更新用户信息】", businessType = BusinessType.UPDATE)
     @PutMapping("/edit")
     public AjaxResult edit(@RequestBody BaseUser baseUser)
@@ -94,7 +94,7 @@ public class BaseUserController extends BaseController
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:user:remove')")
+    @PreAuthorize("@ss.hasPermi('system:smuser:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

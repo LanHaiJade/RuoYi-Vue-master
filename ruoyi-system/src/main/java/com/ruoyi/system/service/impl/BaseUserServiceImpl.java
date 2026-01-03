@@ -75,12 +75,13 @@ public class BaseUserServiceImpl implements IBaseUserService
     @Override
     public AjaxResult insertBaseUser(BaseUser baseUser)
     {
-        if(StringUtil.notNull(baseUser.getPhone())&&StringUtil.notNull(baseUser.getPassword())
-            &&StringUtil.notNull(baseUser.getUserName())){
+        if(!StringUtil.notNull(baseUser.getPhone())&&!StringUtil.notNull(baseUser.getPassword())
+            &&!StringUtil.notNull(baseUser.getUserName())){
             return AjaxResult.error("Missing required parameters!");
         }
         BaseUser user = baseUserMapper.selectBaseUserByPhone(baseUser.getPhone());
         if(user!=null) return AjaxResult.error("Account already exists!");
+        baseUser.setPassword(new Sha256Hash(baseUser.getPassword()).toHex());
         baseUser.setCreateTime(DateUtils.getNowDate());
         baseUser.setDiscount(BigDecimal.valueOf(1));
         baseUser.setRatedis(BigDecimal.valueOf(0));
