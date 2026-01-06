@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseNotice;
+import com.ruoyi.common.domain.BaseNotice;
 
 /**
  * 公告Mapper接口

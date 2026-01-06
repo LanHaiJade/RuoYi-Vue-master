@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseCashinfoMapper;
-import com.ruoyi.system.domain.BaseCashinfo;
+import com.ruoyi.common.domain.BaseCashinfo;
 import com.ruoyi.system.service.IBaseCashinfoService;
 
 /**

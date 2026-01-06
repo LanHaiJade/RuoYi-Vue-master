@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseSocketStatisticsMapper;
-import com.ruoyi.system.domain.BaseSocketStatistics;
+import com.ruoyi.common.domain.BaseSocketStatistics;
 import com.ruoyi.system.service.IBaseSocketStatisticsService;
 
 /**

@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseAreaMapper;
-import com.ruoyi.system.domain.BaseArea;
+import com.ruoyi.common.domain.BaseArea;
 import com.ruoyi.system.service.IBaseAreaService;
 
 /**

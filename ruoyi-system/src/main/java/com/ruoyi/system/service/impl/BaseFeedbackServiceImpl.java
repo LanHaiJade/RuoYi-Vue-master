@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseFeedbackMapper;
-import com.ruoyi.system.domain.BaseFeedback;
+import com.ruoyi.common.domain.BaseFeedback;
 import com.ruoyi.system.service.IBaseFeedbackService;
 
 /**

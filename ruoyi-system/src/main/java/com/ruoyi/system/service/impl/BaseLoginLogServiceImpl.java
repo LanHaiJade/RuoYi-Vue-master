@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseLoginLogMapper;
-import com.ruoyi.system.domain.BaseLoginLog;
+import com.ruoyi.common.domain.BaseLoginLog;
 import com.ruoyi.system.service.IBaseLoginLogService;
 
 /**

@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseGoodsCategoryMapper;
-import com.ruoyi.system.domain.BaseGoodsCategory;
+import com.ruoyi.common.domain.BaseGoodsCategory;
 import com.ruoyi.system.service.IBaseGoodsCategoryService;
 
 /**

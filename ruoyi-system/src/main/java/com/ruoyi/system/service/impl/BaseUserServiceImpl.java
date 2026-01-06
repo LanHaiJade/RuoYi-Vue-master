@@ -8,13 +8,13 @@ import com.ruoyi.common.enums.sm.RoleType;
 import com.ruoyi.common.enums.sm.Status;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.sm.StringUtil;
-import com.ruoyi.system.domain.BaseUserRole;
+import com.ruoyi.common.domain.BaseUserRole;
 import com.ruoyi.system.mapper.BaseUserRoleMapper;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseUserMapper;
-import com.ruoyi.system.domain.BaseUser;
+import com.ruoyi.common.domain.BaseUser;
 import com.ruoyi.system.service.IBaseUserService;
 
 /**

@@ -1,11 +1,23 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.constant.ScheduleConstants;
+import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.enums.sm.MachineType;
+import com.ruoyi.common.enums.sm.OnlineStatus;
+import com.ruoyi.common.enums.sm.Status;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.sm.DateUtil;
+import com.ruoyi.common.utils.sm.SbOnline;
+import com.ruoyi.common.domain.BaseSocketStatistics;
+import com.ruoyi.common.domain.vo.MachineVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineMapper;
-import com.ruoyi.system.domain.BaseMachine;
+import com.ruoyi.common.domain.BaseMachine;
 import com.ruoyi.system.service.IBaseMachineService;
 
 /**
@@ -19,6 +31,8 @@ public class BaseMachineServiceImpl implements IBaseMachineService
 {
     @Autowired
     private BaseMachineMapper baseMachineMapper;
+    @Autowired
+    private RedisCache redisCache;
 
     /**
      * 查询【请填写功能名称】
@@ -42,6 +56,51 @@ public class BaseMachineServiceImpl implements IBaseMachineService
     public List<BaseMachine> selectBaseMachineList(BaseMachine baseMachine)
     {
         return baseMachineMapper.selectBaseMachineList(baseMachine);
+    }
+
+    @Override
+    public List<BaseMachine> selectBaseMachineList(MachineVo machineVo){
+        if(machineVo.getUserId() == null || machineVo.getUserId() < 1) return null;
+        if(machineVo.getStatus() == null) machineVo.setStatus(Status.Normal.getStatus());
+        if(machineVo.getOnLineStatus() == null) machineVo.setOnLineStatus(OnlineStatus.All.getStatus());
+        if(machineVo.getOnLineStatus() == OnlineStatus.Offline.getStatus()
+                || machineVo.getOnLineStatus() == OnlineStatus.Online.getStatus() ) {
+            machineVo.setOnlineTime(DateUtil.onlineTime(new Date()));
+        }
+        return baseMachineMapper.selectMachineVoList(machineVo);
+    }
+    /**
+     * 组织售货机列表数据
+     * @param baseMachineList
+     * @return
+     */
+    @Override
+    public List<MachineVo>  selectMachineVoList(List<BaseMachine> baseMachineList){
+        List<MachineVo>  machineVoList =new ArrayList<MachineVo>();
+        for(BaseMachine baseMachine:baseMachineList){
+            MachineVo machineVo = new MachineVo();
+            machineVo.setId(baseMachine.getId());
+            machineVo.setSbId(baseMachine.getSbId());
+            machineVo.setSbName(baseMachine.getSbName());
+            machineVo.setSbNo(baseMachine.getSbNo());
+            machineVo.setVersion(baseMachine.getVersion());
+            machineVo.setMachineType(baseMachine.getMachineType());
+            machineVo.setMachineTypeName(MachineType.getName(baseMachine.getMachineType()));
+            machineVo.setMachineTypeNameEn(MachineType.getEnglishName(baseMachine.getMachineType()));
+            machineVo.setControlStatus(baseMachine.getControlStatus());
+            machineVo.setControlStatusName(MachineType.getName(baseMachine.getControlStatus()));
+            machineVo.setControlStatusNameEn(MachineType.getEnglishName(baseMachine.getControlStatus()));
+            machineVo.setCreateTime(DateUtil.time(baseMachine.getCreateTime()));
+            machineVo.setEndTime(DateUtil.time(baseMachine.getEndTime()));
+            machineVo.setSerEndTime(DateUtil.time(baseMachine.getSerEndTime()));
+            machineVo.setUpdateTime(DateUtil.time(baseMachine.getUpdateTime()));
+            machineVo.setNetwork(baseMachine.getNetwork());
+            BaseSocketStatistics socketStatistics = redisCache.getSocketStatistics(machineVo.getSbId());
+            boolean isOnLine = SbOnline.getSbIsOnline(socketStatistics);
+            machineVo.setOnLine(isOnLine);
+            machineVoList.add(machineVo);
+        }
+        return machineVoList;
     }
 
     /**

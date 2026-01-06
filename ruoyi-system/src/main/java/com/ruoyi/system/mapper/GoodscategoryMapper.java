@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.Goodscategory;
+import com.ruoyi.common.domain.Goodscategory;
 
 /**
  * 商品分类Mapper接口

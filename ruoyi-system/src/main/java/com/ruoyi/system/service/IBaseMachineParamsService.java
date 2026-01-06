@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachineParams;
+import com.ruoyi.common.domain.BaseMachineParams;
 
 /**
  * 设备参数Service接口

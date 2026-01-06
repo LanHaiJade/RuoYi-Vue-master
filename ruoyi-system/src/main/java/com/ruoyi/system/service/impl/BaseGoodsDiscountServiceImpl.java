@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseGoodsDiscountMapper;
-import com.ruoyi.system.domain.BaseGoodsDiscount;
+import com.ruoyi.common.domain.BaseGoodsDiscount;
 import com.ruoyi.system.service.IBaseGoodsDiscountService;
 
 /**

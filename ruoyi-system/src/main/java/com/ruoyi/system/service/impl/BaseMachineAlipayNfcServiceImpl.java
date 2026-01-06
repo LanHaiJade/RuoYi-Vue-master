@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineAlipayNfcMapper;
-import com.ruoyi.system.domain.BaseMachineAlipayNfc;
+import com.ruoyi.common.domain.BaseMachineAlipayNfc;
 import com.ruoyi.system.service.IBaseMachineAlipayNfcService;
 
 /**

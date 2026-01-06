@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseGoodsBrandMapper;
-import com.ruoyi.system.domain.BaseGoodsBrand;
+import com.ruoyi.common.domain.BaseGoodsBrand;
 import com.ruoyi.system.service.IBaseGoodsBrandService;
 
 /**

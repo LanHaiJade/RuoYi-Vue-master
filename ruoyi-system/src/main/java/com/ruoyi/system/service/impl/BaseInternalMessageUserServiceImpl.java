@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseInternalMessageUserMapper;
-import com.ruoyi.system.domain.BaseInternalMessageUser;
+import com.ruoyi.common.domain.BaseInternalMessageUser;
 import com.ruoyi.system.service.IBaseInternalMessageUserService;
 
 /**

@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BasePaymentLimitMapper;
-import com.ruoyi.system.domain.BasePaymentLimit;
+import com.ruoyi.common.domain.BasePaymentLimit;
 import com.ruoyi.system.service.IBasePaymentLimitService;
 
 /**

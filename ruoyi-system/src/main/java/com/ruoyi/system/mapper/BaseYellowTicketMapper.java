@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseYellowTicket;
+import com.ruoyi.common.domain.BaseYellowTicket;
 
 /**
  * 【请填写功能名称】Mapper接口

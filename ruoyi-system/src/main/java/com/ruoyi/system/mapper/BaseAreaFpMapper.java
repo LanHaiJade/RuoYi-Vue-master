@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseAreaFp;
+import com.ruoyi.common.domain.BaseAreaFp;
 
 /**
  * 省市县Mapper接口

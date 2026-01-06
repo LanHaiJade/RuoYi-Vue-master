@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachineMonitorRecharge;
+import com.ruoyi.common.domain.BaseMachineMonitorRecharge;
 
 /**
  * 监控续费充值记录Service接口

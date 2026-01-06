@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineParamsMapper;
-import com.ruoyi.system.domain.BaseMachineParams;
+import com.ruoyi.common.domain.BaseMachineParams;
 import com.ruoyi.system.service.IBaseMachineParamsService;
 
 /**

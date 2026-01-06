@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import com.google.gson.Gson;
+import com.ruoyi.common.domain.BaseMachine;
+import com.ruoyi.common.domain.BaseSocketStatistics;
+import com.ruoyi.common.utils.sm.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
@@ -265,4 +270,36 @@ public class RedisCache
     {
         return redisTemplate.keys(pattern);
     }
+
+    /**
+     * 获取设备信息
+     * @param key 设备号sbId
+     * @return
+     */
+    public BaseMachine getMachine(String key) {
+        BaseMachine machine = null;
+        if(StringUtil.notNull(key)){
+            String value = (String) redisTemplate.opsForValue().get("0_Machine_"+key);
+            machine = new Gson().fromJson(value, BaseMachine.class);
+        }
+        return machine;
+    }
+
+    /**
+     * 获取设备所在服务器IP信息
+     * @param key 设备号SbId
+     * @return
+     */
+    public BaseSocketStatistics getSocketStatistics(String key) {
+        BaseSocketStatistics socketStatistics = null;
+        if(StringUtil.notNull(key)){
+            String value = (String) redisTemplate.opsForValue().get("0_socketStatistics_"+key);
+            socketStatistics = new Gson().fromJson(value, BaseSocketStatistics.class);
+        }
+        return socketStatistics;
+    }
+
+
+
+
 }

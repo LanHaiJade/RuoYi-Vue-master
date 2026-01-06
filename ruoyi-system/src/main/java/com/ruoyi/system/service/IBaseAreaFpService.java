@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseAreaFp;
+import com.ruoyi.common.domain.BaseAreaFp;
 
 /**
  * 省市县Service接口

@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachineContract;
+import com.ruoyi.common.domain.BaseMachineContract;
 
 /**
  * 合约机信息Mapper接口

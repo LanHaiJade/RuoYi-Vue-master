@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseOrderThirdMapper;
-import com.ruoyi.system.domain.BaseOrderThird;
+import com.ruoyi.common.domain.BaseOrderThird;
 import com.ruoyi.system.service.IBaseOrderThirdService;
 
 /**

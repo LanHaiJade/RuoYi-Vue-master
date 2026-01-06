@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachineMonitorRecharge;
+import com.ruoyi.common.domain.BaseMachineMonitorRecharge;
 
 /**
  * 监控续费充值记录Mapper接口

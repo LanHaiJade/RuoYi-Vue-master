@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseUserRoleMapper;
-import com.ruoyi.system.domain.BaseUserRole;
+import com.ruoyi.common.domain.BaseUserRole;
 import com.ruoyi.system.service.IBaseUserRoleService;
 
 /**

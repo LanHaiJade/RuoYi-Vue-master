@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseTransferAccountMapper;
-import com.ruoyi.system.domain.BaseTransferAccount;
+import com.ruoyi.common.domain.BaseTransferAccount;
 import com.ruoyi.system.service.IBaseTransferAccountService;
 
 /**

@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseKfyhdRegmach;
+import com.ruoyi.common.domain.BaseKfyhdRegmach;
 
 /**
  * 【请填写功能名称】Mapper接口

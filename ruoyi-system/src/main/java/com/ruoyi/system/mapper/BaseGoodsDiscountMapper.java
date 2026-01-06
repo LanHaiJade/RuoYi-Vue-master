@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseGoodsDiscount;
+import com.ruoyi.common.domain.BaseGoodsDiscount;
 
 /**
  * 商品优惠Mapper接口

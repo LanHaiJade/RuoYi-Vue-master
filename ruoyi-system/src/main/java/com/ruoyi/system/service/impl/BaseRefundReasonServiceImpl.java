@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseRefundReasonMapper;
-import com.ruoyi.system.domain.BaseRefundReason;
+import com.ruoyi.common.domain.BaseRefundReason;
 import com.ruoyi.system.service.IBaseRefundReasonService;
 
 /**

@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMemberWeixinRiskMapper;
-import com.ruoyi.system.domain.BaseMemberWeixinRisk;
+import com.ruoyi.common.domain.BaseMemberWeixinRisk;
 import com.ruoyi.system.service.IBaseMemberWeixinRiskService;
 
 /**

@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseInternalMessage;
+import com.ruoyi.common.domain.BaseInternalMessage;
 
 /**
  * 站内信消息Service接口

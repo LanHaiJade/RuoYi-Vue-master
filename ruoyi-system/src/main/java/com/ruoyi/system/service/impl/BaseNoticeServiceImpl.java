@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseNoticeMapper;
-import com.ruoyi.system.domain.BaseNotice;
+import com.ruoyi.common.domain.BaseNotice;
 import com.ruoyi.system.service.IBaseNoticeService;
 
 /**

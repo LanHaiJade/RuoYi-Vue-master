@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseOrderThird;
+import com.ruoyi.common.domain.BaseOrderThird;
 
 /**
  * 【请填写功能名称】Service接口

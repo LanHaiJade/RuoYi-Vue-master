@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseSettingMapper;
-import com.ruoyi.system.domain.BaseSetting;
+import com.ruoyi.common.domain.BaseSetting;
 import com.ruoyi.system.service.IBaseSettingService;
 
 /**

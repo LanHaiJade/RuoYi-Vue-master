@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineRegisterRackMapper;
-import com.ruoyi.system.domain.BaseMachineRegisterRack;
+import com.ruoyi.common.domain.BaseMachineRegisterRack;
 import com.ruoyi.system.service.IBaseMachineRegisterRackService;
 
 /**

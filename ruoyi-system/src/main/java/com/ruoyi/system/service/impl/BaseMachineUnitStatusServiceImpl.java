@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineUnitStatusMapper;
-import com.ruoyi.system.domain.BaseMachineUnitStatus;
+import com.ruoyi.common.domain.BaseMachineUnitStatus;
 import com.ruoyi.system.service.IBaseMachineUnitStatusService;
 
 /**

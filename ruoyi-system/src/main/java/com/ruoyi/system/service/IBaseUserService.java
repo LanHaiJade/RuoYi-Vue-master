@@ -3,7 +3,7 @@ package com.ruoyi.system.service;
 import java.util.List;
 
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.system.domain.BaseUser;
+import com.ruoyi.common.domain.BaseUser;
 
 /**
  * 【请填写功能名称】Service接口

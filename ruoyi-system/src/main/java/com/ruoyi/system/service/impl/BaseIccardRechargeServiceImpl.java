@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseIccardRechargeMapper;
-import com.ruoyi.system.domain.BaseIccardRecharge;
+import com.ruoyi.common.domain.BaseIccardRecharge;
 import com.ruoyi.system.service.IBaseIccardRechargeService;
 
 /**

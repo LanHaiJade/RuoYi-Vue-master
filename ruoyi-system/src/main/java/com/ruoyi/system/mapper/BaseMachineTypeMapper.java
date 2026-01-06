@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachineType;
+import com.ruoyi.common.domain.BaseMachineType;
 
 /**
  * 【请填写功能名称】Mapper接口

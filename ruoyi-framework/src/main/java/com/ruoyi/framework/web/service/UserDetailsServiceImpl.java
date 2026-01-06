@@ -1,8 +1,8 @@
 package com.ruoyi.framework.web.service;
 
 import com.ruoyi.common.enums.sm.RoleType;
-import com.ruoyi.system.domain.BaseUser;
-import com.ruoyi.system.domain.BaseUserRole;
+import com.ruoyi.common.domain.BaseUser;
+import com.ruoyi.common.domain.BaseUserRole;
 import com.ruoyi.system.service.IBaseUserRoleService;
 import com.ruoyi.system.service.IBaseUserService;
 import org.slf4j.Logger;

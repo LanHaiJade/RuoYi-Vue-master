@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import com.ruoyi.system.domain.BaseUser;
+import com.ruoyi.common.domain.BaseUser;
 import com.ruoyi.system.service.IBaseUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

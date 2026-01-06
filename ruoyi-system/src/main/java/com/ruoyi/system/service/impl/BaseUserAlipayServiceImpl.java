@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseUserAlipayMapper;
-import com.ruoyi.system.domain.BaseUserAlipay;
+import com.ruoyi.common.domain.BaseUserAlipay;
 import com.ruoyi.system.service.IBaseUserAlipayService;
 
 /**

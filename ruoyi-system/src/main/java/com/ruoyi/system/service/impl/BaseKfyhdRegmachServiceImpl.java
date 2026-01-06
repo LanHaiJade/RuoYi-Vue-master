@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseKfyhdRegmachMapper;
-import com.ruoyi.system.domain.BaseKfyhdRegmach;
+import com.ruoyi.common.domain.BaseKfyhdRegmach;
 import com.ruoyi.system.service.IBaseKfyhdRegmachService;
 
 /**

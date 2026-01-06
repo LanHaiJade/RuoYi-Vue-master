@@ -1,7 +1,8 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachine;
+import com.ruoyi.common.domain.BaseMachine;
+import com.ruoyi.common.domain.vo.MachineVo;
 
 /**
  * 【请填写功能名称】Service接口
@@ -26,6 +27,16 @@ public interface IBaseMachineService
      * @return 【请填写功能名称】集合
      */
     public List<BaseMachine> selectBaseMachineList(BaseMachine baseMachine);
+
+
+    public List<BaseMachine> selectBaseMachineList(MachineVo machineVo);
+
+    /**
+     * 组织售货机列表数据
+     * @param list 售货机列表
+     * @return 售货机列表
+     */
+    public List<MachineVo>  selectMachineVoList(List<BaseMachine> list);
 
     /**
      * 新增【请填写功能名称】

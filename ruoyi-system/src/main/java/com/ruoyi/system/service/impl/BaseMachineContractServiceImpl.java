@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineContractMapper;
-import com.ruoyi.system.domain.BaseMachineContract;
+import com.ruoyi.common.domain.BaseMachineContract;
 import com.ruoyi.system.service.IBaseMachineContractService;
 
 /**

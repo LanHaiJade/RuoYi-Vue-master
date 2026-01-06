@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseKfyhdTaskMapper;
-import com.ruoyi.system.domain.BaseKfyhdTask;
+import com.ruoyi.common.domain.BaseKfyhdTask;
 import com.ruoyi.system.service.IBaseKfyhdTaskService;
 
 /**

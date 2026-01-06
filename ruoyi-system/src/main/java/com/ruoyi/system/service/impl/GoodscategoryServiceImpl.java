@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.GoodscategoryMapper;
-import com.ruoyi.system.domain.Goodscategory;
+import com.ruoyi.common.domain.Goodscategory;
 import com.ruoyi.system.service.IGoodscategoryService;
 
 /**

@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseRegisterCodeMapper;
-import com.ruoyi.system.domain.BaseRegisterCode;
+import com.ruoyi.common.domain.BaseRegisterCode;
 import com.ruoyi.system.service.IBaseRegisterCodeService;
 
 /**

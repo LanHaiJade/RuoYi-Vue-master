@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseIccardinfoMapper;
-import com.ruoyi.system.domain.BaseIccardinfo;
+import com.ruoyi.common.domain.BaseIccardinfo;
 import com.ruoyi.system.service.IBaseIccardinfoService;
 
 /**

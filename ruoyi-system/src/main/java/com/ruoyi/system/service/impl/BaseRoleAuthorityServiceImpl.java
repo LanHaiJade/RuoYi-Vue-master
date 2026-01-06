@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseRoleAuthorityMapper;
-import com.ruoyi.system.domain.BaseRoleAuthority;
+import com.ruoyi.common.domain.BaseRoleAuthority;
 import com.ruoyi.system.service.IBaseRoleAuthorityService;
 
 /**

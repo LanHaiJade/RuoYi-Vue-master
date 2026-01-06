@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseQuickinfoMapper;
-import com.ruoyi.system.domain.BaseQuickinfo;
+import com.ruoyi.common.domain.BaseQuickinfo;
 import com.ruoyi.system.service.IBaseQuickinfoService;
 
 /**

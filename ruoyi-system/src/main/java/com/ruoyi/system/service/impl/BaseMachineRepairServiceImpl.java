@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineRepairMapper;
-import com.ruoyi.system.domain.BaseMachineRepair;
+import com.ruoyi.common.domain.BaseMachineRepair;
 import com.ruoyi.system.service.IBaseMachineRepairService;
 
 /**

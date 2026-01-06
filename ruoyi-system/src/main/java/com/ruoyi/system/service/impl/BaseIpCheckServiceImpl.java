@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseIpCheckMapper;
-import com.ruoyi.system.domain.BaseIpCheck;
+import com.ruoyi.common.domain.BaseIpCheck;
 import com.ruoyi.system.service.IBaseIpCheckService;
 
 /**

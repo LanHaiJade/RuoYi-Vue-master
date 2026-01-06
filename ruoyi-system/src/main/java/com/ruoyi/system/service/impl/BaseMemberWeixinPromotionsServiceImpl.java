@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMemberWeixinPromotionsMapper;
-import com.ruoyi.system.domain.BaseMemberWeixinPromotions;
+import com.ruoyi.common.domain.BaseMemberWeixinPromotions;
 import com.ruoyi.system.service.IBaseMemberWeixinPromotionsService;
 
 /**

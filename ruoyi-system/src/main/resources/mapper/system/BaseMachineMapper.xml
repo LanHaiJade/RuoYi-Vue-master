@@ -145,6 +145,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ghTime != null "> and gh_time = #{ghTime}</if>
         </where>
     </select>
+
+    <select id="selectMachineVoList" parameterType="MachineVo" resultMap="BaseMachineResult">
+        <include refid="selectBaseMachineVo"/>
+        <where>
+            <if test="sbId != null  and sbId != ''"> and sb_id like concat('%', #{sbId}, '%')</if>
+            <if test="sbName != null  and sbName != ''"> and sb_name like concat('%', #{sbName}, '%')</if>
+            <if test="sbNo != null  and sbNo != ''"> and sb_no like concat('%', #{sbNo}, '%')</if>
+            <if test="version != null  and version != ''"> and version like concat('%', #{version}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="machineType != null "> and machine_type = #{machineType}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="onLineStatus == 0"><![CDATA[ and update_time >= #{onlineTime} ]]></if>
+            <if test="onLineStatus == 4"><![CDATA[ and update_time < #{onlineTime} ]]></if>
+        </where>
+    </select>
     
     <select id="selectBaseMachineById" parameterType="Long" resultMap="BaseMachineResult">
         <include refid="selectBaseMachineVo"/>

@@ -5,7 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseCouponMapper;
-import com.ruoyi.system.domain.BaseCoupon;
+import com.ruoyi.common.domain.BaseCoupon;
 import com.ruoyi.system.service.IBaseCouponService;
 
 /**

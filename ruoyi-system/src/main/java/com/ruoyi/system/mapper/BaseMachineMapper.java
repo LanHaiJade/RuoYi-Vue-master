@@ -1,7 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseMachine;
+import com.ruoyi.common.domain.BaseMachine;
+import com.ruoyi.common.domain.vo.MachineVo;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -26,6 +27,9 @@ public interface BaseMachineMapper
      * @return 【请填写功能名称】集合
      */
     public List<BaseMachine> selectBaseMachineList(BaseMachine baseMachine);
+
+
+    public List<BaseMachine> selectMachineVoList(MachineVo machineVo);
 
     /**
      * 新增【请填写功能名称】

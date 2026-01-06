@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
-import com.ruoyi.system.domain.BaseRefundReason;
+import com.ruoyi.common.domain.BaseRefundReason;
 
 /**
  * 退款原因Mapper接口
