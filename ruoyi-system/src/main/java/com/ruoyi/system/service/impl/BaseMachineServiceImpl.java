@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.enums.sm.ControlStatus;
 import com.ruoyi.common.enums.sm.MachineType;
 import com.ruoyi.common.enums.sm.OnlineStatus;
 import com.ruoyi.common.enums.sm.Status;
@@ -58,14 +59,23 @@ public class BaseMachineServiceImpl implements IBaseMachineService
         return baseMachineMapper.selectBaseMachineList(baseMachine);
     }
 
+    /**
+     * 查询运营商售货机列表
+     * @param machineVo
+     * @return
+     */
     @Override
     public List<BaseMachine> selectBaseMachineList(MachineVo machineVo){
         if(machineVo.getUserId() == null || machineVo.getUserId() < 1) return null;
-        if(machineVo.getStatus() == null) machineVo.setStatus(Status.Normal.getStatus());
-        if(machineVo.getOnLineStatus() == null) machineVo.setOnLineStatus(OnlineStatus.All.getStatus());
-        if(machineVo.getOnLineStatus() == OnlineStatus.Offline.getStatus()
-                || machineVo.getOnLineStatus() == OnlineStatus.Online.getStatus() ) {
+        if(machineVo.getStatus() != null && machineVo.getStatus() != Status.Normal.getStatus()
+            && machineVo.getStatus() != Status.Invalid.getStatus()){
+            machineVo.setStatus(null);
+        }
+        if(machineVo.getOnLineStatus() != null && (machineVo.getOnLineStatus() == OnlineStatus.Offline.getStatus()
+                || machineVo.getOnLineStatus() == OnlineStatus.Online.getStatus()) ) {
             machineVo.setOnlineTime(DateUtil.onlineTime(new Date()));
+        }else{
+            machineVo.setOnLineStatus(OnlineStatus.All.getStatus());
         }
         return baseMachineMapper.selectMachineVoList(machineVo);
     }
@@ -88,13 +98,14 @@ public class BaseMachineServiceImpl implements IBaseMachineService
             machineVo.setMachineTypeName(MachineType.getName(baseMachine.getMachineType()));
             machineVo.setMachineTypeNameEn(MachineType.getEnglishName(baseMachine.getMachineType()));
             machineVo.setControlStatus(baseMachine.getControlStatus());
-            machineVo.setControlStatusName(MachineType.getName(baseMachine.getControlStatus()));
-            machineVo.setControlStatusNameEn(MachineType.getEnglishName(baseMachine.getControlStatus()));
+            machineVo.setControlStatusName(ControlStatus.getName(baseMachine.getControlStatus()));
+            machineVo.setControlStatusNameEn(ControlStatus.getNameEn(baseMachine.getControlStatus()));
             machineVo.setCreateTime(DateUtil.time(baseMachine.getCreateTime()));
             machineVo.setEndTime(DateUtil.time(baseMachine.getEndTime()));
             machineVo.setSerEndTime(DateUtil.time(baseMachine.getSerEndTime()));
             machineVo.setUpdateTime(DateUtil.time(baseMachine.getUpdateTime()));
             machineVo.setNetwork(baseMachine.getNetwork());
+            machineVo.setStatus(baseMachine.getStatus());
             BaseSocketStatistics socketStatistics = redisCache.getSocketStatistics(machineVo.getSbId());
             boolean isOnLine = SbOnline.getSbIsOnline(socketStatistics);
             machineVo.setOnLine(isOnLine);

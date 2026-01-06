@@ -28,7 +28,11 @@ public interface IBaseMachineService
      */
     public List<BaseMachine> selectBaseMachineList(BaseMachine baseMachine);
 
-
+    /**
+     * 查询运营商售货机列表
+     * @param machineVo
+     * @return
+     */
     public List<BaseMachine> selectBaseMachineList(MachineVo machineVo);
 
     /**

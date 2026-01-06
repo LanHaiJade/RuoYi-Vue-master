@@ -28,7 +28,11 @@ public interface BaseMachineMapper
      */
     public List<BaseMachine> selectBaseMachineList(BaseMachine baseMachine);
 
-
+    /**
+     * 查询售货机运营商列表
+     * @param machineVo
+     * @return
+     */
     public List<BaseMachine> selectMachineVoList(MachineVo machineVo);
 
     /**
