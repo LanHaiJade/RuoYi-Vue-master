@@ -49,15 +49,9 @@ public class BaseMachineController extends BaseController
         //startPage();
         PageHelper.startPage(machineVo.getPageNum(), machineVo.getPageSize(), "update_time DESC").setReasonable(true);
         List<BaseMachine> list = baseMachineService.selectBaseMachineList(machineVo);
-        List<MachineVo> machineList = baseMachineService.selectMachineVoList(list);
         long total = new PageInfo<BaseMachine>(list).getTotal();
-        TableDataInfo rspData = new TableDataInfo();
-        rspData.setTotal(total);
-        rspData.setCode(HttpStatus.SUCCESS);
-        rspData.setMsg("查询成功");
-        rspData.setRows(machineList);
-        return rspData;
-        //return getDataTable(list);
+        List<MachineVo> machineList = baseMachineService.selectMachineVoList(list);
+        return getDataTable(machineList,total);
     }
 
     /**

@@ -23,6 +23,24 @@ public class MachineVo extends BaseVo {
     private Integer status;
     private Integer onLineStatus;//-1全部，0在线，4离线
     private Date onlineTime;
+    private String createTimeStart;
+    private String createTimeEnd;
+
+    public String getCreateTimeStart() {
+        return createTimeStart;
+    }
+
+    public void setCreateTimeStart(String createTimeStart) {
+        this.createTimeStart = createTimeStart;
+    }
+
+    public String getCreateTimeEnd() {
+        return createTimeEnd;
+    }
+
+    public void setCreateTimeEnd(String createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
+    }
 
     public Date getOnlineTime() {
         return onlineTime;

@@ -158,6 +158,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null "> and status = #{status}</if>
             <if test="onLineStatus == 0"><![CDATA[ and update_time >= #{onlineTime} ]]></if>
             <if test="onLineStatus == 4"><![CDATA[ and update_time < #{onlineTime} ]]></if>
+            <if test="createTimeStart != null and createTimeStart != ''"><![CDATA[ and create_time >= #{createTimeStart} ]]></if>
+            <if test="createTimeEnd != null and createTimeEnd != ''"><![CDATA[ and create_time <= #{createTimeEnd} ]]></if>
         </where>
     </select>
     
