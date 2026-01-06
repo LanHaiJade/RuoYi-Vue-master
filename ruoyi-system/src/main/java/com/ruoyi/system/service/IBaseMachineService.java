@@ -40,7 +40,7 @@ public interface IBaseMachineService
      * @param list 售货机列表
      * @return 售货机列表
      */
-    public List<MachineVo>  selectMachineVoList(List<BaseMachine> list);
+    public List<MachineVo>  selectMachineVoList(List<BaseMachine> list, MachineVo machineVo);
 
     /**
      * 新增【请填写功能名称】

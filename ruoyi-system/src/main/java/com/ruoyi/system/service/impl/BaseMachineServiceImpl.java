@@ -15,6 +15,7 @@ import com.ruoyi.common.utils.sm.DateUtil;
 import com.ruoyi.common.utils.sm.SbOnline;
 import com.ruoyi.common.domain.BaseSocketStatistics;
 import com.ruoyi.common.domain.vo.MachineVo;
+import com.ruoyi.common.utils.sm.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseMachineMapper;
@@ -85,7 +86,7 @@ public class BaseMachineServiceImpl implements IBaseMachineService
      * @return
      */
     @Override
-    public List<MachineVo>  selectMachineVoList(List<BaseMachine> baseMachineList){
+    public List<MachineVo>  selectMachineVoList(List<BaseMachine> baseMachineList, MachineVo mVo){
         List<MachineVo> machineVoList = new ArrayList<MachineVo>();
         for(BaseMachine baseMachine:baseMachineList){
             MachineVo machineVo = new MachineVo();
@@ -96,10 +97,12 @@ public class BaseMachineServiceImpl implements IBaseMachineService
             machineVo.setVersion(baseMachine.getVersion());
             machineVo.setMachineType(baseMachine.getMachineType());
             machineVo.setMachineTypeName(MachineType.getName(baseMachine.getMachineType()));
-            machineVo.setMachineTypeNameEn(MachineType.getEnglishName(baseMachine.getMachineType()));
             machineVo.setControlStatus(baseMachine.getControlStatus());
             machineVo.setControlStatusName(ControlStatus.getName(baseMachine.getControlStatus()));
-            machineVo.setControlStatusNameEn(ControlStatus.getNameEn(baseMachine.getControlStatus()));
+            if(StringUtil.equals("en", mVo.getLanguage())){
+                machineVo.setMachineTypeName(MachineType.getEnglishName(baseMachine.getMachineType()));
+                machineVo.setControlStatusName(ControlStatus.getNameEn(baseMachine.getControlStatus()));
+            }
             machineVo.setCreateTime(DateUtil.time(baseMachine.getCreateTime()));
             machineVo.setEndTime(DateUtil.time(baseMachine.getEndTime()));
             machineVo.setSerEndTime(DateUtil.time(baseMachine.getSerEndTime()));

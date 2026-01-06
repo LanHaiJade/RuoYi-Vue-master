@@ -12,10 +12,8 @@ public class MachineVo extends BaseVo {
     private String version;
     private Integer machineType;
     private String machineTypeName;
-    private String machineTypeNameEn;
     private Integer controlStatus;
     private String controlStatusName;
-    private String controlStatusNameEn;
     private String endTime;
     private String serEndTime;
     private Integer network;
@@ -114,14 +112,6 @@ public class MachineVo extends BaseVo {
         this.machineTypeName = machineTypeName;
     }
 
-    public String getMachineTypeNameEn() {
-        return machineTypeNameEn;
-    }
-
-    public void setMachineTypeNameEn(String machineTypeNameEn) {
-        this.machineTypeNameEn = machineTypeNameEn;
-    }
-
     public Integer getControlStatus() {
         return controlStatus;
     }
@@ -136,14 +126,6 @@ public class MachineVo extends BaseVo {
 
     public void setControlStatusName(String controlStatusName) {
         this.controlStatusName = controlStatusName;
-    }
-
-    public String getControlStatusNameEn() {
-        return controlStatusNameEn;
-    }
-
-    public void setControlStatusNameEn(String controlStatusNameEn) {
-        this.controlStatusNameEn = controlStatusNameEn;
     }
 
     public String getEndTime() {

@@ -10,6 +10,15 @@ public class BaseVo implements Serializable {
     private Long userId;
     private String createTime;
     private String updateTime;
+    private String language;//语言，中文：zh,英文：en
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     public int getPageNum() {
         return pageNum;
