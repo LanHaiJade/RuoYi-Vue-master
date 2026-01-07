@@ -46,10 +46,9 @@ public class BaseMachineController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(MachineVo machineVo)
     {
-        //startPage();
-        PageHelper.startPage(machineVo.getPageNum(), machineVo.getPageSize(), "sort DESC,create_time DESC").setReasonable(true);
+        startPage();
         List<BaseMachine> list = baseMachineService.selectBaseMachineList(machineVo);
-        long total = new PageInfo<BaseMachine>(list).getTotal();
+        long total = new PageInfo<>(list).getTotal();
         List<MachineVo> machineList = baseMachineService.selectMachineVoList(list, machineVo);
         return getDataTable(machineList,total);
     }

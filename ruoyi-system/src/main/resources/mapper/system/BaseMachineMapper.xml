@@ -161,6 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTimeStart != null and createTimeStart != ''"><![CDATA[ and create_time >= #{createTimeStart} ]]></if>
             <if test="createTimeEnd != null and createTimeEnd != ''"><![CDATA[ and create_time <= #{createTimeEnd} ]]></if>
         </where>
+        ORDER BY sort DESC,create_time DESC
     </select>
     
     <select id="selectBaseMachineById" parameterType="Long" resultMap="BaseMachineResult">
