@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.math.BigDecimal;
 
 /**
- * 【请填写功能名称】对象 base_iccardrerecord
+ * 【IC卡功能操作记录】对象 base_iccardrerecord
  * 
  * @author ruoyi
  * @date 2025-12-24
@@ -18,35 +18,35 @@ public class BaseIccardrerecord extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    private Long id;
+    private Long id;//表自增唯一id
 
     /** 操作内容 */
     @Excel(name = "操作内容")
-    private String message;
+    private String message;//操作内容，文字描述
 
     /** 状态，1开卡时间，2销卡时间，3管理员充值，4挂失（禁用），5启用，6补卡，7二维码充值 */
     @Excel(name = "状态，1开卡时间，2销卡时间，3管理员充值，4挂失", readConverterExp = "禁=用")
-    private Long state;
+    private Long state;//状态，1开卡时间，2销卡时间，3管理员充值，4挂失（禁用），5启用，6补卡，7二维码充值，8余额清零
 
     /** 卡号 */
     @Excel(name = "卡号")
-    private String cardNumber;
+    private String cardNumber;//IC卡卡号
 
     /** 操作用户名 */
     @Excel(name = "操作用户名")
-    private String ctrlUserName;
+    private String ctrlUserName;//操作人名称
 
     /** 所属运营商用户ID */
     @Excel(name = "所属运营商用户ID")
-    private Long userId;
+    private Long userId;//IC卡所属运营商id
 
     /** 金额 */
     @Excel(name = "金额")
-    private BigDecimal amount;
+    private BigDecimal amount;//IC卡余额
 
     /** 卡片持有人 */
     @Excel(name = "卡片持有人")
-    private String name;
+    private String name;//IC卡姓名
 
     public void setId(Long id) 
     {

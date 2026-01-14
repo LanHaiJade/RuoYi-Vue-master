@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.math.BigDecimal;
 
 /**
- * 【请填写功能名称】对象 base_iccard
+ * 【IC卡信息表】对象 base_iccard
  * 
  * @author ruoyi
  * @date 2025-12-24
@@ -18,43 +18,43 @@ public class BaseIccard extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    private Long id;
+    private Long id;//自增唯一id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String idNo;
+    private String idNo;//IC卡卡号
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String cpuNo;
+    private String cpuNo;//IC卡名称
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;
+    private Long userId;//所属运营商id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String name;
+    private String name;//姓名
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long status;
+    private Long status;//IC卡状态：0正常4禁用5销卡
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal balance;
+    private BigDecimal balance;//IC卡余额
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String phone;
+    private String phone;//手机号信息
 
     /** 操作人 */
     @Excel(name = "操作人")
-    private Long ctrlUserId;
+    private Long ctrlUserId;//操作人id
 
     /** 操作人姓名 */
     @Excel(name = "操作人姓名")
-    private String ctrlUserName;
+    private String ctrlUserName;//操作人名称
 
     public void setId(Long id) 
     {

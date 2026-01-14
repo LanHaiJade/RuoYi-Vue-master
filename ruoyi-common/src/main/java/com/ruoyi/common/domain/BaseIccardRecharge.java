@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.math.BigDecimal;
 
 /**
- * 【请填写功能名称】对象 base_iccard_recharge
+ * 【IC卡充值记录】对象 base_iccard_recharge
  * 
  * @author ruoyi
  * @date 2025-12-24
@@ -18,55 +18,55 @@ public class BaseIccardRecharge extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    private Long id;
+    private Long id;//表自增唯一id
 
     /** 充值前金额 */
     @Excel(name = "充值前金额")
-    private BigDecimal afterRechargeAmount;
+    private BigDecimal afterRechargeAmount;//充值前余额
 
     /** 充值后金额 */
     @Excel(name = "充值后金额")
-    private BigDecimal beforeRechargeAmount;
+    private BigDecimal beforeRechargeAmount;//充值后余额
 
     /** 充值金额 */
     @Excel(name = "充值金额")
-    private BigDecimal rechargeAmount;
+    private BigDecimal rechargeAmount;//充值金额
 
     /** 卡号 */
     @Excel(name = "卡号")
-    private String cardNumber;
+    private String cardNumber;//IC卡卡号
 
     /** 用户id */
     @Excel(name = "用户id")
-    private Long userId;
+    private Long userId;//所属运营商id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String orderNo;
+    private String orderNo;//订单号
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Integer payType;
+    private Integer payType;//0线下充值
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Integer payStatus;
+    private Integer payStatus;//0未支付1已支付
 
     /** 操作人 */
     @Excel(name = "操作人")
-    private Long ctrlUserId;
+    private Long ctrlUserId;//操作人用户id
 
     /** 操作人姓名 */
     @Excel(name = "操作人姓名")
-    private String ctrlUserName;
+    private String ctrlUserName;//操作人用户名称
 
     /** 卡名称 */
     @Excel(name = "卡名称")
-    private String cpuNo;
+    private String cpuNo;//IC卡名称
 
     /** 赠送金额 */
     @Excel(name = "赠送金额")
-    private BigDecimal giftAmount;
+    private BigDecimal giftAmount;//充值赠送金额
 
     public void setId(Long id) 
     {
