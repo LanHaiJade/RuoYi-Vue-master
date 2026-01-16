@@ -87,7 +87,7 @@ public class BaseMachineServiceImpl implements IBaseMachineService
      */
     @Override
     public List<MachineVo>  selectMachineVoList(List<BaseMachine> baseMachineList, MachineVo mVo){
-        List<MachineVo> machineVoList = new ArrayList<MachineVo>();
+        List<MachineVo> machineVoList = new ArrayList<>();
         for(BaseMachine baseMachine:baseMachineList){
             MachineVo machineVo = new MachineVo();
             machineVo.setId(baseMachine.getId());

@@ -58,4 +58,7 @@ public interface BaseIccardrerecordMapper
      * @return 结果
      */
     public int deleteBaseIccardrerecordByIds(Long[] ids);
+
+
+    int insertBaseIccardrerecordList(List<BaseIccardrerecord> baseIccardrerecord);
 }

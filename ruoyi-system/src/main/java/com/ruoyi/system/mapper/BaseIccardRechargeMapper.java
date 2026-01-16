@@ -58,4 +58,6 @@ public interface BaseIccardRechargeMapper
      * @return 结果
      */
     public int deleteBaseIccardRechargeByIds(Long[] ids);
+
+    int insertBaseIccardRechargeList(List<BaseIccardRecharge> iccardRechargeList);
 }

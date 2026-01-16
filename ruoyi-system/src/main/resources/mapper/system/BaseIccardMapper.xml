@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, id_no, cpu_no, user_id, name, status, balance, update_time, create_time, phone, ctrl_user_id, ctrl_user_name, remark from base_iccard
     </sql>
 
-    <select id="selectBaseIccardList" parameterType="BaseIccard" resultMap="BaseIccardResult">
+    <!--<select id="selectBaseIccardList" parameterType="BaseIccard" resultMap="BaseIccardResult">
         <include refid="selectBaseIccardVo"/>
         <where>  
             <if test="idNo != null  and idNo != ''"> and id_no = #{idNo}</if>
@@ -37,11 +37,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ctrlUserId != null "> and ctrl_user_id = #{ctrlUserId}</if>
             <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
         </where>
+    </select>-->
+    <select id="selectBaseIccardList" parameterType="BaseIccard" resultMap="BaseIccardResult">
+        <include refid="selectBaseIccardVo"/>
+        <where>
+            <if test="idNo != null  and idNo != ''"> and id_no like concat('%', #{idNo}, '%')</if>
+            <if test="cpuNo != null  and cpuNo != ''"> and cpu_no like concat('%', #{cpuNo}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="balance != null "> and balance = #{balance}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="ctrlUserId != null "> and ctrl_user_id = #{ctrlUserId}</if>
+            <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
+        </where>
+        ORDER BY create_time DESC
     </select>
     
     <select id="selectBaseIccardById" parameterType="Long" resultMap="BaseIccardResult">
         <include refid="selectBaseIccardVo"/>
         where id = #{id}
+    </select>
+
+    <select id="selectBaseIccardIds" parameterType="BaseIccard" resultMap="BaseIccardResult">
+        <include refid="selectBaseIccardVo"/>
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                id IN
+                <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectBaseIccard" parameterType="BaseIccard" resultMap="BaseIccardResult">
+        <include refid="selectBaseIccardVo"/>
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
     </select>
 
     <insert id="insertBaseIccard" parameterType="BaseIccard" useGeneratedKeys="true" keyProperty="id">
@@ -95,6 +135,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
+    <update id="updateBaseIccardIds">
+        UPDATE base_iccard
+        SET
+        balance =
+        CASE id
+        <foreach collection="iccardList" item="item">
+            WHEN #{item.id} THEN #{item.balance}
+        </foreach>
+        ELSE balance
+        END,
+        update_time =
+        CASE id
+        <foreach collection="iccardList" item="item">
+            WHEN #{item.id} THEN
+            <choose>
+                <when test="item.updateTime != null">#{item.updateTime}</when>
+                <otherwise>NOW()</otherwise>
+            </choose>
+        </foreach>
+        ELSE update_time
+        END,
+        <!-- 新增：status字段批量修改（核心新增代码） -->
+        status =
+        CASE id
+        <foreach collection="iccardList" item="item">
+            WHEN #{item.id} THEN #{item.status}
+        </foreach>
+        ELSE status
+        END,
+        ctrl_user_id =
+        CASE id
+        <foreach collection="iccardList" item="item">
+            WHEN #{item.id} THEN #{item.ctrlUserId}
+        </foreach>
+        ELSE ctrl_user_id
+        END,
+        ctrl_user_name =
+        CASE id
+        <foreach collection="iccardList" item="item">
+            WHEN #{item.id} THEN #{item.ctrlUserName}
+        </foreach>
+        ELSE ctrl_user_name
+        END,
+        remark =
+        CASE id
+        <foreach collection="iccardList" item="item">
+            WHEN #{item.id} THEN #{item.remark}
+        </foreach>
+        ELSE remark
+        END
+        WHERE id IN
+        <foreach collection="iccardList" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
     <delete id="deleteBaseIccardById" parameterType="Long">
         delete from base_iccard where id = #{id}
     </delete>
@@ -105,4 +201,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <!-- 批量插入IC卡信息 -->
+    <insert id="batchInsertBaseIccard" parameterType="java.util.List">
+        INSERT INTO base_iccard (
+        id_no,
+        cpu_no,
+        user_id,
+        name,
+        status,
+        balance,
+        phone,
+        remark,
+        create_time,
+        update_time
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.idNo},
+            #{item.cpuNo},
+            #{item.userId},
+            #{item.name},
+            #{item.status},
+            #{item.balance},
+            #{item.phone},
+            #{item.remark},
+            NOW(),
+            NOW()
+            )
+        </foreach>
+    </insert>
+
+    <!-- 根据卡号列表查询 -->
+    <select id="selectCardsByNos" parameterType="map" resultMap="BaseIccardResult">
+        SELECT id_no FROM base_iccard
+        WHERE user_id = #{userId}
+        AND id_no IN
+        <foreach collection="cardNos" item="cardNo" open="(" separator="," close=")">
+            #{cardNo}
+        </foreach>
+    </select>
+    <select id="selectBaseIccardListNoPage" parameterType="BaseIccardVo" resultMap="BaseIccardResult">
+        <include refid="selectBaseIccardVo"/>
+        <where>
+            <if test="idNo != null  and idNo != ''"> and id_no like concat('%', #{idNo}, '%')</if>
+            <if test="cpuNo != null  and cpuNo != ''"> and cpu_no like concat('%', #{cpuNo}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="balance != null "> and balance = #{balance}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="ctrlUserId != null "> and ctrl_user_id = #{ctrlUserId}</if>
+            <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.ruoyi.common.domain;
+package com.ruoyi.common.domain.vo;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 【IC卡信息表】对象 base_iccard
@@ -15,12 +14,12 @@ import java.util.List;
  * @author ruoyi
  * @date 2025-12-24
  */
-public class BaseIccard extends BaseVo
+public class BaseIccardVo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    /*private Long id;//自增唯一id*/
+    private Long id;//自增唯一id
 
     /** $column.columnComment */
     @Excel(name = "卡号", readConverterExp = "$column.readConverterExp()")
@@ -31,8 +30,7 @@ public class BaseIccard extends BaseVo
     private String cpuNo;//IC卡名称
 
     /** $column.columnComment */
-    /*@Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;//所属运营商id*/
+    private Long userId;//所属运营商id
 
     /** $column.columnComment */
     @Excel(name = "姓名", readConverterExp = "$column.readConverterExp()")
@@ -154,6 +152,23 @@ public class BaseIccard extends BaseVo
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
