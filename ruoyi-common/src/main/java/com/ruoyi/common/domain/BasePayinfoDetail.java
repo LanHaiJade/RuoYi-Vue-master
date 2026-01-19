@@ -22,35 +22,35 @@ public class BasePayinfoDetail extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long payinfoId;
+    private Long payinfoId;//payInfo表id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;
+    private Long userId;//运营商id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String sbId;
+    private String sbId;//设备号
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long goodsId;
+    private Long goodsId;//商品id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String goodsName;
+    private String goodsName;//商品名称
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long number;
+    private Long number;//数量
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal price;
+    private BigDecimal price;//进价
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal amount;
+    private BigDecimal amount;//支付金额
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -58,19 +58,19 @@ public class BasePayinfoDetail extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long huoDao;
+    private Long huoDao;//货道
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long payStatus;
+    private Long payStatus;//支付状态
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long hasDelivery;
+    private Long hasDelivery;//出货状态
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long hasRefund;
+    private Long hasRefund;//退款状态
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -78,7 +78,7 @@ public class BasePayinfoDetail extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Integer payType;
+    private Integer payType;//支付类型
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -86,15 +86,15 @@ public class BasePayinfoDetail extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal oldamount;
+    private BigDecimal oldamount;//原订单金额
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal disamount;
+    private BigDecimal disamount;//折扣
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String discountInfo;
+    private String discountInfo;//折扣详情
 
     public void setId(Long id) 
     {
