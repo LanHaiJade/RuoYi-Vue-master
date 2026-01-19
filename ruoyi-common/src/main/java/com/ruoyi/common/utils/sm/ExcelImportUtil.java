@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,16 +49,8 @@ public class ExcelImportUtil {
                 card.setCpuNo(getCellValueSafely(row.getCell(1)));     // 卡名称
                 card.setName(getCellValueSafely(row.getCell(2)));      // 姓名
 
-                // 金额转换
-                String amountStr = getCellValueSafely(row.getCell(3));
-                try {
-                    // 清除金额中的逗号（如1,000.00）
-                    amountStr = amountStr.replace(",", "");
-                    card.setBalance(new BigDecimal(amountStr));
-                } catch (Exception e) {
-                    card.setBalance(BigDecimal.ZERO);
-                }
-
+                // 金额转换-单独处理金额
+                card.setBalance(getAmountFromCell(row.getCell(3)));
                 card.setPhone(getCellValueSafely(row.getCell(4)));     // 手机号
                 card.setRemark(getCellValueSafely(row.getCell(5)));    // 备注
 
@@ -71,6 +64,61 @@ public class ExcelImportUtil {
         }
 
         return cardList;
+    }
+
+    /**
+     * 安全转换单元格为BigDecimal（专门处理金额）
+     */
+    private static BigDecimal getAmountFromCell(Cell cell) {
+        if (cell == null) {
+            return BigDecimal.ZERO;
+        }
+
+        try {
+            // 方法1：先尝试使用DataFormatter获取格式化的字符串
+            DataFormatter formatter = new DataFormatter();
+            String formattedValue = formatter.formatCellValue(cell);
+
+            // 清除逗号和其他非数字字符（保留小数点、负号）
+            formattedValue = formattedValue.replace(",", "")
+                    .replace("¥", "")
+                    .replace("$", "")
+                    .replace("€", "")
+                    .trim();
+
+            // 如果是百分比，需要转换
+            if (formattedValue.endsWith("%")) {
+                formattedValue = formattedValue.replace("%", "");
+                BigDecimal value = new BigDecimal(formattedValue);
+                return value.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
+            }
+
+            // 空字符串或非数字字符串处理
+            if (formattedValue.isEmpty() || formattedValue.equals("-")) {
+                return BigDecimal.ZERO;
+            }
+
+            // 使用字符串构造函数
+            return new BigDecimal(formattedValue);
+
+        } catch (Exception e) {
+            try {
+                // 方法2：如果格式化失败，尝试直接获取数值
+                if (cell.getCellType() == CellType.NUMERIC) {
+                    double numericValue = cell.getNumericCellValue();
+
+                    // 对于金额，通常只需要2位小数精度
+                    // 使用BigDecimal的字符串构造函数避免精度问题
+                    // 先格式化为字符串，保留两位小数
+                    String amountStr = String.format("%.2f", numericValue);
+                    return new BigDecimal(amountStr);
+                }
+            } catch (Exception ex) {
+                // 忽略异常
+            }
+
+            return BigDecimal.ZERO;
+        }
     }
 
     /**

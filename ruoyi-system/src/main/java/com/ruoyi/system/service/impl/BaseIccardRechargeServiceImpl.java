@@ -1,7 +1,11 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+
+import com.ruoyi.common.domain.vo.BaseIccardRechargeVo;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.http.HttpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.BaseIccardRechargeMapper;
@@ -92,5 +96,16 @@ public class BaseIccardRechargeServiceImpl implements IBaseIccardRechargeService
     public int deleteBaseIccardRechargeById(Long id)
     {
         return baseIccardRechargeMapper.deleteBaseIccardRechargeById(id);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param baseIccardRecharge
+     * @return
+     */
+    @Override
+    public List<BaseIccardRechargeVo> selectBaseIccardRechargeVoList(BaseIccardRechargeVo baseIccardRecharge) {
+        return baseIccardRechargeMapper.selectBaseIccardRechargeVoList(baseIccardRecharge);
     }
 }

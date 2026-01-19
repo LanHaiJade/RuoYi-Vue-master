@@ -42,12 +42,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
             <if test="cpuNo != null  and cpuNo != ''"> and cpu_no = #{cpuNo}</if>
             <if test="giftAmount != null "> and giftAmount = #{giftAmount}</if>
+            <if test="beginTime != null and beginTime != ''">
+                and update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and update_time &lt;= #{endTime}
+            </if>
+            <!-- 创建时间模糊查询（字符串匹配） -->
+            <if test="updateTime != null and updateTime != ''">
+                and DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') like concat('%', #{updateTime}, '%')
+            </if>
         </where>
     </select>
     
     <select id="selectBaseIccardRechargeById" parameterType="Long" resultMap="BaseIccardRechargeResult">
         <include refid="selectBaseIccardRechargeVo"/>
         where id = #{id}
+    </select>
+
+
+    <select id="selectBaseIccardRechargeVoList" resultType="com.ruoyi.common.domain.vo.BaseIccardRechargeVo" resultMap="BaseIccardRechargeResult">
+        <include refid="selectBaseIccardRechargeVo"/>
+        <where>
+            <if test="afterRechargeAmount != null"> and After_recharge_amount = #{afterRechargeAmount}</if>
+            <if test="beforeRechargeAmount != null"> and Before_recharge_amount = #{beforeRechargeAmount}</if>
+            <if test="rechargeAmount != null"> and recharge_amount = #{rechargeAmount}</if>
+            <if test="cardNumber != null and cardNumber != ''">
+                and card_number like concat('%', #{cardNumber}, '%')
+            </if>
+
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="payType != null"> and pay_type = #{payType}</if>
+            <if test="payStatus != null"> and pay_status = #{payStatus}</if>
+            <if test="ctrlUserId != null"> and ctrl_user_id = #{ctrlUserId}</if>
+            <if test="ctrlUserName != null and ctrlUserName != ''">
+                and ctrl_user_name like concat('%', #{ctrlUserName}, '%')
+            </if>
+            <if test="cpuNo != null and cpuNo != ''">
+                and cpu_no like concat('%', #{cpuNo}, '%')
+            </if>
+
+            <if test="giftAmount != null"> and giftAmount = #{giftAmount}</if>
+            <!-- 日期范围查询（字符串格式） -->
+            <if test="beginTime != null and beginTime != ''">
+                and update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and update_time &lt;= #{endTime}
+            </if>
+            <!-- 创建时间模糊查询（字符串匹配） -->
+            <if test="updateTime != null and updateTime != ''">
+                and DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') like concat('%', #{updateTime}, '%')
+            </if>
+        </where>
+        <!-- 按照创建时间升序排序 -->
+        ORDER BY update_time DESC
     </select>
 
     <insert id="insertBaseIccardRecharge" parameterType="BaseIccardRecharge" useGeneratedKeys="true" keyProperty="id">

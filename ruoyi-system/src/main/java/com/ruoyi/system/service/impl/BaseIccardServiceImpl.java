@@ -8,6 +8,10 @@ import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.domain.*;
 import com.ruoyi.common.domain.dto.RechargeIcDto;
 import com.ruoyi.common.domain.vo.BaseIccardVo;
+import com.ruoyi.common.enums.sm.ICIccardrerecordOpType;
+import com.ruoyi.common.enums.sm.ICRechargePayTypeStatus;
+import com.ruoyi.common.enums.sm.ICRechargeStatus;
+import com.ruoyi.common.enums.sm.ICStatus;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.PageUtils;
 import com.ruoyi.common.utils.sm.ExcelImportUtil;
@@ -95,14 +99,14 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
                 baseIccard.setCtrlUserName(baseUser.getUserName());
             }
         }
-        baseIccard.setStatus(0L);
+        baseIccard.setStatus(ICStatus.KaiKa.getType());
         baseIccard.setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(DateUtils.getNowDate()));
         baseIccard.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(DateUtils.getNowDate()));
         // 记录一下开卡操作日志
         BaseIccardrerecord baseIccardrerecord = getCordLog(baseIccard);
         baseIccardrerecord.setMessage("开卡成功");
+        baseIccardrerecord.setOpType(ICIccardrerecordOpType.KaiKa.getType());
         baseIccardrerecordMapper.insertBaseIccardrerecord(baseIccardrerecord);
-
         if (baseIccardMapper.insertBaseIccard(baseIccard) > 0) {
             return "开卡成功";
         }
@@ -122,7 +126,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
             return "用户ID为空";
         }
         // 检查IC卡状态
-        if (baseIccard.getStatus() != 0) {
+        if (!Objects.equals(baseIccard.getStatus(), ICStatus.KaiKa.getType())) {
             return "请使用正常IC卡";
         }
         // 判断重复卡号
@@ -151,6 +155,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
         }else if (!baseIccard.getRemark().equals(baseIccardById.getRemark())) {
             baseIccardrerecord.setMessage("修改备注：原备注" + baseIccardById.getRemark() + ",修改备注为" + baseIccard.getRemark());
         }
+        baseIccardrerecord.setOpType(ICIccardrerecordOpType.xiuGai.getType());
         baseIccardrerecordMapper.insertBaseIccardrerecord(baseIccardrerecord);
 
 
@@ -211,7 +216,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
         //先检查卡状态 查询目前卡中的余额 并添加数据
         List<BaseIccard> iccardList = baseIccardMapper.selectBaseIccardIds(rechargeIcDto.getIds());
         for (BaseIccard baseIccard : iccardList) {
-            if (baseIccard.getStatus() != 0) {
+            if (!Objects.equals(baseIccard.getStatus(), ICStatus.KaiKa.getType())) {
                 return "充值列表中存在不正常卡";
             }
         }
@@ -228,8 +233,8 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
             IccardRecharge.setCreateTime(DateUtils.getNowDate());
             IccardRecharge.setCardNumber(baseIccard.getIdNo());
             IccardRecharge.setUserId(baseIccard.getUserId());
-            IccardRecharge.setPayType(0);
-            IccardRecharge.setPayStatus(1);
+            IccardRecharge.setPayType(ICRechargePayTypeStatus.xianXia.getType()); // 默认就是线下支付
+            IccardRecharge.setPayStatus(ICRechargeStatus.yiZhiFu.getType()); // 默认是已支付
             IccardRecharge.setCpuNo(baseIccard.getCpuNo());
             IccardRecharge.setRemark(baseIccard.getRemark());
             if (rechargeIcDto.getCtrlUserId() != null) {
@@ -252,6 +257,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
             baseIccardrerecord.setUserId(rechargeIcDto.getCtrlUserId());
             baseIccardrerecord.setAmount(baseIccard.getBalance());
             baseIccardrerecord.setName(baseIccard.getName());
+            baseIccardrerecord.setOpType(ICIccardrerecordOpType.chongZhi.getType());
 
             baseIccardrerecordList.add(baseIccardrerecord);
             IccardRechargeList.add(IccardRecharge);
@@ -286,6 +292,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
         BaseIccardrerecord baseIccardrerecord = new BaseIccardrerecord();
         BaseIccard baseIccardById = baseIccardMapper.selectBaseIccardById(baseIccard.getId());
         getLog(baseIccard, baseIccardrerecord, baseIccardById);
+        baseIccardrerecord.setOpType(ICIccardrerecordOpType.buKa.getType());
         baseIccardrerecord.setMessage("补卡：原卡号" + baseIccardById.getIdNo() + ",新卡号" + baseIccard.getIdNo());
         baseIccardrerecordMapper.insertBaseIccardrerecord(baseIccardrerecord);
 
@@ -395,7 +402,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
             }
 
             // 记录操作日志
-            for (BaseIccard baseIccard : excelDataList) {
+            for (BaseIccard baseIccard : validCards) {
                 BaseIccardrerecord baseIccardrerecord = new BaseIccardrerecord();
                 baseIccardrerecord.setName(baseIccard.getName());
                 baseIccardrerecord.setState(baseIccard.getStatus());
@@ -405,6 +412,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
                 baseIccardrerecord.setUserId(userId);
                 baseIccardrerecord.setAmount(baseIccard.getBalance());
                 baseIccardrerecord.setCtrlUserName(baseIccard.getCtrlUserName());
+                baseIccardrerecord.setOpType(ICIccardrerecordOpType.daoRu.getType());
                 baseIccardrerecord.setMessage("导入开通会员卡,余额：" + baseIccard.getBalance() + "元");
                 baseIccardrerecordMapper.insertBaseIccardrerecord(baseIccardrerecord);
             }
@@ -462,7 +470,7 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
 
     /**
      * 不分页查询
-     * @param baseIccard
+     * @param 
      * @return
      */
     @Override
@@ -481,11 +489,14 @@ public class BaseIccardServiceImpl implements IBaseIccardService {
         baseIccardrerecord.setUserId(baseIccard.getUserId());
         baseIccardrerecord.setAmount(baseIccard.getBalance());
         baseIccardrerecord.setName(baseIccard.getName());
-        if (rechargeIcDto.getStatus() == 0) { // 状态为启用时 记录操作日志
+        if (Objects.equals(rechargeIcDto.getStatus(), ICStatus.KaiKa.getType())) { // 状态为启用时 记录操作日志
+            baseIccardrerecord.setOpType(ICIccardrerecordOpType.qiYong.getType());
             baseIccardrerecord.setMessage("启用卡");
-        } else if (rechargeIcDto.getStatus() == 4) {
+        } else if (Objects.equals(rechargeIcDto.getStatus(), ICStatus.jinYong.getType())) {
+            baseIccardrerecord.setOpType(ICIccardrerecordOpType.jinYong.getType());
             baseIccardrerecord.setMessage("禁用卡");
-        } else if (rechargeIcDto.getStatus() == 5) {
+        } else if (Objects.equals(rechargeIcDto.getStatus(), ICStatus.xiaoKa.getType())) {
+            baseIccardrerecord.setOpType(ICIccardrerecordOpType.zhuXiao.getType());
             baseIccardrerecord.setMessage("注销卡");
         }
         return baseIccardrerecord;

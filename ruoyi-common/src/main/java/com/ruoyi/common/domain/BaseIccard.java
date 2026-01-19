@@ -19,34 +19,34 @@ public class BaseIccard extends BaseVo
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    
     /*private Long id;//自增唯一id*/
 
-    /** $column.columnComment */
-    @Excel(name = "卡号", readConverterExp = "$column.readConverterExp()")
+    
+    @Excel(name = "卡号", width = 20)
     private String idNo;//IC卡卡号
 
-    /** $column.columnComment */
-    @Excel(name = "卡名称", readConverterExp = "$column.readConverterExp()")
+    
+    @Excel(name = "卡名称", width = 15)
     private String cpuNo;//IC卡名称
 
-    /** $column.columnComment */
+    
     /*@Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private Long userId;//所属运营商id*/
 
-    /** $column.columnComment */
-    @Excel(name = "姓名", readConverterExp = "$column.readConverterExp()")
+    
+    @Excel(name = "姓名",width = 10)
     private String name;//姓名
 
-    /** $column.columnComment */
+    
     private Long status;//IC卡状态：0正常4禁用5销卡
 
-    /** $column.columnComment */
-    @Excel(name = "金额", readConverterExp = "$column.readConverterExp()")
+    
+    @Excel(name = "金额", width = 12)
     private BigDecimal balance;//IC卡余额
 
-    /** $column.columnComment */
-    @Excel(name = "手机号", readConverterExp = "$column.readConverterExp()")
+    
+    @Excel(name = "手机号", width = 15)
     private String phone;//手机号信息
 
     /** 操作人 */
@@ -55,7 +55,7 @@ public class BaseIccard extends BaseVo
     /** 操作人姓名 */
     private String ctrlUserName;//操作人名称
 
-    @Excel(name = "备注")
+    @Excel(name = "备注", width = 20)
     private String remark;
 
     public void setIdNo(String idNo)

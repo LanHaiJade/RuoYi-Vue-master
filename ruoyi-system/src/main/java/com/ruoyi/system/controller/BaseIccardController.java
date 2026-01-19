@@ -1,17 +1,20 @@
 package com.ruoyi.system.controller;
 
-import java.io.IOException;
+
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import com.ruoyi.common.domain.dto.RechargeIcDto;
 import com.ruoyi.common.domain.vo.BaseIccardVo;
 import com.ruoyi.common.utils.sm.ExcelExportUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +38,7 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
  */
 @RestController
 @RequestMapping("/system/iccard")
+@Api("会员卡管理")
 public class BaseIccardController extends BaseController {
     @Autowired
     private IBaseIccardService baseIccardService;
@@ -42,6 +46,7 @@ public class BaseIccardController extends BaseController {
     /**
      * 查询【会员卡】列表
      */
+    @ApiOperation("获取会员卡列表")
     @PreAuthorize("@ss.hasPermi('system:iccard:list')")
     @GetMapping("/list")
     public TableDataInfo list(BaseIccard baseIccard) {
@@ -56,10 +61,15 @@ public class BaseIccardController extends BaseController {
     @PreAuthorize("@ss.hasPermi('system:iccard:export')")
     @Log(title = "【导出会员卡】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, BaseIccardVo baseIccardVo) {
+    public void export(HttpServletResponse response,BaseIccardVo baseIccardVo) throws UnsupportedEncodingException {
         List<BaseIccard> list = baseIccardService.selectBaseIccardListNoPage(baseIccardVo);
         ExcelUtil<BaseIccard> util = new ExcelUtil<>(BaseIccard.class);
-        util.exportExcel(response, list, "【请填写功能名称】数据");
+        // 手动设置响应头，确保文件名正确
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        response.setHeader("Content-Disposition", "attachment;filename=" +
+                URLEncoder.encode("会员卡列表", "UTF-8") + ".xls");
+        util.exportExcel(response, list, "【导出会员卡列表】数据");
     }
 
     /**
@@ -157,14 +167,12 @@ public class BaseIccardController extends BaseController {
     @PreAuthorize("@ss.hasPermi('system:iccard:importExcel')")
     @Log(title = "【导入会员卡】", businessType = BusinessType.INSERT)
     @PostMapping("/import")
-    public AjaxResult importExcel(
-            @RequestParam("file") MultipartFile file,
-            @RequestParam("userId") Long userId) {
+    public AjaxResult importExcel(@RequestParam("file") MultipartFile file,
+                                  @RequestParam("userId") Long userId) {
         // 检查文件
         if (file.isEmpty()) {
             return AjaxResult.error("请选择要导入的文件");
         }
-
         // 检查文件类型
         String fileName = file.getOriginalFilename();
         if (fileName != null && !fileName.toLowerCase().endsWith(".xlsx") &&
@@ -179,7 +187,7 @@ public class BaseIccardController extends BaseController {
     /**
      * 下载IC卡导入模板
      */
-    @GetMapping("/downloadTemplate")
+    @PostMapping("/downloadTemplate")
     @PreAuthorize("@ss.hasPermi('system:iccard:downloadExcel')") // 如果需要权限控制
     public void downloadTemplate(HttpServletResponse response) {
         try {
