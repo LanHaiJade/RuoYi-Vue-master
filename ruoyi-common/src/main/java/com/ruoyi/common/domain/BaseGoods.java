@@ -22,11 +22,11 @@ public class BaseGoods extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String name;
+    private String name;//商品名称
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;
+    private Long userId;//运营商id
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -38,7 +38,7 @@ public class BaseGoods extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long status;
+    private Long status;//0正常4停用
 
     /** $column.columnComment */
     private Long isPublic;
@@ -57,7 +57,7 @@ public class BaseGoods extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal price;
+    private BigDecimal price;//商品进价
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -105,11 +105,11 @@ public class BaseGoods extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal discount;
+    private BigDecimal discount;//商品折扣
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal amount;
+    private BigDecimal amount;//商品卖价
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
