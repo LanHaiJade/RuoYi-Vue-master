@@ -42,12 +42,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="ctrlUserName != null  and ctrlUserName != ''"> and ctrl_user_name like concat('%', #{ctrlUserName}, '%')</if>
             <if test="cpuNo != null  and cpuNo != ''"> and cpu_no = #{cpuNo}</if>
             <if test="giftAmount != null "> and giftAmount = #{giftAmount}</if>
+            <if test="beginTime != null and beginTime != ''">
+                and update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and update_time &lt;= #{endTime}
+            </if>
+            <!-- 创建时间模糊查询（字符串匹配） -->
+            <if test="updateTime != null and updateTime != ''">
+                and DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') like concat('%', #{updateTime}, '%')
+            </if>
         </where>
     </select>
     
     <select id="selectBaseIccardRechargeById" parameterType="Long" resultMap="BaseIccardRechargeResult">
         <include refid="selectBaseIccardRechargeVo"/>
         where id = #{id}
+    </select>
+
+
+    <select id="selectBaseIccardRechargeVoList" resultType="com.ruoyi.common.domain.vo.BaseIccardRechargeVo" resultMap="BaseIccardRechargeResult">
+        <include refid="selectBaseIccardRechargeVo"/>
+        <where>
+            <if test="afterRechargeAmount != null"> and After_recharge_amount = #{afterRechargeAmount}</if>
+            <if test="beforeRechargeAmount != null"> and Before_recharge_amount = #{beforeRechargeAmount}</if>
+            <if test="rechargeAmount != null"> and recharge_amount = #{rechargeAmount}</if>
+            <if test="cardNumber != null and cardNumber != ''">
+                and card_number like concat('%', #{cardNumber}, '%')
+            </if>
+
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="orderNo != null and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="payType != null"> and pay_type = #{payType}</if>
+            <if test="payStatus != null"> and pay_status = #{payStatus}</if>
+            <if test="ctrlUserId != null"> and ctrl_user_id = #{ctrlUserId}</if>
+            <if test="ctrlUserName != null and ctrlUserName != ''">
+                and ctrl_user_name like concat('%', #{ctrlUserName}, '%')
+            </if>
+            <if test="cpuNo != null and cpuNo != ''">
+                and cpu_no like concat('%', #{cpuNo}, '%')
+            </if>
+
+            <if test="giftAmount != null"> and giftAmount = #{giftAmount}</if>
+            <!-- 日期范围查询（字符串格式） -->
+            <if test="beginTime != null and beginTime != ''">
+                and update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and update_time &lt;= #{endTime}
+            </if>
+            <!-- 创建时间模糊查询（字符串匹配） -->
+            <if test="updateTime != null and updateTime != ''">
+                and DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') like concat('%', #{updateTime}, '%')
+            </if>
+        </where>
+        <!-- 按照创建时间升序排序 -->
+        ORDER BY update_time DESC
     </select>
 
     <insert id="insertBaseIccardRecharge" parameterType="BaseIccardRecharge" useGeneratedKeys="true" keyProperty="id">
@@ -86,6 +136,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">#{remark},</if>
             <if test="giftAmount != null">#{giftAmount},</if>
          </trim>
+    </insert>
+
+
+    <insert id="insertBaseIccardRechargeList" parameterType="list" useGeneratedKeys="true" keyProperty="id">
+        insert into base_iccard_recharge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <!-- 根据第一个元素判断要插入的字段 -->
+            <if test="list != null and list.size() > 0">
+                <if test="list[0].afterRechargeAmount != null">After_recharge_amount,</if>
+                <if test="list[0].beforeRechargeAmount != null">Before_recharge_amount,</if>
+                <if test="list[0].rechargeAmount != null">recharge_amount,</if>
+                <if test="list[0].updateTime != null">update_time,</if>
+                <if test="list[0].createTime != null">create_time,</if>
+                <if test="list[0].cardNumber != null">card_number,</if>
+                <if test="list[0].userId != null">user_id,</if>
+                <if test="list[0].orderNo != null">order_no,</if>
+                <if test="list[0].payType != null">pay_type,</if>
+                <if test="list[0].payStatus != null">pay_status,</if>
+                <if test="list[0].ctrlUserId != null">ctrl_user_id,</if>
+                <if test="list[0].ctrlUserName != null">ctrl_user_name,</if>
+                <if test="list[0].cpuNo != null">cpu_no,</if>
+                <if test="list[0].remark != null">remark,</if>
+                <if test="list[0].giftAmount != null">giftAmount,</if>
+            </if>
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="list[0].afterRechargeAmount != null">#{item.afterRechargeAmount},</if>
+                <if test="list[0].beforeRechargeAmount != null">#{item.beforeRechargeAmount},</if>
+                <if test="list[0].rechargeAmount != null">#{item.rechargeAmount},</if>
+                <if test="list[0].updateTime != null">#{item.updateTime},</if>
+                <if test="list[0].createTime != null">#{item.createTime},</if>
+                <if test="list[0].cardNumber != null">#{item.cardNumber},</if>
+                <if test="list[0].userId != null">#{item.userId},</if>
+                <if test="list[0].orderNo != null">#{item.orderNo},</if>
+                <if test="list[0].payType != null">#{item.payType},</if>
+                <if test="list[0].payStatus != null">#{item.payStatus},</if>
+                <if test="list[0].ctrlUserId != null">#{item.ctrlUserId},</if>
+                <if test="list[0].ctrlUserName != null">#{item.ctrlUserName},</if>
+                <if test="list[0].cpuNo != null">#{item.cpuNo},</if>
+                <if test="list[0].remark != null">#{item.remark},</if>
+                <if test="list[0].giftAmount != null">#{item.giftAmount},</if>
+            </trim>
+        </foreach>
     </insert>
 
     <update id="updateBaseIccardRecharge" parameterType="BaseIccardRecharge">

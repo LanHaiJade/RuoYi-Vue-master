@@ -22,35 +22,35 @@ public class BaseDeliveryCode extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String sbId;//设备号
+    private String sbId;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String deliveryInfo;//使用后出货详情
+    private String deliveryInfo;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String deliveryCode;//提货码
+    private String deliveryCode;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long status;//状态0未使用，1、3已使用，4已过期
+    private Long status;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Date startTime;//有效起始时间
+    private Date startTime;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Date endTime;//有效结束时间
+    private Date endTime;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;//运营商id
+    private Long userId;
 
     /** 已选货道（多个逗号间隔） */
-    @Excel(name = "已选货道", readConverterExp = "多个逗号间隔")
-    private String huodaos;//提货码所选设备货道号多个“,”间隔
+    @Excel(name = "已选货道", readConverterExp = "多=个逗号间隔")
+    private String huodaos;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")

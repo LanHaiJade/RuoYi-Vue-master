@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.common.domain.BaseIccardrerecord;
+import com.ruoyi.common.domain.vo.BaseIccardrerecordVo;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -58,4 +59,14 @@ public interface BaseIccardrerecordMapper
      * @return 结果
      */
     public int deleteBaseIccardrerecordByIds(Long[] ids);
+
+
+    int insertBaseIccardrerecordList(List<BaseIccardrerecord> baseIccardrerecord);
+
+    /**
+     * 分页查询
+     * @param baseIccardrerecordVo
+     * @return
+     */
+    List<BaseIccardrerecordVo> selectBaseIccardrerecordVoList(BaseIccardrerecordVo baseIccardrerecordVo);
 }

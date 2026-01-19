@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.common.domain.BaseIccardrerecord;
+import com.ruoyi.common.domain.vo.BaseIccardrerecordVo;
 
 /**
  * 【请填写功能名称】Service接口
@@ -58,4 +59,11 @@ public interface IBaseIccardrerecordService
      * @return 结果
      */
     public int deleteBaseIccardrerecordById(Long id);
+
+    /**
+     * 分页查询
+     * @param baseIccardrerecordVo
+     * @return
+     */
+    List<BaseIccardrerecordVo> selectBaseIccardrerecordVoList(BaseIccardrerecordVo baseIccardrerecordVo);
 }

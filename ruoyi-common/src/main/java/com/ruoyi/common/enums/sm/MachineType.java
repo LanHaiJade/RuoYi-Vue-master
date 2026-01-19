@@ -28,11 +28,10 @@ public enum MachineType
   ER30(15,"30货道合约机","30-Lane Contract Machine"),
   ER60(16,"60货道合约机","60-Lane Contract Machine"),
   PBJ(17,"拍报机","Newspaper Machine"),
-  
-  
-  
+
   SL30_ZG(131,"30货道刷脸合约机","30-Lane Facial Recognition Contract Machine"),
   SL60_ZG(141,"60货道刷脸合约机","60-Lane Facial Recognition Contract Machine"),
+  KHYCZ(142,"卡号已存在","")
   ;
 
   private int type;

@@ -1,4 +1,4 @@
-package com.ruoyi.common.domain;
+package com.ruoyi.common.domain.vo;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 【IC卡信息表】对象 base_iccard
@@ -15,38 +14,37 @@ import java.util.List;
  * @author ruoyi
  * @date 2025-12-24
  */
-public class BaseIccard extends BaseVo
+public class BaseIccardVo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    
-    /*private Long id;//自增唯一id*/
+    /** $column.columnComment */
+    private Long id;//自增唯一id
 
-    
-    @Excel(name = "卡号", width = 20)
+    /** $column.columnComment */
+    @Excel(name = "卡号", readConverterExp = "$column.readConverterExp()")
     private String idNo;//IC卡卡号
 
-    
-    @Excel(name = "卡名称", width = 15)
+    /** $column.columnComment */
+    @Excel(name = "卡名称", readConverterExp = "$column.readConverterExp()")
     private String cpuNo;//IC卡名称
 
-    
-    /*@Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;//所属运营商id*/
+    /** $column.columnComment */
+    private Long userId;//所属运营商id
 
-    
-    @Excel(name = "姓名",width = 10)
+    /** $column.columnComment */
+    @Excel(name = "姓名", readConverterExp = "$column.readConverterExp()")
     private String name;//姓名
 
-    
+    /** $column.columnComment */
     private Long status;//IC卡状态：0正常4禁用5销卡
 
-    
-    @Excel(name = "金额", width = 12)
+    /** $column.columnComment */
+    @Excel(name = "金额", readConverterExp = "$column.readConverterExp()")
     private BigDecimal balance;//IC卡余额
 
-    
-    @Excel(name = "手机号", width = 15)
+    /** $column.columnComment */
+    @Excel(name = "手机号", readConverterExp = "$column.readConverterExp()")
     private String phone;//手机号信息
 
     /** 操作人 */
@@ -55,7 +53,7 @@ public class BaseIccard extends BaseVo
     /** 操作人姓名 */
     private String ctrlUserName;//操作人名称
 
-    @Excel(name = "备注", width = 20)
+    @Excel(name = "备注")
     private String remark;
 
     public void setIdNo(String idNo)
@@ -154,6 +152,23 @@ public class BaseIccard extends BaseVo
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

@@ -31,12 +31,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="amount != null "> and amount = #{amount}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <!-- 日期范围查询（字符串格式） -->
+            <if test="beginTime != null and beginTime != ''">
+                and update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and update_time &lt;= #{endTime}
+            </if>
+
+            <!-- 创建时间模糊查询（字符串匹配） -->
+            <if test="updateTime != null and updateTime != ''">
+                and DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') like concat('%', #{updateTime}, '%')
+            </if>
         </where>
     </select>
     
     <select id="selectBaseIccardrerecordById" parameterType="Long" resultMap="BaseIccardrerecordResult">
         <include refid="selectBaseIccardrerecordVo"/>
         where id = #{id}
+    </select>
+
+
+    <select id="selectBaseIccardrerecordVoList" resultType="com.ruoyi.common.domain.vo.BaseIccardrerecordVo" resultMap="BaseIccardrerecordResult">
+        <include refid="selectBaseIccardrerecordVo"/>
+        <where>
+            <if test="message != null and message != ''"> and message = #{message}</if>
+            <if test="state != null"> and state = #{state}</if>
+            <if test="cardNumber != null and cardNumber != ''">
+                and card_number like concat('%', #{cardNumber}, '%')
+            </if>
+
+            <if test="ctrlUserName != null and ctrlUserName != ''">
+                and ctrl_user_name like concat('%', #{ctrlUserName}, '%')
+            </if>
+
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="amount != null"> and amount = #{amount}</if>
+            <if test="name != null and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <!-- 日期范围查询（字符串格式） -->
+            <if test="beginTime != null and beginTime != ''">
+                and update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and update_time &lt;= #{endTime}
+            </if>
+
+            <!-- 创建时间模糊查询（字符串匹配） -->
+            <if test="updateTime != null and updateTime != ''">
+                and DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') like concat('%', #{updateTime}, '%')
+            </if>
+        </where>
+        <!-- 按照创建时间升序排序 -->
+        ORDER BY update_time DESC
     </select>
 
     <insert id="insertBaseIccardrerecord" parameterType="BaseIccardrerecord" useGeneratedKeys="true" keyProperty="id">
@@ -51,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="amount != null">amount,</if>
             <if test="name != null">name,</if>
+            <if test="opType != null">op_type</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="message != null">#{message},</if>
@@ -62,7 +109,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">#{userId},</if>
             <if test="amount != null">#{amount},</if>
             <if test="name != null">#{name},</if>
+            <if test="opType != null">#{opType}</if>
          </trim>
+    </insert>
+
+    <insert id="insertBaseIccardrerecordList" parameterType="list" useGeneratedKeys="true" keyProperty="id">
+        insert into base_iccardrerecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].message != null">message,</if>
+            <if test="list[0].state != null">state,</if>
+            <if test="list[0].updateTime != null">update_time,</if>
+            <if test="list[0].createTime != null">create_time,</if>
+            <if test="list[0].cardNumber != null">card_number,</if>
+            <if test="list[0].ctrlUserName != null">ctrl_user_name,</if>
+            <if test="list[0].userId != null">user_id,</if>
+            <if test="list[0].amount != null">amount,</if>
+            <if test="list[0].name != null">name,</if>
+            <if test="list[0].opType != null">op_type</if>
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="list[0].message != null">#{item.message},</if>
+                <if test="list[0].state != null">#{item.state},</if>
+                <if test="list[0].updateTime != null">#{item.updateTime},</if>
+                <if test="list[0].createTime != null">#{item.createTime},</if>
+                <if test="list[0].cardNumber != null">#{item.cardNumber},</if>
+                <if test="list[0].ctrlUserName != null">#{item.ctrlUserName},</if>
+                <if test="list[0].userId != null">#{item.userId},</if>
+                <if test="list[0].amount != null">#{item.amount},</if>
+                <if test="list[0].name != null">#{item.name},</if>
+                <if test="list[0].opType != null">#{item.opType}</if>
+            </trim>
+        </foreach>
     </insert>
 
     <update id="updateBaseIccardrerecord" parameterType="BaseIccardrerecord">

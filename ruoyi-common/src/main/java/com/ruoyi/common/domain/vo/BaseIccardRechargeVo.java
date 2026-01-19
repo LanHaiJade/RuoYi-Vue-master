@@ -1,11 +1,13 @@
-package com.ruoyi.common.domain;
+package com.ruoyi.common.domain.vo;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.core.domain.BaseVo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 【IC卡充值记录】对象 base_iccard_recharge
@@ -13,61 +15,59 @@ import java.math.BigDecimal;
  * @author ruoyi
  * @date 2025-12-24
  */
-public class BaseIccardRecharge extends BaseEntity
+public class BaseIccardRechargeVo extends BaseVo
 {
     private static final long serialVersionUID = 1L;
 
-
-    private Long id;//表自增唯一id
-
+    /** 充值前金额 */
     @Excel(name = "充值前金额")
     private BigDecimal afterRechargeAmount;//充值前余额
 
-
+    /** 充值后金额 */
     @Excel(name = "充值后金额")
     private BigDecimal beforeRechargeAmount;//充值后余额
 
-
+    /** 充值金额 */
     @Excel(name = "充值金额")
     private BigDecimal rechargeAmount;//充值金额
 
-
+    /** 卡号 */
     @Excel(name = "卡号")
     private String cardNumber;//IC卡卡号
 
-
-    private Long userId;//所属运营商id
-
-
+    /** $column.columnComment */
     private String orderNo;//订单号
 
-
-
+    /** $column.columnComment */
     private Integer payType;//0线下充值
 
-
+    /** $column.columnComment */
     private Integer payStatus;//0未支付1已支付
 
-
+    /** 操作人 */
+    @Excel(name = "操作人")
     private Long ctrlUserId;//操作人用户id
 
-
+    /** 操作人姓名 */
     @Excel(name = "操作人姓名")
     private String ctrlUserName;//操作人用户名称
 
-
+    /** 卡名称 */
     @Excel(name = "卡名称")
     private String cpuNo;//IC卡名称
 
-
+    /** 赠送金额 */
     @Excel(name = "赠送金额")
     private BigDecimal giftAmount;//充值赠送金额
 
 
-    private String beginTime;
+    @Excel(name = "备注")
+    private String remark;
 
-    private String endTime;
 
+    private String beginTime; // 开始时间
+
+    private String endTime; // 结束时间
 
     public String getBeginTime() {
         return beginTime;
@@ -85,14 +85,12 @@ public class BaseIccardRecharge extends BaseEntity
         this.endTime = endTime;
     }
 
-    public void setId(Long id)
-    {
-        this.id = id;
+    public String getRemark() {
+        return remark;
     }
 
-    public Long getId() 
-    {
-        return id;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public void setAfterRechargeAmount(BigDecimal afterRechargeAmount) 
@@ -133,16 +131,6 @@ public class BaseIccardRecharge extends BaseEntity
     public String getCardNumber() 
     {
         return cardNumber;
-    }
-
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
     }
 
     public void setOrderNo(String orderNo) 

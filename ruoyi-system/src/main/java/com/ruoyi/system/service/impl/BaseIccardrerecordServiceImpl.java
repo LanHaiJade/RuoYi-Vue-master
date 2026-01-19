@@ -1,6 +1,9 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+
+import com.ruoyi.common.domain.vo.BaseIccardrerecordVo;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,5 +95,16 @@ public class BaseIccardrerecordServiceImpl implements IBaseIccardrerecordService
     public int deleteBaseIccardrerecordById(Long id)
     {
         return baseIccardrerecordMapper.deleteBaseIccardrerecordById(id);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param baseIccardrerecordVo
+     * @return
+     */
+    @Override
+    public List<BaseIccardrerecordVo> selectBaseIccardrerecordVoList(BaseIccardrerecordVo baseIccardrerecordVo) {
+        return baseIccardrerecordMapper.selectBaseIccardrerecordVoList(baseIccardrerecordVo);
     }
 }

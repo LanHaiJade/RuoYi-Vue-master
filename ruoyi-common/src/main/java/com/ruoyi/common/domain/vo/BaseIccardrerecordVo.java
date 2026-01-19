@@ -1,7 +1,8 @@
-package com.ruoyi.common.domain;
+package com.ruoyi.common.domain.vo;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.core.domain.BaseVo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,12 +14,9 @@ import java.math.BigDecimal;
  * @author ruoyi
  * @date 2025-12-24
  */
-public class BaseIccardrerecord extends BaseEntity
+public class BaseIccardrerecordVo extends BaseVo
 {
     private static final long serialVersionUID = 1L;
-
-    /** $column.columnComment */
-    private Long id;//表自增唯一id
 
     /** 操作内容 */
     @Excel(name = "操作内容")
@@ -32,10 +30,8 @@ public class BaseIccardrerecord extends BaseEntity
     private String cardNumber;//IC卡卡号
 
     /** 操作用户名 */
+    @Excel(name = "操作用户名")
     private String ctrlUserName;//操作人名称
-
-    /** 所属运营商用户ID */
-    private Long userId;//IC卡所属运营商id
 
     /** 金额 */
     @Excel(name = "金额")
@@ -45,16 +41,20 @@ public class BaseIccardrerecord extends BaseEntity
     @Excel(name = "卡片持有人")
     private String name;//IC卡姓名
 
+    /**操作类型**/
+    private String opType;
 
+    public String getOpType() {
+        return opType;
+    }
+
+    public void setOpType(String opType) {
+        this.opType = opType;
+    }
 
     private String beginTime;
 
     private String endTime;
-
-
-    /**操作类型**/
-    private int opType;
-
 
     public String getBeginTime() {
         return beginTime;
@@ -72,25 +72,7 @@ public class BaseIccardrerecord extends BaseEntity
         this.endTime = endTime;
     }
 
-    public int getOpType() {
-        return opType;
-    }
-
-    public void setOpType(int opType) {
-        this.opType = opType;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-
-    public void setMessage(String message) 
+    public void setMessage(String message)
     {
         this.message = message;
     }
@@ -130,15 +112,6 @@ public class BaseIccardrerecord extends BaseEntity
         return ctrlUserName;
     }
 
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
 
     public void setAmount(BigDecimal amount) 
     {

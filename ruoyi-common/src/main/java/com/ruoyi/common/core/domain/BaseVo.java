@@ -12,6 +12,7 @@ public class BaseVo implements Serializable {
     private String updateTime;
     private String language;//语言，中文：zh,英文：en
 
+
     public String getLanguage() {
         return language;
     }
@@ -67,4 +68,6 @@ public class BaseVo implements Serializable {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
+
+
 }
