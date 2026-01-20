@@ -28,8 +28,6 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 import org.springframework.web.multipart.MultipartFile;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-
 /**
  * 【请填写功能名称】Controller
  *

@@ -1,5 +1,6 @@
 package com.ruoyi.system.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,8 +47,13 @@ public class BaseMachineController extends BaseController
     {
         startPage();
         List<BaseMachine> list = baseMachineService.selectBaseMachineList(machineVo);
-        long total = new PageInfo<>(list).getTotal();
-        List<MachineVo> machineList = baseMachineService.selectMachineVoList(list, machineVo);
+        long total = 0;
+        List<MachineVo> machineList = new ArrayList<>();
+        if (list != null && list.size() > 0){
+            total = new PageInfo<>(list).getTotal();
+            machineList = baseMachineService.selectMachineVoList(list, machineVo);
+        }
+
         return getDataTable(machineList,total);
     }
 

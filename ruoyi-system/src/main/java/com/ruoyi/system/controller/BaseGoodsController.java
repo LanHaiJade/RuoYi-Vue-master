@@ -22,7 +22,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 【请填写功能名称】Controller
+ * 【我的商品】Controller
  * 
  * @author ruoyi
  * @date 2025-12-24
@@ -35,7 +35,7 @@ public class BaseGoodsController extends BaseController
     private IBaseGoodsService baseGoodsService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询【我的商品】列表
      */
     @PreAuthorize("@ss.hasPermi('system:goods:list')")
     @GetMapping("/list")
@@ -47,20 +47,20 @@ public class BaseGoodsController extends BaseController
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出【我的商品】列表
      */
     @PreAuthorize("@ss.hasPermi('system:goods:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "【我的商品】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BaseGoods baseGoods)
     {
         List<BaseGoods> list = baseGoodsService.selectBaseGoodsList(baseGoods);
         ExcelUtil<BaseGoods> util = new ExcelUtil<BaseGoods>(BaseGoods.class);
-        util.exportExcel(response, list, "【请填写功能名称】数据");
+        util.exportExcel(response, list, "【我的商品】数据");
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取【我的商品】详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:goods:query')")
     @GetMapping(value = "/{id}")
@@ -70,10 +70,10 @@ public class BaseGoodsController extends BaseController
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增【我的商品】
      */
     @PreAuthorize("@ss.hasPermi('system:goods:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "【我的商品】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BaseGoods baseGoods)
     {
@@ -81,10 +81,10 @@ public class BaseGoodsController extends BaseController
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改【我的商品】
      */
     @PreAuthorize("@ss.hasPermi('system:goods:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "【我的商品】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BaseGoods baseGoods)
     {
@@ -92,10 +92,10 @@ public class BaseGoodsController extends BaseController
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除【我的商品】
      */
     @PreAuthorize("@ss.hasPermi('system:goods:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "【我的商品】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

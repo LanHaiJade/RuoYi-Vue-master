@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.math.BigDecimal;
 
 /**
- * 【请填写功能名称】对象 base_goods
+ * 【我的商品】对象 base_goods
  * 
  * @author ruoyi
  * @date 2025-12-24
