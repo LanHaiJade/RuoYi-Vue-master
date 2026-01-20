@@ -18,47 +18,47 @@ public class BaseDelivery extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    private Long id;
+    private Long id;// 设备ID
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long machineId;
+    private Long machineId; // 设备ID
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String sbId;
+    private String sbId; // 设备号
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String sbName;
+    private String sbName; // 设备名称
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long userId;
+    private Long userId; // 运营商ID
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long goodsId;
+    private Long goodsId; // 商品ID
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String goodsName;
+    private String goodsName; // 商品名称
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long payinfoId;
+    private Long payinfoId; // 订单表ID
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long huodao;
+    private Long huodao; // 货道号
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private BigDecimal amount;
+    private BigDecimal amount; // 金额
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String returnNo;
+    private String returnNo;//设备2字节订单号
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -66,7 +66,7 @@ public class BaseDelivery extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long paymentType;
+    private Long paymentType;//支付方式
 
     public void setId(Long id) 
     {
